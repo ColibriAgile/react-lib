@@ -1,6 +1,6 @@
 {
   "name": "react-lib",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Biblioteca para aplicativos react",
   "scripts": {
     "test": "npm test"
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/ColibriAgile/react-lib#readme",
   "dependencies": {
     "axios": "^0.24.0",
+    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-promise-tracker": "^2.1.0"
   }
