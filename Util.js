@@ -101,26 +101,6 @@ function roundNumber(number, places) {
   return Number(Math.round(number + "e" + places) + "e-" + places);
 }
 
-function obterItensFichaProduto(prod, qtd = 1) {
-  let itensProd = [];
-  if (prod) {
-    itensProd = prod.itens
-      .sort((i1, i2) => {
-        return i1.ordem - i2.ordem;
-      })
-      .map((i) => {
-        return {
-          id: i.id,
-          itemId: i.item.id,
-          produto: i.item,
-          qtd: i.qtd * qtd,
-          key: i.id,
-        };
-      });
-  }
-  return itensProd;
-}
-
 export {
   fmtCNPJ,
   fmtDateDDMMYYYYHHMM,
@@ -135,6 +115,5 @@ export {
   formatarPrecoZero,
   formatarQuantidade,
   roundNumber,
-  formatarPrecoSemMoeda,
-  obterItensFichaProduto,
+  formatarPrecoSemMoeda
 };
