@@ -12,12 +12,15 @@ const uniqueId = () => {
   return uuidv4().substring(0, 8);
 };
 
-const fmtDateDDMMYYYYHHMM = (value) => {
+const fmtDateDDMMYYYYHHMM = (value, convertToLocalDate = true) => {
+  if (convertToLocalDate) {
+    return moment.utc(value).local().format("DD/MM/YYYY HH:mm:ss");
+  }
   return moment(value).format("DD/MM/YYYY HH:mm:ss");
 };
 
 const fmtDateDDMMYYYY = (value) => {
-  return moment(value).format("DD/MM/YYYY HH:mm:ss");
+  return moment(value).format("DD/MM/YYYY");
 };
 
 const fmtCNPJ = (value) => {
