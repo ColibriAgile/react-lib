@@ -5,7 +5,9 @@ const useStyles = makeStyles((theme) => ({
     form: {
         display: "flex",
         "flex-direction": "column",
-        height: "100%",
+         [theme.breakpoints.up("sm")]: {
+             height: "100%",
+         },
         "& div": {
             marginBottom: theme.spacing(1),
         },
