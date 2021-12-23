@@ -23,7 +23,7 @@ const Notificacao = () => {
     const AlertMsg = forwardRef((props, ref) => {
         return (
             <div ref={ref}>
-                <Alert onClose={handleClose} severity={severidade}>
+                <Alert onClose={handleClose} severity={severidade} >
                     {msg}
                     {details && <details>{details}</details>}
                 </Alert>
