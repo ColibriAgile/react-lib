@@ -20,7 +20,11 @@ const fmtDateDDMMYYYYHHMM = (value, convertToLocalDate = true) => {
 };
 
 const fmtDateDDMMYYYY = (value) => {
-  return moment(value).format("DD/MM/YYYY");
+  if (value) {
+    return moment(value).format("DD/MM/YYYY");
+  } else {
+    return null;
+  }
 };
 
 const fmtCNPJ = (value) => {
