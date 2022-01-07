@@ -1,5 +1,7 @@
 const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
+const urlPattern = '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?';
+
 const campoVazio = (value) => {
   return (
     value === null ||
@@ -11,6 +13,10 @@ const campoVazio = (value) => {
 const emailInvalido = (value) => {
   return campoVazio(value) || !emailPattern.test(value);
 };
+
+const urlInvalida = (value) => {
+  return campoVazio(value) || !urlPattern.test(value);
+}
 
 const minLength = (value, length) => {
   return !campoVazio(value) && value.length < length;
@@ -42,6 +48,9 @@ const validate = (form, name, field, t) => {
   }
   if (field.rules["email"] && emailInvalido(value)) {
     return t("erro.email");
+  }
+   if (field.rules["url"] && emailInvalido(value)) {
+    return t("erro.url");
   }
   if (field.rules["minLength"] && minLength(value, field.rules["minLength"])) {
     return t("erro.tam-min", { tam: field.rules["minLength"] });
