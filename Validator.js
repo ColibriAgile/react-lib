@@ -49,7 +49,7 @@ const validate = (form, name, field, t) => {
   if (field.rules["email"] && emailInvalido(value)) {
     return t("erro.email");
   }
-   if (field.rules["url"] && emailInvalido(value)) {
+   if (field.rules["url"] && urlInvalida(value)) {
     return t("erro.url");
   }
   if (field.rules["minLength"] && minLength(value, field.rules["minLength"])) {
