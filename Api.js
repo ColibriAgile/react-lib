@@ -8,6 +8,10 @@ const isSucesso = (res) => {
   return res && !res.loading && res.status && [200, 201, 202, 204].indexOf(res.status) > -1;
 };
 
+const isLoading = (res) => {
+  return res && res.loading;
+};
+
 const execRestRequest = async (client, request, loading) => {
   const doRequest = async (request) => {
     try {
@@ -28,24 +32,19 @@ const execRestRequest = async (client, request, loading) => {
 };
 
 const get = async (client, url, loading = true) => {
-  let result = await execRestRequest(client,{ url, method: "get" }, loading);
-  if (isSucesso(result)) {
-    return result.data;
-  } else {
-    throw result;
-  }
+  return execRestRequest(client,{ url, method: "get" }, loading);
 };
 
-const del = (url, loading = true) => {
-  return execRestRequest({ url, method: "delete" }, loading);
+const del = (client, url, loading = true) => {
+  return execRestRequest(client,{ url, method: "delete" }, loading);
 };
 
-const post = (url, data, loading = true) => {
-  return execRestRequest({ url, method: "post", data }, loading);
+const post = (client, url, data, loading = true) => {
+  return execRestRequest(client,{ url, method: "post", data }, loading);
 };
 
-const put = (url, data, loading = true) => {
-  return execRestRequest({ url, method: "put", data }, loading);
+const put = (client, url, data, loading = true) => {
+  return execRestRequest(client,{ url, method: "put", data }, loading);
 };
 
-export { isErro, isSucesso, get, del, post, put, execRestRequest };
+export { isErro, isSucesso, isLoading, get, del, post, put, execRestRequest };
