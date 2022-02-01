@@ -47,4 +47,28 @@ const put = (client, url, data, loading = true) => {
   return execRestRequest(client,{ url, method: "put", data }, loading);
 };
 
-export { isErro, isSucesso, isLoading, get, del, post, put, execRestRequest };
+const uploadBlob = (url, data, loading = true) => {
+    return execRestRequest({
+        url,
+        method: "post",
+        data,
+        headers: {
+            "Content-Type": `blob.type; boundary=${data._boundary}`,
+        }
+    }, loading);
+}
+
+const uploadFile = (url, data, loading = true, progress = null) => {
+    return execRestRequest({
+        url,
+        method: "post",
+        data,
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        onUploadProgress: progress
+    }, loading);
+}
+
+
+export { isErro, isSucesso, isLoading, get, del, post, put, uploadFile, uploadBlob, execRestRequest };

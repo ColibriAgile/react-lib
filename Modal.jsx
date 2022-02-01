@@ -6,7 +6,7 @@ import {
   Button,
   useMediaQuery,
 } from "@mui/material";
-import ModalTitulo from "../_react-lib/ModalTitulo";
+import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";
 import { makeStyles, useTheme } from "@mui/styles";
 import LoadingButton from "./LoadingButton";
