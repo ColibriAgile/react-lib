@@ -18,7 +18,7 @@ const execRestRequest = async (client, request, loading) => {
             return await client(request);
         } catch (error) {
             console.error(error);
-            if (error?.response?.status === 401) {
+            if (error?.response?.status === 401 && !client.notRedirect) {
                 window.location.href = "/";
             }
             return error.response;
