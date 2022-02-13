@@ -35,11 +35,10 @@ const fmtDateDDMMYYYYHHMM = (value, convertToLocalDate = true) => {
 
 
 const fmtDateDDMMYYYY = (value) => {
-    if (value) {
-        return moment(value).format("DD/MM/YYYY");
-    } else {
+    if (!value) {
         return null;
     }
+    return moment(value).format("DD/MM/YYYY");
 };
 
 const fmtCNPJ = (value) => {
@@ -85,14 +84,6 @@ const formatarPrecoZero = (valor) => {
     return formatarPreco(valor);
 };
 
-const formatarConversao = (valor) => {
-    return new Intl.NumberFormat("pt-BR", {
-        style: "decimal",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 4,
-    }).format(valor);
-};
-
 const formatarQuantidade = (valor) => {
     return new Intl.NumberFormat("pt-BR", {
         style: "decimal",
@@ -131,7 +122,6 @@ export {
     fmtIdInstalacao,
     fmtCodigoAtivacao,
     uniqueId,
-    formatarConversao,
     latinizeStr,
     filterDxStringColumn,
     formatarPreco,

@@ -1,6 +1,6 @@
 import React from "react";
 import { createConfirmation, confirmable } from "react-confirm";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, ThemeProvider, useTheme } from "@mui/styles";
 import {
   Dialog,
   DialogActions,
@@ -8,8 +8,7 @@ import {
   useMediaQuery,
   Button,
 } from "@mui/material";
-import ModalTitulo from "../_react-lib/ModalTitulo";
-import { ThemeProvider, useTheme } from "@mui/styles";
+import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";
 import LoadingButton from "./LoadingButton";
 

@@ -1,31 +1,40 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import {useCallback, useEffect, useReducer, useRef, useState} from "react";
 import { useTranslation } from "react-i18next";
-import validate from "./Validator";
+import validate from "../Validator";
 
-const useForm = (initialState = {}) => {
+export const useForm = (initialState = {}) => {
     const [formValues, setFormValues] = useReducer((state, newState) => ({ ...state, ...newState }), initialState);
     const [errors, setErrors] = useState({});
     const fields = useRef({});
     const fieldNames = useRef(new Set());
     const { t } = useTranslation();
 
-    //seta focus no primeiro campo com erro
-    useEffect(() => {
-        if (Object.keys(errors).length > 0) {
-            for (let name of fieldNames.current) {
-                if (errors[name]) {
-                    if (fields.current[name] && fields.current[name].element) {
-                        if (fields.current[name].element.className.includes("MuiSelect")) {
-                            fields.current[name].element.previousSibling.focus();
-                        } else {
-                            fields.current[name].element.focus();
-                        }
-                        break;
-                    }
-                }
+    const setFocusOnFirstFieldWithError = useCallback(() => {
+        function focus(name) {
+            if (fields.current[name].element.className.includes("MuiSelect")) {
+                fields.current[name].element.previousSibling.focus();
+            } else {
+                fields.current[name].element.focus();
             }
         }
-    }, [errors]);
+
+        for (let name of fieldNames.current) {
+            if (!errors[name]) {
+                continue;
+            }
+
+            if (fields.current[name] && fields.current[name].element) {
+                focus(name);
+                break;
+            }
+        }
+    }, [fields, errors]);
+
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            setFocusOnFirstFieldWithError();
+        }
+    }, [errors, setFocusOnFirstFieldWithError]);
 
     const handleChecked = (event) => {
         const auxValues = {};
@@ -72,9 +81,9 @@ const useForm = (initialState = {}) => {
         fieldNames.current.forEach((name) => {
             const el = fields.current[name].element;
             if (el && !el.disabled) {
-                const error = validate(formValues, name, fields.current[name], t);
+                const [error, params] = validate(formValues, name, fields.current[name]);
                 if (error) {
-                    errors[name] = error;
+                    errors[name] = t(error, params);
                 }
             }
         });
@@ -110,14 +119,14 @@ const useForm = (initialState = {}) => {
         }
     };
 
-    return [
+    return {
         addField,
         formValues,
         setFormValues,
         errors,
         hasErro,
         reset,
-        {
+        on: {
             handleChange,
             handleChecked,
             handleValue,
@@ -126,7 +135,5 @@ const useForm = (initialState = {}) => {
             removeAllFields,
         },
         resetErrors,
-    ];
+    };
 };
-
-export default useForm;

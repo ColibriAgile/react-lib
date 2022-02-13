@@ -8,7 +8,7 @@ function getDimensions() {
     };
 }
 
-export default function useDimensions() {
+export function useDimensions() {
     const [dimensions, setDimensions] = useState(getDimensions());
 
     useEffect(() => {

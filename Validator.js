@@ -1,7 +1,3 @@
-const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-
-const urlPattern = '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?';
-
 const campoVazio = (value) => {
   return (
     value === null ||
@@ -11,11 +7,13 @@ const campoVazio = (value) => {
 };
 
 const emailInvalido = (value) => {
+  const emailPattern = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
   return campoVazio(value) || !emailPattern.test(value);
 };
 
 const urlInvalida = (value) => {
-  return campoVazio(value) || !urlPattern.test(value);
+  const pattern = new RegExp(/^(ftp|https?):\/\/[^\s$.?#].[^\s]*$/i);
+  return campoVazio(value) || !pattern.test(value);
 }
 
 const minLength = (value, length) => {
@@ -27,51 +25,60 @@ const maxLength = (value, length) => {
 };
 
 const hasNumber = (value) => {
-  const pattern = new RegExp(/[0-9]/);
-  return pattern.test(value);
+  const pattern = new RegExp(/\d/);
+  return !campoVazio(value) && !pattern.test(value);
 };
 
 const hasCapitalLetter = (value) => {
   const pattern = new RegExp(/[A-Z]/);
-  return pattern.test(value);
+  return !campoVazio(value) && !pattern.test(value);
 };
 
 const hasEspecialCharacter = (value) => {
   const pattern = new RegExp(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/);
-  return pattern.test(value);
+  return !campoVazio(value) && !pattern.test(value);
 };
 
-const validate = (form, name, field, t) => {
+const validations = {
+  required: campoVazio,
+  email: emailInvalido,
+  url: urlInvalida,
+  minLength: minLength,
+  maxLength: maxLength,
+  hasNumber: hasNumber,
+  hasCapitalLetter: hasCapitalLetter,
+  hasEspecialCharacter: hasEspecialCharacter,
+  equal: (value, field) => {
+    return value !== field;
+  }
+}
+
+const messages = {
+  required: "erro.obrigatorio",
+  email: "erro.email",
+  url: "erro.url",
+  minLength: "erro.tam-min",
+  maxLength: "erro.tam-max",
+  hasNumber: "erro.numero",
+  hasCapitalLetter: "erro.letra-maiuscula",
+  hasEspecialCharacter: "erro.caracter-especial",
+  equal: "erro.valor-diferente"
+}
+
+const validate = (form, name, field) => {
   const value = form[name];
-  if (field.rules["required"] && campoVazio(value)) {
-    return t("erro.obrigatorio");
-  }
-  if (field.rules["email"] && emailInvalido(value)) {
-    return t("erro.email");
-  }
-   if (field.rules["url"] && urlInvalida(value)) {
-    return t("erro.url");
-  }
-  if (field.rules["minLength"] && minLength(value, field.rules["minLength"])) {
-    return t("erro.tam-min", { tam: field.rules["minLength"] });
-  }
-  if (field.rules["maxLength"] && maxLength(value, field.rules["maxLength"])) {
-    return t("erro.tam-max", { tam: field.rules["maxLength"] });
-  }
-  if (field.rules["hasNumber"] && !hasNumber(value)) {
-    return t("erro.numero");
-  }
-  if (field.rules["hasCapitalLetter"] && !hasCapitalLetter(value)) {
-    return t("erro.letra-maiuscula");
-  }
-  if (field.rules["hasEspecialCharacter"] && !hasEspecialCharacter(value)) {
-    return t("erro.caracter-especial");
-  }
-  if (field.rules["equal"] && value !== form[field.rules["equal"]]) {
-    return t("erro.valor-diferente");
+
+  for (let key in field.rules) {
+    if (field.rules[key]) {
+      let validation = validations[key];
+      if (validation(value, field.rules[key])) {
+        let params = key === 'minLength' || key === 'maxLength' ? { tam : field.rules[key] } : null;
+        return [messages[key], params];
+      }
+    }
   }
 
-  return null;
+  return [null, null];
 };
 
 export default validate;

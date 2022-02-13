@@ -1,8 +1,8 @@
 import useTheme from "@mui/styles/useTheme";
-import useDimensions from "./Dimensions";
+import { useDimensions } from "./useDimensions";
 import { useMediaQuery } from "@mui/material";
 
-export default function useTableHeight(customOffset = 0) {
+function useTableHeight(customOffset = 0) {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const offSet = mobile ? 160 : 130;
