@@ -1,0 +1,47 @@
+{
+  "_from": "@nui/material-colors@^1.0.0",
+  "_id": "@nui/material-colors@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-icUmo4pDiiS7hahl8SDEL+qSoBQ=",
+  "_location": "/@nui/material-colors",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@nui/material-colors@^1.0.0",
+    "name": "@nui/material-colors",
+    "escapedName": "@nui%2fmaterial-colors",
+    "scope": "@nui",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "/@nui/mui-theme"
+  ],
+  "_resolved": "http://nexuspro.ncr.com/nexus/content/repositories/cxd-npm/@nui/material-colors/-/material-colors-1.0.0.tgz",
+  "_shasum": "89c526a38a438a24bb85a865f120c42fea92a014",
+  "_spec": "@nui/material-colors@^1.0.0",
+  "_where": "D:\\projetos\\cloud\\colibri-cloud-server\\web\\src\\main\\webapp\\resources\\node_modules\\@nui\\mui-theme",
+  "author": {
+    "name": "andrew.bolles@ncr.com"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "@nui/material-colors",
+  "publishConfig": {
+    "registry": "http://nexuspro.ncr.com/nexus/content/repositories/cxd-npm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@almgit.ncr.com:7999/nui/nui-material-colors.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}
