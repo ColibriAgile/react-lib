@@ -71,7 +71,8 @@ const validate = (form, name, field) => {
   for (let key in field.rules) {
     if (field.rules[key]) {
       let validation = validations[key];
-      if (validation(value, field.rules[key])) {
+      let param = key === "equal" ? form[field.rules[key]] : field.rules[key];
+      if (validation(value, param)) {
         let params = key === 'minLength' || key === 'maxLength' ? { tam : field.rules[key] } : null;
         return [messages[key], params];
       }

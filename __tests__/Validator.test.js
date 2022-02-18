@@ -135,12 +135,14 @@ test("valida se tem caracter especial", () => {
 
 test("valida se valor igual" ,() => {
   const formValues = {
-    password: "abc12345"
+    password: "abc12345",
+    confirmPassword: "abc12345",
+    notEqual: "xxxx"
   }
 
-  let [actual, ] = validate(formValues, "password", { rules: { equal: "abc12345" } });
+  let [actual, ] = validate(formValues, "confirmPassword", { rules: { equal: "password" } });
   expect(actual).toBe(null);
 
-  [actual, ] = validate(formValues, "password", { rules: { equal: "123456" } });
+  [actual, ] = validate(formValues, "password", { rules: { equal: "notEqual" } });
   expect(actual).toBe("erro.valor-diferente");
 })
