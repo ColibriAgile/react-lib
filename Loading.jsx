@@ -1,7 +1,7 @@
-import React from "react";
-import { usePromiseTracker } from "react-promise-tracker";
+import React, {useContext} from "react";
 import { Backdrop, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import {LoadingContext} from "./context/LoadingContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,10 +13,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Loading() {
-  const { promiseInProgress } = usePromiseTracker();
+  const { isLoading } = useContext(LoadingContext);
+
   const classes = useStyles();
   return (
-    <Backdrop open={promiseInProgress} className={classes.root}>
+    <Backdrop open={isLoading} className={classes.root}>
       <CircularProgress className={classes.progress} />
     </Backdrop>
   );

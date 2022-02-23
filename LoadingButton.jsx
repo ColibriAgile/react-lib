@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, CircularProgress } from "@mui/material";
-import { usePromiseTracker } from "react-promise-tracker";
+import { LoadingContext } from "./context/LoadingContext";
 
 const LoadingButton = props => {
-  const { promiseInProgress } = usePromiseTracker();
+  const {isLoading} = React.useContext(LoadingContext);
 
   return (
-    <Button {...props} disabled={promiseInProgress}>
-      {promiseInProgress ? <CircularProgress size={22} /> : props.children}
+    <Button {...props} disabled={isLoading}>
+      {isLoading ? <CircularProgress size={22} /> : props.children}
     </Button>
   );
 };
