@@ -19,7 +19,8 @@ export default function CustomForm({ children, submit }) {
     return (
         <form className={classes.form} onSubmit={submit}>
             {children}
-            <input type="submit" style={{ visibility: "hidden" }} />
+            <input type="submit" style={{ visibility: "hidden", display: "none" }} />
+
         </form>
     );
 }
