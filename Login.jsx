@@ -44,25 +44,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const initialState = {email: "", senha: ""};
+const initialState = {login: "", email: "", senha: ""};
 
-export default function Login({client, permiteRedefinicao}) {
+export default function Login({client, permiteRedefinicao, useUsername }) {
     const {authDispatcher} = React.useContext(AuthContext);
     const [erroLogin, setErroLogin] = React.useState(false);
     const {addField, formValues, errors, hasErro, on} = useForm(initialState);
     const {t} = useTranslation();
     const classes = useStyles();
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         setErroLogin(false);
-        post(client, "/login/", formValues)
-            .then((response) => {
-                if (isSucesso(response)) {
-                    authDispatcher({type: "login", user: response.data});
-                } else {
-                    setErroLogin(true);
-                }
-            })
+        let response = await post(client, "/login/", formValues);
+        if (isSucesso(response)) {
+            authDispatcher({type: "login", user: response.data});
+        } else {
+            setErroLogin(true);
+        }
     };
 
     return (
@@ -72,12 +70,12 @@ export default function Login({client, permiteRedefinicao}) {
                 <CustomForm submit={on.handleSubmit(onSubmit)}>
                     <TextField
                         inputRef={(e) => addField(e, {required: true})}
-                        name="email"
-                        label={t("login.email")}
+                        name={useUsername ? "login" : "email"}
+                        label={useUsername ? t("login.login") : t("login.email")}
                         variant={"outlined"}
-                        value={formValues["email"]}
-                        error={hasErro("email")}
-                        helperText={errors["email"]}
+                        value={useUsername ?  formValues["login"] : formValues["email"]}
+                        error={hasErro(useUsername ? formValues["login"] :  formValues["email"])}
+                        helperText={useUsername ? errors["login"] : errors["email"]}
                         onChange={on.handleChange}
                         autoFocus
                     />
