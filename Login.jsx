@@ -1,6 +1,5 @@
 import React from "react";
 import {AuthContext} from "./context/AuthContext";
-import Paper from "@mui/material/Paper";
 import {makeStyles} from "@mui/styles";
 import {useTranslation} from "react-i18next";
 import TextField from "@mui/material/TextField";
@@ -9,8 +8,8 @@ import CustomForm from "./CustomForm";
 import {Link} from "react-router-dom"
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {Box} from "@mui/material";
-import Alert from "@mui/material/Alert";
+import {Box, IconButton, Paper, Alert} from "@mui/material";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -46,9 +45,10 @@ const useStyles = makeStyles(theme => ({
 
 const initialState = {login: "", email: "", senha: ""};
 
-export default function Login({client, permiteRedefinicao, useUsername }) {
+export default function Login({client, permiteRedefinicao, useUsername}) {
     const {authDispatcher} = React.useContext(AuthContext);
     const [erroLogin, setErroLogin] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false);
     const {addField, formValues, errors, hasErro, on} = useForm(initialState);
     const {t} = useTranslation();
     const classes = useStyles();
@@ -69,12 +69,12 @@ export default function Login({client, permiteRedefinicao, useUsername }) {
             <Paper elevation={3} className={classes.paper}>
                 <CustomForm submit={on.handleSubmit(onSubmit)}>
                     <TextField
-                        inputRef={(e) => addField(e, {required: true})}
+                        inputRef={(e) => addField(e, {required: true, email: !useUsername})}
                         name={useUsername ? "login" : "email"}
                         label={useUsername ? t("login.login") : t("login.email")}
                         variant={"outlined"}
-                        value={useUsername ?  formValues["login"] : formValues["email"]}
-                        error={hasErro(useUsername ? formValues["login"] :  formValues["email"])}
+                        value={useUsername ? formValues["login"] : formValues["email"]}
+                        error={hasErro(useUsername ? formValues["login"] : formValues["email"])}
                         helperText={useUsername ? errors["login"] : errors["email"]}
                         onChange={on.handleChange}
                         autoFocus
@@ -84,11 +84,22 @@ export default function Login({client, permiteRedefinicao, useUsername }) {
                         name="senha"
                         label={t("login.senha")}
                         variant={"outlined"}
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         value={formValues["senha"]}
                         error={hasErro("senha")}
                         helperText={errors["senha"]}
                         onChange={on.handleChange}
+                        InputProps={{
+                            endAdornment:
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onMouseDown={() => setShowPassword(true)}
+                                        onMouseUp={() => setShowPassword(false)}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                            }}
                     />
                     <Box className={classes.actionContainer}>
                         <LoadingButton
