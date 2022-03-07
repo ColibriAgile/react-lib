@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderMenuList = forwardRef(({onClose, disableTooltip, pages}, ref) => {
+const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pages}, ref) => {
   const {t} = useTranslation();
   let location = useLocation();
   const classes = useStyles();
@@ -26,14 +26,14 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, pages}, ref) => {
         {pages.map((page, index) => (
             <LightTooltip
                 key={index}
-                title={t("header." + page.title)}
+                title={t("header." + (page.title || page.route))}
                 placement="right"
                 disableFocusListener={disableTooltip}
                 disableHoverListener={disableTooltip}
                 disableTouchListener={disableTooltip}
             >
               <ListItem
-                  classes={{root: classes.root}}
+                  className={classes.root}
                   button
                   key={page.route}
                   component={Link}
@@ -41,8 +41,8 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, pages}, ref) => {
                   selected={activeRoute(page.route)}
                   onClick={onClose}
               >
-                <ListItemIcon className={classes.icon}>{page.icon}</ListItemIcon>
-                <ListItemText primary={t("header." + page.title)}/>
+                {showIcons && <ListItemIcon className={classes.icon}>{page.icon}</ListItemIcon>}
+                <ListItemText primary={t("header." + (page.title || page.route))}/>
               </ListItem>
             </LightTooltip>
         ))}

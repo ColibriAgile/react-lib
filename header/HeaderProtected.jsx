@@ -19,7 +19,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -190,19 +190,17 @@ const HeaderProtected = forwardRef((props, ref) => {
           {drawerContent}
         </Drawer>
       </Hidden>
-      <Hidden smUp>
-        <SwipeableDrawer
-          variant="temporary"
-          open={openMobile}
-          onClose={toggleDrawer(false)}
-          onOpen={toggleDrawer(true)}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawerContent}
-        </SwipeableDrawer>
-      </Hidden>
+      <SwipeableDrawer
+        variant="temporary"
+        open={openMobile}
+        onClose={toggleDrawer(false)}
+        onOpen={toggleDrawer(true)}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
+        {drawerContent}
+      </SwipeableDrawer>
     </Fragment>
   );
 });
