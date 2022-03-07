@@ -1,81 +1,54 @@
 import React from "react";
-import { Button, Menu, MenuItem, Hidden } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { AuthContext } from "../context/AuthContext";
-import { useTranslation } from "react-i18next";
-import clsx from "clsx";
-import { AccountCircle } from "@mui/icons-material";
-import { isSucesso } from "../Api";
 
 const useStyles = makeStyles((theme) => ({
-  userMenu: {
-    color: theme.palette.secondary.main,
-    height: "100%",
+  logout: {
+    marginLeft: "auto",
   },
-  noWrap: {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
+  menu: {
+    color: theme.palette.common.white,
+    height: "58px",
   },
-  user: {
-    maxWidth: "100px",
-  },
-  ambienteMenu: {
-    height: "100%",
-  },
-  ambiente: {
-    maxWidth: "300px",
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "220px",
-    },
+  menuItem: {
+    textDecoration: "none",
+    color: theme.palette.common.black,
   },
 }));
 
-export default function HeaderUserMenu({ logout }) {
+const HeaderUserMenu = ({ logout }) => {
   const classes = useStyles();
-  const { auth, authDispatcher } = React.useContext(AuthContext);
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const { t } = useTranslation();
+  const { auth } = React.useContext(AuthContext);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleLogout = async () => {
-    let res = await logout();
-    if (isSucesso(res)) {
-      authDispatcher({ type: "logout" });
-    }
-  };
-
   return (
-    <div>
-      <Button
-        className={classes.userMenu}
-        aria-controls="menu-usuario"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        <AccountCircle color={"secondary"} />
-        <Hidden xsDown>
-          <div className={clsx(classes.noWrap, classes.user)}>
-            {auth.user.nome}
-          </div>
-        </Hidden>
+    <div className={classes.logout}>
+      <Button id="logout" onClick={handleClick} className={classes.menu}>
+        {auth.user.nome}
       </Button>
       <Menu
-        id="menu-usuario"
+        id="logout-menu"
         anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
+        open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleLogout}>{t("login.logout")}</MenuItem>
+        <MenuItem onClick={logout} className={classes.menuItem}>
+          {t("login.logout")}
+        </MenuItem>
       </Menu>
     </div>
   );
-}
+};
+
+export default HeaderUserMenu;
