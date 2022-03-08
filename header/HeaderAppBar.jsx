@@ -1,21 +1,32 @@
 import React from "react";
-import { AppBar } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {AppBar, Box, Toolbar, useMediaQuery} from "@mui/material";
+import {makeStyles, useTheme} from "@mui/styles";
+import logoNCR from "../img/ncr-logo-handshake.svg";
+import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  ncrAppBar: {
-    border: "none",
-    backgroundColor: "#18565e",
-    color: theme.palette.common.white,
-  },
+    ncrAppBar: {
+        flexGrow: 1,
+        border: "none",
+        backgroundColor: "#18565e",
+        color: theme.palette.common.white,
+    },
 }));
 
-export default function HeaderAppBar({ children }) {
-  const classes = useStyles();
+export default function HeaderAppBar({children}) {
+    const classes = useStyles();
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  return (
-    <AppBar position="fixed" className={classes.ncrAppBar}>
-      {children}
-    </AppBar>
-  );
+    return (
+        <Box sx={{flexGrow: 1, marginBottom: theme.spacing(10)}}>
+            <AppBar className={classes.ncrAppBar}>
+                <Toolbar disableGutters>
+                    {!mobile && <img src={logoNCR} alt="NCR" height="64" width="64" onClick={() => navigate("/")}/>}
+                    {children}
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
 }

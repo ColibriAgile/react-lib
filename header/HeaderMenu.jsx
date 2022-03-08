@@ -1,12 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import {useProtectedPages} from "../../common/Paginas";
 import {makeStyles} from "@mui/styles";
-import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   menu: {
@@ -35,12 +32,10 @@ export default function HeaderMenu({title, pages}) {
 
   return (
       <div>
-        <Button id="market" onClick={handleClick} className={classes.menu}>
-          {title}
-          <KeyboardArrowDownIcon/>
+        <Button onClick={handleClick} className={classes.menu}>
+            {title}
         </Button>
         <Menu
-            id="market-menu"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}

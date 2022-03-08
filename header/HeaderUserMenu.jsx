@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 const useStyles = makeStyles((theme) => ({
   logout: {
     marginLeft: "auto",
+    marginRight: theme.spacing(2),
   },
   menu: {
     color: theme.palette.common.white,

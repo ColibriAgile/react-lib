@@ -1,8 +1,7 @@
 import React from "react";
 import { Typography, useMediaQuery } from "@mui/material";
 import { makeStyles, useTheme } from "@mui/styles";
-import logoNCR from "../img/ncr-logo-handshake.svg";
-import { useNavigate } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -15,10 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textDecoration: "none",
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(1),
   },
   version: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(1),
     fontSize: "small",
   },
   margin: {
@@ -28,23 +27,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function HeaderTitle({ title, version }) {
   const classes = useStyles();
-  const navigate = useNavigate();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className={classes.logo} onClick={() => navigate("/")}>
-      {!mobile && <img src={logoNCR} alt="NCR" height="64" width="64" />}
+    <div className={classes.logo}>
       <div>
         <Typography
-          variant={mobile ? "body2" : "body1"}
+          variant={mobile ? "subtitle1" : "h6"}
           className={classes.title}
-        >
-          {title}
-        </Typography>
-        {!mobile && (
-          <Typography className={classes.version}>{version}</Typography>
-        )}
+        >{title}</Typography>
+        <Typography variant={mobile ? "caption" : "body1"} className={classes.version}>{version}</Typography>
       </div>
     </div>
   );
