@@ -9,8 +9,9 @@ const useStyles = makeStyles((theme) => ({
   },
   version: {
     position: "absolute",
-    bottom: theme.spacing(0.5),
-    fontSize: "0.7rem",
+    bottom: theme.spacing(1),
+    fontSize: "0.65rem",
+    fontWeight: "lighter",
   },
 }));
 
