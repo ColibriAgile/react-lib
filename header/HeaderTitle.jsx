@@ -4,11 +4,13 @@ import {makeStyles, useTheme} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
+      marginTop: theme.spacing(2),
   },
   version: {
-    fontSize: "smaller",
+      marginTop: '-1px',
+      fontSize: "0.7rem"
   },
 }));
 
