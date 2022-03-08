@@ -1,44 +1,28 @@
 import React from "react";
-import { Typography, useMediaQuery } from "@mui/material";
-import { makeStyles, useTheme } from "@mui/styles";
-
+import {Typography, useMediaQuery} from "@mui/material";
+import {makeStyles, useTheme} from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  logo: {
-    backgroundColor: "#18565e",
-    height: "64px",
-    display: "flex",
-    alignItems: "center",
-    marginRight: "10px",
-    cursor: "pointer",
-  },
   title: {
-    textDecoration: "none",
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   version: {
-    marginLeft: theme.spacing(1),
-    fontSize: "small",
-  },
-  margin: {
-    margin: theme.spacing(1),
+    fontSize: "smaller",
   },
 }));
 
-export default function HeaderTitle({ title, version }) {
+export default function HeaderTitle({title, version}) {
   const classes = useStyles();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className={classes.logo}>
-      <div>
-        <Typography
-          variant={mobile ? "subtitle1" : "h6"}
-          className={classes.title}
-        >{title}</Typography>
-        <Typography variant={mobile ? "caption" : "body1"} className={classes.version}>{version}</Typography>
+      <div className={classes.title}>
+        <Typography variant={mobile ? "body2" : "body1"}>{title}</Typography>
+        <Typography variant={"body2"} className={classes.version}>
+          {version}
+        </Typography>
       </div>
-    </div>
   );
 }
