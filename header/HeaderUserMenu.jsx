@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import { AuthContext } from "../context/AuthContext";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   logout: {
     marginLeft: "auto",
     marginRight: theme.spacing(2),
@@ -22,15 +22,21 @@ const useStyles = makeStyles((theme) => ({
 const HeaderUserMenu = ({ logout }) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const { auth } = React.useContext(AuthContext);
-
+  const { auth, authDispatcher } = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    authDispatcher({ type: "logout" });
   };
 
   return (
@@ -44,7 +50,7 @@ const HeaderUserMenu = ({ logout }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={logout} className={classes.menuItem}>
+        <MenuItem onClick={handleLogout} className={classes.menuItem}>
           {t("login.logout")}
         </MenuItem>
       </Menu>
