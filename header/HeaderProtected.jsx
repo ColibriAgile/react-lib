@@ -1,8 +1,8 @@
 import React from "react";
-import HeaderTitle from "../../_react-lib/header/HeaderTitle";
-import HeaderAppBar from "../../_react-lib/header/HeaderAppBar";
-import HeaderMenu from "../../_react-lib/header/HeaderMenu";
-import HeaderUserMenu from "../../_react-lib/header/HeaderUserMenu";
+import HeaderTitle from "./HeaderTitle";
+import HeaderAppBar from "./HeaderAppBar";
+import HeaderMenu from "./HeaderMenu";
+import HeaderUserMenu from "./HeaderUserMenu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuIcon from "@mui/icons-material/Menu";
 
