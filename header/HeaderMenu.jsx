@@ -7,6 +7,15 @@ import {makeStyles} from "@mui/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const useStyles = makeStyles((theme) => ({
+    button: {
+        color: theme.palette.common.white,
+        fontSize: "0.8rem",
+        backgroundColor: "#087B87",
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.light
+        },
+    },
+
     menu: {
         marginLeft: theme.spacing(1),
         color: theme.palette.common.white,
@@ -33,16 +42,17 @@ export default function HeaderMenu({title, onClick, route, pages}) {
         setAnchorEl(null);
     };
 
+    const isButton = route !== undefined || onClick !== undefined;
     const label = pages ? <>{title} <KeyboardArrowDownIcon /></> : title;
 
     return (
         <div>
             {route && <Link to={route}>
-                <Button onClick={handleClick} className={classes.menu}>
+                <Button onClick={handleClick} className={isButton ? classes.button : classes.menu}>
                     {label}
                 </Button>
             </Link>}
-            {!route && <Button onClick={handleClick} className={classes.menu}>
+            {!route && <Button onClick={handleClick} className={isButton ? classes.button : classes.menu}>
                 {label}
             </Button>}
             {pages && <Menu
