@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#18565e",
         color: theme.palette.common.white,
     },
+    logo: {
+        cursor: "pointer"
+    },
 }));
 
 export default function HeaderAppBar({children}) {
@@ -23,7 +26,7 @@ export default function HeaderAppBar({children}) {
         <Box sx={{flexGrow: 1, marginBottom: theme.spacing(10)}}>
             <AppBar className={classes.ncrAppBar}>
                 <Toolbar disableGutters>
-                    {!mobile && <img src={logoNCR} alt="NCR" height="64" width="64" onClick={() => navigate("/")}/>}
+                    {!mobile && <img src={logoNCR} className={classes.logo} alt="NCR" height="64" width="64" onClick={() => navigate("/")}/>}
                     {children}
                 </Toolbar>
             </AppBar>
