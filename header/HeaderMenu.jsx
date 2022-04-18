@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import {makeStyles} from "@mui/styles";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ListItemIcon from "@mui/material/ListItemIcon";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -43,17 +43,16 @@ export default function HeaderMenu({title, onClick, route, pages}) {
     };
 
     const isButton = route !== undefined || onClick !== undefined;
-    const label = pages ? <>{title} <KeyboardArrowDownIcon /></> : title;
 
     return (
         <div>
             {route && <Link to={route}>
-                <Button onClick={handleClick} className={isButton ? classes.button : classes.menu}>
-                    {label}
+                <Button onClick={handleClick} className={classes.button}>
+                    {title}
                 </Button>
             </Link>}
             {!route && <Button onClick={handleClick} className={isButton ? classes.button : classes.menu}>
-                {label}
+                {title}
             </Button>}
             {pages && <Menu
                 anchorEl={anchorEl}
@@ -62,7 +61,10 @@ export default function HeaderMenu({title, onClick, route, pages}) {
             >
                 {pages.map((page, index) => (
                     <Link key={index} to={page.route} className={classes.menuItem}>
-                        <MenuItem onClick={handleClose}>{page.title}</MenuItem>
+
+                        <MenuItem onClick={handleClose}>
+                            {page.icon && <ListItemIcon className={classes.icon}>{page.icon}</ListItemIcon>}
+                            {page.title}</MenuItem>
                     </Link>
                 ))}
             </Menu>}

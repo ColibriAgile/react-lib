@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, useMediaQuery } from "@mui/material";
 import { makeStyles, useTheme } from "@mui/styles";
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HeaderTitle({ title, version }) {
+  const {t} = useTranslation();
   const classes = useStyles();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -25,7 +27,7 @@ export default function HeaderTitle({ title, version }) {
 
   return (
     <div className={classes.title} onClick={() => navigate("/")}>
-      <Typography variant={mobile ? "body2" : "body1"}>{title}</Typography>
+      <Typography variant={mobile ? "body2" : "body1"}>{title ?? t("header.titulo")}</Typography>
       <Typography variant={"body2"} className={classes.version}>
         {version}
       </Typography>

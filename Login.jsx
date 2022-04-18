@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 const initialState = {login: "", email: "", senha: ""};
 
-export default function Login({client, permiteRedefinicao, useUsername}) {
+export default function Login({client, permiteRedefinicao, permiteCadastrarNovoUsuario, loginEndPoint = "/login/", useUsername}) {
     const {authDispatcher} = React.useContext(AuthContext);
     const [erroLogin, setErroLogin] = React.useState(false);
     const [showPassword, setShowPassword] = React.useState(false);
@@ -55,7 +55,7 @@ export default function Login({client, permiteRedefinicao, useUsername}) {
 
     const onSubmit = async () => {
         setErroLogin(false);
-        let response = await post(client, "/login/", formValues);
+        let response = await post(client, loginEndPoint, formValues);
         if (isSucesso(response)) {
             authDispatcher({type: "login", user: response.data});
         } else {
@@ -112,6 +112,7 @@ export default function Login({client, permiteRedefinicao, useUsername}) {
                         </LoadingButton>
 
                         {permiteRedefinicao && <Link to={{pathname: "/esqueci", hash: "#"}}>{t("login.esqueci")}</Link>}
+                        {permiteCadastrarNovoUsuario && <Link to={{pathname: "/cadastro", hash: "#"}}>{t("login.cadastro")}</Link>}
                     </Box>
                 </CustomForm>
             </Paper>

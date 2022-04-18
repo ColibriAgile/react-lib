@@ -11,10 +11,10 @@ export const useForm = (initialState = {}) => {
 
     const setFocusOnFirstFieldWithError = useCallback(() => {
         function focus(name) {
-            if (fields.current[name].element.className.includes("MuiSelect")) {
-                fields.current[name].element.previousSibling.focus();
+            if (fields.current[name].element?.className?.includes("MuiSelect")) {
+                fields.current[name].element.previousSibling?.focus();
             } else {
-                fields.current[name].element.focus();
+                fields.current[name].element?.focus();
             }
         }
 
