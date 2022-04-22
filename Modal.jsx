@@ -36,6 +36,7 @@ const Modal = forwardRef(
       children,
       autoFocus = false,
       fullScreen = false,
+      hideActions = false,
     },
     ref
   ) => {
@@ -84,7 +85,7 @@ const Modal = forwardRef(
       >
         <ModalTitulo titulo={titulo} onClose={() => handleClose()} />
         <DialogContent dividers>{children}</DialogContent>
-        <DialogActions className={classes.action}>
+          {!hideActions && <DialogActions className={classes.action}>
           <LoadingButton
             variant="contained"
             onClick={onConfirm}
@@ -100,7 +101,7 @@ const Modal = forwardRef(
           >
             {t("acao.cancelar")}
           </Button>
-        </DialogActions>
+        </DialogActions>}
       </Dialog>
     );
   }
