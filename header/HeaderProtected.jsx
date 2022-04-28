@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderTitle from "./HeaderTitle";
 import HeaderAppBar from "./HeaderAppBar";
+import HeaderLanguage from "./HeaderLanguage";
 import HeaderMenu from "./HeaderMenu";
 import HeaderUserMenu from "./HeaderUserMenu";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,6 +22,8 @@ export default function HeaderProtected({ title, version, menu, menus, logout })
                   pages={menu.pages} />
           ))}
           <HeaderUserMenu logout={logout} />
+          {/* Permite trocar o idioma */}
+          <HeaderLanguage />
       </HeaderAppBar>
   );
 }

@@ -8,13 +8,14 @@ export const useForm = (initialState = {}) => {
     const fields = useRef({});
     const fieldNames = useRef(new Set());
     const { t } = useTranslation();
-
     const setFocusOnFirstFieldWithError = useCallback(() => {
         function focus(name) {
+            let element = fields.current[name].element;
             if (fields.current[name].element?.className?.includes("MuiSelect")) {
-                fields.current[name].element.previousSibling?.focus();
-            } else {
-                fields.current[name].element?.focus();
+                element = element?.previousSibling;
+            }
+            if (element) {
+                element.focus();
             }
         }
 
