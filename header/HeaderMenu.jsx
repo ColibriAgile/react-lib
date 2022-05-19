@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
     menuItem: {
         textDecoration: "none",
-        color: theme.palette.common.black,
+    	color: theme.palette.text.primary,
     },
 }));
 
