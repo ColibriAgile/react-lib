@@ -8,8 +8,8 @@ import CustomForm from "./CustomForm";
 import {Link} from "react-router-dom"
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {Box, IconButton, Paper, Alert} from "@mui/material";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {Box, Paper, Alert} from "@mui/material";
+import PasswordField from "./PasswordField";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -48,7 +48,7 @@ const initialState = {login: "", email: "", senha: ""};
 export default function Login({client, permiteRedefinicao, permiteCadastrarNovoUsuario, loginEndPoint = "/login/", useUsername}) {
     const {authDispatcher} = React.useContext(AuthContext);
     const [erroLogin, setErroLogin] = React.useState(false);
-    const [showPassword, setShowPassword] = React.useState(false);
+
     const {addField, formValues, errors, hasErro, on} = useForm(initialState);
     const {t} = useTranslation();
     const classes = useStyles();
@@ -71,6 +71,7 @@ export default function Login({client, permiteRedefinicao, permiteCadastrarNovoU
                     <TextField
                         inputRef={(e) => addField(e, {required: true, email: !useUsername})}
                         name={useUsername ? "login" : "email"}
+                        autoComplete={useUsername ? "username" : "email"}
                         label={useUsername ? t("login.login") : t("login.email")}
                         variant={"outlined"}
                         value={useUsername ? formValues["login"] : formValues["email"]}
@@ -79,27 +80,16 @@ export default function Login({client, permiteRedefinicao, permiteCadastrarNovoU
                         onChange={on.handleChange}
                         autoFocus
                     />
-                    <TextField
+                    <PasswordField
                         inputRef={(e) => addField(e, {required: true})}
                         name="senha"
                         label={t("login.senha")}
                         variant={"outlined"}
-                        type={showPassword ? 'text' : 'password'}
                         value={formValues["senha"]}
                         error={hasErro("senha")}
                         helperText={errors["senha"]}
+                        autoComplete="current-password"
                         onChange={on.handleChange}
-                        InputProps={{
-                            endAdornment:
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onMouseDown={() => setShowPassword(true)}
-                                        onMouseUp={() => setShowPassword(false)}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                            }}
                     />
                     <Box className={classes.actionContainer}>
                         <LoadingButton
