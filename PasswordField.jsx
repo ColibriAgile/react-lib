@@ -11,11 +11,13 @@ export default function PasswordField(props) {
           {...props}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
+              ...props.InputProps,
               endAdornment:
                   <IconButton
                       aria-label="toggle password visibility"
                       onMouseDown={() => setShowPassword(true)}
                       onMouseUp={() => setShowPassword(false)}
+                      onMouseLeave={() => setShowPassword(false)}
                       edge="end"
                   >
                       {showPassword ? <VisibilityOff/> : <Visibility/>}

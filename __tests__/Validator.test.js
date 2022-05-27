@@ -146,3 +146,16 @@ test("valida se valor igual" ,() => {
   [actual, ] = validate(formValues, "password", { rules: { equal: "notEqual" } });
   expect(actual).toBe("erro.valor-diferente");
 })
+
+test("valida cnpj" ,() => {
+  const formValues = {
+    cnpjValido: "84.497.791/0001-05",
+    cnpjInvalido: "abc12345"
+  }
+
+  let [actual, ] = validate(formValues, "cnpjValido", { rules: { cnpj: true } });
+  expect(actual).toBe(null);
+
+  [actual, ] = validate(formValues, "cnpjInvalido", { rules: { cnpj: true } });
+  expect(actual).toBe("erro.cnpj");
+})

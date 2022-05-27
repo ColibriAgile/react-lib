@@ -1,3 +1,6 @@
+import { cnpjValido } from "./cnpjValido";
+
+
 const campoVazio = (value) => {
   return (
     value === null ||
@@ -9,6 +12,10 @@ const campoVazio = (value) => {
 const emailInvalido = (value) => {
   const emailPattern = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
   return campoVazio(value) || !emailPattern.test(value);
+};
+
+const cnpjInvalido = (value) => {
+  return campoVazio(value) || !cnpjValido(value);
 };
 
 const urlInvalida = (value) => {
@@ -42,6 +49,7 @@ const hasEspecialCharacter = (value) => {
 const validations = {
   required: campoVazio,
   email: emailInvalido,
+  cnpj: cnpjInvalido,
   url: urlInvalida,
   minLength: minLength,
   maxLength: maxLength,
@@ -62,7 +70,8 @@ const messages = {
   hasNumber: "erro.numero",
   hasCapitalLetter: "erro.letra-maiuscula",
   hasEspecialCharacter: "erro.caracter-especial",
-  equal: "erro.valor-diferente"
+  equal: "erro.valor-diferente",
+  cnpj: "erro.cnpj"
 }
 
 const validate = (form, name, field) => {
