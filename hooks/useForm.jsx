@@ -82,6 +82,9 @@ export const useForm = (initialState = {}) => {
         fieldNames.current.forEach((name) => {
             const el = fields.current[name].element;
             if (el && !el.disabled) {
+                if (name === undefined) {
+                    return;
+                }
                 const [error, params] = validate(formValues, name, fields.current[name]);
                 if (error) {
                     errors[name] = t(error, params);
