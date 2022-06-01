@@ -117,6 +117,14 @@ export const useForm = (initialState = {}) => {
         setErrors({});
     };
 
+    const removeFields = (fieldNames) => {
+        for (const field in formValues) {
+            if (fieldNames.includes(field)) {
+                removeField(field);
+            }
+        };
+    };
+
     const removeAllFields = () => {
         for (const field in formValues) {
             removeField(field);
@@ -135,9 +143,10 @@ export const useForm = (initialState = {}) => {
             handleChecked,
             handleValue,
             handleSubmit,
-            removeField,
-            removeAllFields,
         },
+        removeField,
+        removeFields,
+        removeAllFields,
         resetErrors,
     };
 };

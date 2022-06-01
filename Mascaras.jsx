@@ -45,7 +45,7 @@ const MascaraCnpj = forwardRef((props, ref) => {
 });
 
 function desmascararNumero(valor) {
-    return valor.replace(/\D+/g, "");
+    return valor?.replace(/\D+/g, "");
 }
 
 export { MascaraTelefone, MascaraCep, MascaraCnpj, desmascararNumero };
