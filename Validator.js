@@ -39,6 +39,16 @@ const hasEspecialCharacter = (value) => {
   return !campoVazio(value) && !pattern.test(value);
 };
 
+/**
+ * só pode conter números e pontos
+ * não pode começar nem terminar em ponto
+ * não pode ter 2 pontos consecutivos
+ */
+const versaoInvalida = (value) => {
+   const pattern = new RegExp( /^(?!\.)(?!.*\.$)(?!.*\.\.)[\d.]+$/);
+  return !campoVazio(value) && !pattern.test(value);
+}
+
 const validations = {
   required: campoVazio,
   email: emailInvalido,
@@ -48,6 +58,7 @@ const validations = {
   hasNumber: hasNumber,
   hasCapitalLetter: hasCapitalLetter,
   hasEspecialCharacter: hasEspecialCharacter,
+  versao: versaoInvalida,
   equal: (value, field) => {
     return value !== field;
   }
@@ -62,7 +73,8 @@ const messages = {
   hasNumber: "erro.numero",
   hasCapitalLetter: "erro.letra-maiuscula",
   hasEspecialCharacter: "erro.caracter-especial",
-  equal: "erro.valor-diferente"
+  equal: "erro.valor-diferente",
+  versao: "erro.versao"
 }
 
 const validate = (form, name, field) => {
