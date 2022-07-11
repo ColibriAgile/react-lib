@@ -40,9 +40,9 @@ const hasEspecialCharacter = (value) => {
 };
 
 /**
- * só pode conter números e pontos
- * não pode começar nem terminar em ponto
- * não pode ter 2 pontos consecutivos
+ * só pode conter números e pontos [\d.]
+ * não pode começar nem terminar em ponto (?!\.) (?!.*\.$)
+ * não pode ter 2 pontos consecutivos (?!.*\.\.)
  */
 const versaoInvalida = (value) => {
    const pattern = new RegExp( /^(?!\.)(?!.*\.$)(?!.*\.\.)[\d.]+$/);
