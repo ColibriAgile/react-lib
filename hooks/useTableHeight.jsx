@@ -1,6 +1,6 @@
-import useTheme from "@mui/styles/useTheme";
+
 import { useDimensions } from "./useDimensions";
-import { useMediaQuery } from "@mui/material";
+import {useMediaQuery, useTheme} from "@mui/material";
 
 function useTableHeight(customOffset = 0) {
   const theme = useTheme();

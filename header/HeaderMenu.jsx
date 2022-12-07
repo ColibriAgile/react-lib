@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import {makeStyles} from "@mui/styles";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import {makeStyles} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
     button: {

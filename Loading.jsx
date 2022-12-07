@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
-import { Backdrop, CircularProgress } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {Backdrop, CircularProgress, makeStyles} from "@mui/material";
 import {LoadingContext} from "./context/LoadingContext";
 
 const useStyles = makeStyles(theme => ({

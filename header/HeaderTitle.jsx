@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography, useMediaQuery } from "@mui/material";
-import { makeStyles, useTheme } from "@mui/styles";
+import {makeStyles, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 

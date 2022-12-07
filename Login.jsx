@@ -1,6 +1,5 @@
 import React from "react";
 import {AuthContext} from "./context/AuthContext";
-import {makeStyles} from "@mui/styles";
 import {useTranslation} from "react-i18next";
 import TextField from "@mui/material/TextField";
 import {useForm} from "./hooks/useForm";
@@ -8,7 +7,7 @@ import CustomForm from "./CustomForm";
 import {Link} from "react-router-dom"
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {Box, IconButton, Paper, Alert} from "@mui/material";
+import {Box, IconButton, Paper, Alert, makeStyles} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const useStyles = makeStyles(theme => ({

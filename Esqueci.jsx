@@ -1,6 +1,5 @@
 import React from "react";
 import Paper from "@mui/material/Paper";
-import { makeStyles } from "@mui/styles";
 import {useTranslation} from "react-i18next";
 import TextField from "@mui/material/TextField";
 import {useForm} from "./index";
@@ -9,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
+import {makeStyles} from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
     container: {

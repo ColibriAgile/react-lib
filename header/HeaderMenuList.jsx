@@ -1,8 +1,7 @@
 import React, {forwardRef} from "react";
-import {List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
+import {List, ListItem, ListItemIcon, ListItemText, makeStyles} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {Link, useLocation} from "react-router-dom";
-import {makeStyles} from "@mui/styles";
 import LightTooltip from "../LigthTooltip";
 
 const useStyles = makeStyles((theme) => ({

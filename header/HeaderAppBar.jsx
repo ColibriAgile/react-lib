@@ -1,6 +1,5 @@
 import React from "react";
-import {AppBar, Box, Toolbar, useMediaQuery} from "@mui/material";
-import {makeStyles, useTheme} from "@mui/styles";
+import {AppBar, Box, makeStyles, Toolbar, useMediaQuery, useTheme} from "@mui/material";
 import logoNCR from "../img/ncr-logo-handshake.svg";
 import {useNavigate} from "react-router-dom";
 

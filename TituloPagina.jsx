@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography, useMediaQuery } from "@mui/material";
-import { makeStyles, useTheme } from "@mui/styles";
+import {makeStyles, Typography, useMediaQuery, useTheme} from "@mui/material";
+
 
 const useStyles = makeStyles((theme) => ({
     titulo: {

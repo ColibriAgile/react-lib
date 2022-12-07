@@ -4,7 +4,6 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import {useTranslation} from "react-i18next";
 import Typography from "@mui/material/Typography";
-import {makeStyles} from "@mui/styles";
 import {useForm} from "./hooks/useForm";
 import {useNotificacao, Alerta} from "./context/NotificacaoContext";
 import TextField from "@mui/material/TextField";
@@ -12,6 +11,7 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import PainelMsg from "./PainelMsg";
 import {get, isSucesso, post} from "./Api";
+import {makeStyles} from "@mui/material";
 
 const useStyles = makeStyles(theme => ({
     root: {

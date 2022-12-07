@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, SpeedDialIcon } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {Button, makeStyles, SpeedDialIcon} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
     iconHeader: {

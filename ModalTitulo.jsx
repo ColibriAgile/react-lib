@@ -1,7 +1,7 @@
-import { Typography, IconButton } from "@mui/material";
+import {Typography, IconButton, makeStyles} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
-import { makeStyles } from "@mui/styles";
+
 
 const useStyles = makeStyles((theme) => ({
     tituloContainer: {

@@ -1,6 +1,6 @@
 import React from "react";
-import {Alert, AlertTitle} from "@mui/material";
-import {useTheme} from "@mui/styles";
+import {Alert, AlertTitle, useTheme} from "@mui/material";
+
 
 export default function AlertaErro({titulo, msg=''}) {
     const theme = useTheme();

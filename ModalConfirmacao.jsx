@@ -1,12 +1,11 @@
 import React from "react";
 import { createConfirmation, confirmable } from "react-confirm";
-import { makeStyles, ThemeProvider, useTheme } from "@mui/styles";
 import {
   Dialog,
   DialogActions,
   DialogContent,
   useMediaQuery,
-  Button,
+  Button, makeStyles, useTheme, ThemeProvider,
 } from "@mui/material";
 import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";

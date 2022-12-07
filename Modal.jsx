@@ -1,14 +1,13 @@
 import React, { forwardRef, useImperativeHandle } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogActions,
-  Button,
-  useMediaQuery,
+    Dialog,
+    DialogContent,
+    DialogActions,
+    Button,
+    useMediaQuery, makeStyles, useTheme,
 } from "@mui/material";
 import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";
-import { makeStyles, useTheme } from "@mui/styles";
 import LoadingButton from "./LoadingButton";
 
 const useStyles = makeStyles(theme => ({

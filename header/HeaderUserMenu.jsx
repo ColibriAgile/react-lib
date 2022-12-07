@@ -1,7 +1,6 @@
 import React from "react";
-import { Button, Menu, MenuItem } from "@mui/material";
+import {Button, makeStyles, Menu, MenuItem} from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { makeStyles } from "@mui/styles";
 import { AuthContext } from "../context/AuthContext";
 
 const useStyles = makeStyles(theme => ({

@@ -1,8 +1,7 @@
 import React from "react";
 import HeaderTitle from "./HeaderTitle";
 import HeaderAppBar from "./HeaderAppBar";
-import {Button, Typography, useMediaQuery} from "@mui/material";
-import {makeStyles, useTheme} from "@mui/styles";
+import {Button, makeStyles, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
