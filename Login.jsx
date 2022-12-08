@@ -7,7 +7,7 @@ import CustomForm from "./CustomForm";
 import {Link} from "react-router-dom"
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {IconButton, Alert, styled} from "@mui/material";
+import {IconButton, Alert, styled, Box} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import Paper from "@mui/material/Paper";
 
@@ -29,7 +29,7 @@ const ButtonLogin = styled(LoadingButton)({
     width: "100%",
 });
 
-const BoxAction = styled('Box')(({ theme }) => ({
+const BoxAction = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     "& button": {
