@@ -1,23 +1,22 @@
 import React, {forwardRef} from "react";
-import {List, ListItem, ListItemIcon, ListItemText, makeStyles} from "@mui/material";
+import {AppBar, List, ListItem, ListItemIcon, ListItemText, styled} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {Link, useLocation} from "react-router-dom";
 import LightTooltip from "../LigthTooltip";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100% !important",
-    margin: "0px !important",
-  },
-  icon: {
-    marginLeft: "8px",
-  },
-}));
+const ListItemNcr = styled(ListItem) ({
+  width: "100% !important",
+  margin: "0px !important"
+});
+
+const ListItemIconNCR = styled(ListItemIcon) ({
+  marginLeft: "8px"
+});
+
 
 const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pages}, ref) => {
   const {t} = useTranslation();
   let location = useLocation();
-  const classes = useStyles();
   const activeRoute = (page) => location.pathname === page;
 
   return (
@@ -31,8 +30,7 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pag
                 disableHoverListener={disableTooltip}
                 disableTouchListener={disableTooltip}
             >
-              <ListItem
-                  className={classes.root}
+              <ListItemNcr
                   button
                   key={page.route}
                   component={Link}
@@ -40,9 +38,9 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pag
                   selected={activeRoute(page.route)}
                   onClick={onClose}
               >
-                {showIcons && <ListItemIcon className={classes.icon}>{page.icon}</ListItemIcon>}
+                {showIcons && <ListItemIconNCR>{page.icon}</ListItemIconNCR>}
                 <ListItemText primary={t("header." + (page.title || page.route))}/>
-              </ListItem>
+              </ListItemNcr>
             </LightTooltip>
         ))}
       </List>

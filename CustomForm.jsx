@@ -1,27 +1,23 @@
 import React from "react";
-import {makeStyles} from "@mui/material";
+import {styled} from "@mui/material";
 
-
-const useStyles = makeStyles((theme) => ({
-    form: {
-        display: "flex",
-        "flex-direction": "column",
-         [theme.breakpoints.up("sm")]: {
-             height: "100%",
-         },
-        "& div": {
-            marginBottom: theme.spacing(1),
-        },
+const FormNcr = styled('form')(({ theme }) => ({
+    display: "flex",
+    "flex-direction": "column",
+    [theme.breakpoints.up("sm")]: {
+        height: "100%",
+    },
+    "& div": {
+        marginBottom: theme.spacing(1),
     },
 }));
 
+
 export default function CustomForm({ children, submit }) {
-    const classes = useStyles();
     return (
-        <form className={classes.form} onSubmit={submit}>
+        <FormNcr conSubmit={submit}>
             {children}
             <input type="submit" style={{ visibility: "hidden", display: "none" }} />
-
-        </form>
+        </FormNcr>
     );
 }

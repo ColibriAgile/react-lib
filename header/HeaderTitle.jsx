@@ -1,35 +1,36 @@
 import React from "react";
-import {makeStyles, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {styled, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    cursor: "pointer",
-  },
-  version: {
-    position: "absolute",
-    bottom: theme.spacing(1),
-    fontSize: "0.65rem",
-    fontWeight: "lighter",
-  },
+
+const DivTitle = styled('div')(({ theme }) => ({
+  marginLeft: theme.spacing(2),
+  marginRight: theme.spacing(2),
+  cursor: "pointer"
 }));
+
+
+const TypographyVersion =  styled(Typography)(({ theme }) => ({
+  position: "absolute",
+  bottom: theme.spacing(1),
+  fontSize: "0.65rem",
+  fontWeight: "lighter",
+}));
+
 
 export default function HeaderTitle({ title, version }) {
   const {t} = useTranslation();
-  const classes = useStyles();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
   return (
-    <div className={classes.title} onClick={() => navigate("/")}>
+    <DivTitle onClick={() => navigate("/")}>
       <Typography variant={mobile ? "body2" : "body1"}>{title ?? t("header.titulo")}</Typography>
-      <Typography variant={"body2"} className={classes.version}>
+      <TypographyVersion variant={"body2"} >
         {version}
-      </Typography>
-    </div>
+      </TypographyVersion>
+    </DivTitle>
   );
 }

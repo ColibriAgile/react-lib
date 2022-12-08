@@ -1,36 +1,33 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import {makeStyles} from "@mui/material";
+import {Button, styled} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    button: {
-        color: theme.palette.common.white,
-        fontSize: "0.8rem",
-        backgroundColor: "#087B87",
-        "&:hover": {
-            backgroundColor: theme.palette.secondary.light
-        },
-    },
-
-    menu: {
-        marginLeft: theme.spacing(1),
-        color: theme.palette.common.white,
-        height: "58px",
-    },
-
-    menuItem: {
-        textDecoration: "none",
-        color: theme.palette.common.black,
-    },
+const ButtonLink = styled(Button)(({ theme }) => ({
+    color: theme.palette.common.white,
+    fontSize: "0.8rem",
+    backgroundColor: "#087B87",
+    "&:hover": {
+        backgroundColor: theme.palette.secondary.light
+    }
 }));
+
+const ButtonMenu = styled(Button)(({ theme }) => ({
+    marginLeft: theme.spacing(1),
+    color: theme.palette.common.white,
+    height: "58px",
+}));
+
+const LinkItem = styled('Link')(({ theme }) => ({
+    textDecoration: "none",
+    color: theme.palette.common.black
+}));
+
 
 export default function HeaderMenu({title, onClick, route, pages}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const classes = useStyles();
 
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -47,25 +44,23 @@ export default function HeaderMenu({title, onClick, route, pages}) {
     return (
         <div>
             {route && <Link to={route}>
-                <Button onClick={handleClick} className={classes.button}>
+                <ButtonLink onClick={handleClick}>
                     {title}
-                </Button>
+                </ButtonLink>
             </Link>}
-            {!route && <Button onClick={handleClick} className={isButton ? classes.button : classes.menu}>
-                {title}
-            </Button>}
+            {!route && isButton && <ButtonLink onClick={handleClick}> {title}</ButtonLink> }
+            {!route && !isButton && <ButtonMenu onClick={handleClick}> {title}</ButtonMenu> }
             {pages && <Menu
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
             >
                 {pages.map((page, index) => (
-                    <Link key={index} to={page.route} className={classes.menuItem}>
-
+                    <LinkItem key={index} to={page.route}>
                         <MenuItem onClick={handleClose}>
-                            {page.icon && <ListItemIcon className={classes.icon}>{page.icon}</ListItemIcon>}
+                            {page.icon && <ListItemIcon>{page.icon}</ListItemIcon>}
                             {page.title}</MenuItem>
-                    </Link>
+                    </LinkItem>
                 ))}
             </Menu>}
         </div>

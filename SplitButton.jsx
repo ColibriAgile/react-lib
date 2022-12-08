@@ -8,23 +8,23 @@ import {
     MenuItem,
     Grow,
     SpeedDialIcon,
-    ClickAwayListener,
+    ClickAwayListener, styled,
 } from "@mui/material";
 
-import { makeStyles } from "@mui/styles";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 
-const useStyles = makeStyles((theme) => ({
-    iconHeader: {
-        height: "22px",
-    },
-    popup: {
-        zIndex: theme.zIndex.modal + 1,
-    },
+
+const PopperPopup = styled(Popper)(({ theme }) => ({
+    zIndex: theme.zIndex.modal + 1
 }));
 
+
+const IconHeader = styled(SpeedDialIcon) ({
+    height: "22px"
+})
+
+
 export default function SplitButton({ options }) {
-    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -55,14 +55,13 @@ export default function SplitButton({ options }) {
         <React.Fragment>
             <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
                 <Button onClick={handleClick} color={"primary"}>
-                    {options[selectedIndex].label ?? <SpeedDialIcon className={classes.iconHeader} />}
+                    {options[selectedIndex].label ?? <IconHeader />}
                 </Button>
                 <Button size="small" color={"primary"} onClick={handleToggle}>
                     <ArrowDropDownOutlinedIcon />
                 </Button>
             </ButtonGroup>
-            <Popper
-                className={classes.popup}
+            <PopperPopup
                 open={open}
                 anchorEl={anchorRef.current}
                 role={undefined}
@@ -85,7 +84,7 @@ export default function SplitButton({ options }) {
                                             selected={index === selectedIndex}
                                             onClick={(event) => handleMenuItemClick(event, index)}
                                         >
-                                            {option.label ?? <SpeedDialIcon className={classes.iconHeader} />}
+                                            {option.label ?? <IconHeader />}
                                         </MenuItem>
                                     ))}
                                 </MenuList>
@@ -93,7 +92,7 @@ export default function SplitButton({ options }) {
                         </Paper>
                     </Grow>
                 )}
-            </Popper>
+            </PopperPopup>
         </React.Fragment>
     );
 }

@@ -1,25 +1,24 @@
 import React from "react";
-import {Button, makeStyles, Menu, MenuItem} from "@mui/material";
+import {Button, Menu, MenuItem, styled} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
 
-const useStyles = makeStyles(theme => ({
-  logout: {
-    marginLeft: "auto",
-    marginRight: theme.spacing(2),
-  },
-  menu: {
-    color: theme.palette.common.white,
-    height: "58px",
-  },
-  menuItem: {
-    textDecoration: "none",
-    color: theme.palette.common.black,
-  },
+const DivLogout = styled('div')(({ theme }) => ({
+  marginLeft: "auto",
+  marginRight: theme.spacing(2)
+}));
+
+const ButtonMenu = styled(Button)(({ theme }) => ({
+  color: theme.palette.common.white,
+  height: "58px"
+}));
+
+const MenuItemNCR = styled(MenuItem)(({ theme }) => ({
+  textDecoration: "none",
+  color: theme.palette.common.black
 }));
 
 const HeaderUserMenu = ({ logout }) => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const { auth, authDispatcher } = React.useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,21 +38,21 @@ const HeaderUserMenu = ({ logout }) => {
   };
 
   return (
-    <div className={classes.logout}>
-      <Button id="logout" onClick={handleClick} className={classes.menu}>
+    <DivLogout>
+      <ButtonMenu id="logout" onClick={handleClick}>
         {auth.user.nome}
-      </Button>
+      </ButtonMenu>
       <Menu
         id="logout-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleLogout} className={classes.menuItem}>
+        <MenuItemNCR onClick={handleLogout}>
           {t("login.logout")}
-        </MenuItem>
+        </MenuItemNCR>
       </Menu>
-    </div>
+    </DivLogout>
   );
 };
 

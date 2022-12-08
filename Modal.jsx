@@ -4,22 +4,21 @@ import {
     DialogContent,
     DialogActions,
     Button,
-    useMediaQuery, makeStyles, useTheme,
+    useMediaQuery, useTheme, styled,
 } from "@mui/material";
 import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";
 import LoadingButton from "./LoadingButton";
 
-const useStyles = makeStyles(theme => ({
-  action: {
+const DialogActionsContainer = styled(DialogActions)(({ theme }) => ({
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "flex-start",
-      "& button": {
-        flexGrow: 1,
-      },
-    },
-  },
+        justifyContent: "flex-start",
+        "& button": {
+            flexGrow: 1,
+        },
+    }
 }));
+
 
 const Modal = forwardRef(
   (
@@ -39,7 +38,6 @@ const Modal = forwardRef(
     ref
   ) => {
     const { t } = useTranslation();
-    const classes = useStyles();
     const theme = useTheme();
     const full = useMediaQuery(theme.breakpoints.down("sm"));
     const [open, setOpen] = React.useState(false);
@@ -83,7 +81,7 @@ const Modal = forwardRef(
       >
         <ModalTitulo titulo={titulo} onClose={() => handleClose()} />
         <DialogContent dividers>{children}</DialogContent>
-        <DialogActions className={classes.action}>
+        <DialogActionsContainer>
           <LoadingButton
             variant="contained"
             onClick={onConfirm}
@@ -99,7 +97,7 @@ const Modal = forwardRef(
           >
             {t("acao.cancelar")}
           </Button>
-        </DialogActions>
+        </DialogActionsContainer>
       </Dialog>
     );
   }

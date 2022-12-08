@@ -7,38 +7,39 @@ import CustomForm from "./CustomForm";
 import {Link} from "react-router-dom"
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {Box, IconButton, Paper, Alert, makeStyles} from "@mui/material";
+import {IconButton, Alert, styled} from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import Paper from "@mui/material/Paper";
 
-const useStyles = makeStyles(theme => ({
-    container: {
-        padding: theme.spacing(2),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+const DivContainer = styled('div')(({ theme }) => ({
+    padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+}));
 
+const PaperLogin = styled(Paper)(({ theme }) => ({
+    padding: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    minWidth: "350px"
+}));
+
+const ButtonLogin = styled(LoadingButton)({
+    width: "100%",
+});
+
+const BoxAction = styled('Box')(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    "& button": {
+        marginBottom: theme.spacing(1)
     },
-    paper: {
-        padding: theme.spacing(2),
-        marginTop: theme.spacing(2),
-        minWidth: "350px",
+    "& a": {
+        marginTop: theme.spacing(1),
+        color: theme.palette.primary.dark
     },
-    button: {
-        width: "100%",
-    },
-    actionContainer: {
-        display: "flex",
-        flexDirection: "column",
-        "& button": {
-            marginBottom: theme.spacing(1)
-        },
-        "& a": {
-            marginTop: theme.spacing(1),
-            color: theme.palette.primary.dark
-        },
-        alignItems: "center"
-    }
+    alignItems: "center"
 }));
 
 
@@ -50,7 +51,6 @@ export default function Login({client, permiteRedefinicao, permiteCadastrarNovoU
     const [showPassword, setShowPassword] = React.useState(false);
     const {addField, formValues, errors, hasErro, on} = useForm(initialState);
     const {t} = useTranslation();
-    const classes = useStyles();
 
     const onSubmit = async () => {
         setErroLogin(false);
@@ -63,9 +63,9 @@ export default function Login({client, permiteRedefinicao, permiteCadastrarNovoU
     };
 
     return (
-        <div className={classes.container}>
+        <DivContainer>
             {erroLogin && <Alert severity="error">{t("login.erro")}</Alert>}
-            <Paper elevation={3} className={classes.paper}>
+            <PaperLogin elevation={3}>
                 <CustomForm submit={on.handleSubmit(onSubmit)}>
                     <TextField
                         inputRef={(e) => addField(e, {required: true, email: !useUsername})}
@@ -100,22 +100,21 @@ export default function Login({client, permiteRedefinicao, permiteCadastrarNovoU
                                     </IconButton>
                             }}
                     />
-                    <Box className={classes.actionContainer}>
-                        <LoadingButton
+                    <BoxAction>
+                        <ButtonLogin
                             variant="contained"
                             type="submit"
                             color="primary"
-                            className={classes.button}
                         >
                             {t("login.entrar")}
-                        </LoadingButton>
+                        </ButtonLogin>
 
                         {permiteRedefinicao && <Link to={{pathname: "/esqueci", hash: "#"}}>{t("login.esqueci")}</Link>}
                         {permiteCadastrarNovoUsuario && <Link to={{pathname: "/cadastro", hash: "#"}}>{t("login.cadastro")}</Link>}
-                    </Box>
+                    </BoxAction>
                 </CustomForm>
-            </Paper>
-        </div>
+            </PaperLogin>
+        </DivContainer>
     )
 
 }

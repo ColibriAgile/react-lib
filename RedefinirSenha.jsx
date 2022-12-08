@@ -11,34 +11,40 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import PainelMsg from "./PainelMsg";
 import {get, isSucesso, post} from "./Api";
-import {makeStyles} from "@mui/material";
+import {styled} from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: theme.spacing(1),
-        padding: "0px 80px 0px 80px",
-        [theme.breakpoints.down('sm')]: {
-            padding: "0px 10px 0px 10px",
-        }
-    },
-    formContainer: {
-        padding: "20px 40px 20px 40px"
-    },
-    titulo: {
-        marginBottom: theme.spacing(1)
-    },
-    form: {
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "20px",
-        "& div": {
-            marginBottom: "2px"
-        },
-        "& button": {
-            marginTop: "20px"
-        }
+const ContainerPage = styled(Container)(({ theme }) => ({
+    marginTop: theme.spacing(1),
+    padding: "0px 80px 0px 80px",
+    [theme.breakpoints.down('sm')]: {
+        padding: "0px 10px 0px 10px",
     }
-}))
+}));
+
+const PaperFormContainer = styled(Paper) ({
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%"
+});
+
+const DivTitulo = styled('div')(({ theme }) => ({
+    marginBottom: theme.spacing(1)
+}));
+
+const FormSenha = styled('form') ({
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "20px",
+    "& div": {
+        marginBottom: "2px"
+    },
+    "& button": {
+        marginTop: "20px"
+    }
+});
+
 
 const initialState = {
     senha: '',
@@ -50,7 +56,6 @@ export default function RedefinirSenha({client}) {
     const {addField, formValues, errors, hasErro, on} = useForm(initialState);
     const {t} = useTranslation();
     const notificacao = useNotificacao();
-    const classes = useStyles();
     const [usuarioToken, setUsuarioToken] = useState();
     const [erroToken, setErroToken] = useState(false);
     const [sucesso, setSucesso] = useState(false);
@@ -93,22 +98,22 @@ export default function RedefinirSenha({client}) {
     }
 
     return (
-        <Container className={classes.root} maxWidth="sm">
+        <ContainerPage maxWidth="sm">
             {erroToken
                 ? <PainelMsg erro msg={t("usuario.token-invalido")}/>
                 : sucesso
                     ? msgSucesso()
                     :
-                    <Paper className={classes.formContainer}>
-                        <div className={classes.titulo}>
+                    <PaperFormContainer>
+                        <DivTitulo>
                             <Typography variant="h6" component="h6">
                                 {t("usuario.nova-senha")}
                             </Typography>
                             <Typography variant="body2">
                                 {t("usuario.senha-msg")}
                             </Typography>
-                        </div>
-                        <form className={classes.form} onSubmit={on.handleSubmit(onSubmit)}>
+                        </DivTitulo>
+                        <FormSenha onSubmit={on.handleSubmit(onSubmit)}>
                             <TextField
                                 name="senha"
                                 value={formValues.senha}
@@ -139,9 +144,9 @@ export default function RedefinirSenha({client}) {
                             <Button variant="contained" type="submit" color="primary">
                                 {t("acao.salvar")}
                             </Button>
-                        </form>
-                    </Paper>
+                        </FormSenha>
+                    </PaperFormContainer>
             }
-        </Container>
+        </ContainerPage>
     )
 }

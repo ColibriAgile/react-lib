@@ -5,21 +5,19 @@ import {
   DialogActions,
   DialogContent,
   useMediaQuery,
-  Button, makeStyles, useTheme, ThemeProvider,
+  Button, useTheme, ThemeProvider, styled,
 } from "@mui/material";
 import ModalTitulo from "./ModalTitulo";
 import { useTranslation } from "react-i18next";
 import LoadingButton from "./LoadingButton";
 
-const useStyles = makeStyles(theme => ({
-  action: {
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "flex-start",
-      "& button": {
-        flexGrow: 1,
-      },
+const DialogActionsContainer = styled(DialogActions)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    justifyContent: "flex-start",
+    "& button": {
+      flexGrow: 1,
     },
-  },
+  }
 }));
 
 const ModalConfirmacao = ({
@@ -36,7 +34,6 @@ const ModalConfirmacao = ({
   fullScreen = false,
 }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const theme = useTheme();
   const full = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -57,7 +54,7 @@ const ModalConfirmacao = ({
             }}
           />
         </DialogContent>
-        <DialogActions className={classes.action}>
+        <DialogActionsContainer>
           <LoadingButton
             variant="contained"
             onClick={async () => {
@@ -74,7 +71,7 @@ const ModalConfirmacao = ({
           <Button variant="outlined" onClick={cancel} color="primary">
             {cancelLabel ?? t("acao.cancelar")}
           </Button>
-        </DialogActions>
+        </DialogActionsContainer>
       </Dialog>
     </ThemeProvider>
   );

@@ -8,43 +8,48 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import {isSucesso, post} from "./Api";
 import LoadingButton from "./LoadingButton";
-import {makeStyles} from "@mui/material";
+import {styled} from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
-    container: {
-        paddingTop: theme.spacing(5),
-    },
-    form: {
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-        height: "100%"
-    },
-    input: {
-        width: "100%",
-        marginTop: "20px",
-        padding: "10px",
-        [theme.breakpoints.down('sm')]: {
-            "margin-top": "10px"
-        }
-    },
-    paper: {
-        height: "140px",
-        marginTop: "20px",
-        padding: "20px",
-    },
-    buttonContainer: {
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center"
-    },
-    button: {
-        alignSelf: "flex-end",
-        width: "100%"
+const ContainerPage = styled(Container)(({ theme }) => ({
+    paddingTop: theme.spacing(5)
+}));
+
+
+const FormEmail = styled('form') ({
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%"
+});
+
+
+const TextFieldEmail = styled(TextField)(({ theme }) => ({
+    width: "100%",
+    marginTop: "20px",
+    padding: "10px",
+    [theme.breakpoints.down('sm')]: {
+        "margin-top": "10px"
     }
 }));
+
+const PaperForm = styled(Paper)({
+    height: "140px",
+    marginTop: "20px",
+    padding: "20px"
+});
+
+const DivButtonContainer = styled('div')({
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center"
+});
+
+const LoadingButtonEnviar = styled(LoadingButton)({
+    alignSelf: "flex-end",
+    width: "100%"
+});
 
 
 export default function Esqueci({client}) {
@@ -52,7 +57,6 @@ export default function Esqueci({client}) {
     const [sucessoEsqueci, setSucessoEsqueci] = React.useState(false);
     const {addField, formValues, errors, hasErro, on} = useForm();
     const {t} = useTranslation();
-    const classes = useStyles();
 
     const onSubmit = () => {
         setErroEsqueci(false);
@@ -73,24 +77,23 @@ export default function Esqueci({client}) {
 
     const formEsqueci = () => {
         return (
-            <Paper elevation={1} className={classes.paper}>
-                <form className={classes.form} onSubmit={on.handleSubmit(onSubmit)}>
-                    <TextField
+            <PaperForm elevation={1} >
+                <FormEmail onSubmit={on.handleSubmit(onSubmit)}>
+                    <TextFieldEmail
                         inputRef={(e) => addField(e, {required: true, email: true})}
                         autoFocus
                         name="email"
                         label={t("login.email")}
                         error={hasErro("email")}
                         helperText={errors["email"]}
-                        onChange={on.handleChange}
-                        className={classes.input}/>
-                    <div className={classes.buttonContainer}>
-                        <LoadingButton variant="contained" type="submit" color="primary" className={classes.button}>
+                        onChange={on.handleChange}/>
+                    <DivButtonContainer>
+                        <LoadingButtonEnviar variant="contained" type="submit" color="primary">
                             {t("login.enviar")}
-                        </LoadingButton>
-                    </div>
-                </form>
-            </Paper>
+                        </LoadingButtonEnviar>
+                    </DivButtonContainer>
+                </FormEmail>
+            </PaperForm>
         )
     };
 
@@ -105,8 +108,8 @@ export default function Esqueci({client}) {
     };
 
     return (
-        <Container maxWidth="sm" className={classes.container}>
-            <div className={classes.root}>
+        <ContainerPage maxWidth="sm">
+            <div>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         {formEsqueci()}
@@ -116,7 +119,7 @@ export default function Esqueci({client}) {
                     </Grid>
                 </Grid>
             </div>
-        </Container>
+        </ContainerPage>
     )
 }
 
