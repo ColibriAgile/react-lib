@@ -53,6 +53,7 @@ const PageTemplate = ({
     return () => reference?.instance?.endCustomLoading();
   }, [promiseInProgress, ref]);
 
+
   return (
     <DivContainer>
       <PaperGrid>

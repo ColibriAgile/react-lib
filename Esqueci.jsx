@@ -52,7 +52,7 @@ const LoadingButtonEnviar = styled(LoadingButton)({
 });
 
 
-export default function Esqueci({client}) {
+export default function Esqueci({client, url = 'usuario/redefinir/'}) {
     const [erroEsqueci, setErroEsqueci] = React.useState(false);
     const [sucessoEsqueci, setSucessoEsqueci] = React.useState(false);
     const {addField, formValues, errors, hasErro, on} = useForm();
@@ -63,7 +63,7 @@ export default function Esqueci({client}) {
         setSucessoEsqueci(false);
         post(
             client,
-            'usuario/redefinir/',
+            url,
             formValues
         ).then(response => {
             if (isSucesso(response)) {
