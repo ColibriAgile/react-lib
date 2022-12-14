@@ -20,7 +20,7 @@ const ButtonMenu = styled(Button)(({ theme }) => ({
     height: "58px",
 }));
 
-const LinkItem = styled('Link')(({ theme }) => ({
+const LinkItem = styled(Link)(({ theme }) => ({
     textDecoration: "none",
     color: theme.palette.common.black
 }));

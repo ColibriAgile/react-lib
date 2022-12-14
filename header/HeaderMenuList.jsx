@@ -1,5 +1,5 @@
 import React, {forwardRef} from "react";
-import {AppBar, List, ListItem, ListItemIcon, ListItemText, styled} from "@mui/material";
+import {List, ListItem, ListItemIcon, ListItemText, styled} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import {Link, useLocation} from "react-router-dom";
 import LightTooltip from "../LigthTooltip";
