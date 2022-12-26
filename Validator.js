@@ -39,6 +39,11 @@ const hasEspecialCharacter = (value) => {
   return !campoVazio(value) && !pattern.test(value);
 };
 
+const cnameInvalido = (value) => {
+  const pattern = new RegExp(/[!@#$%^&*()_+\=[\]{};':"\\|,.<>/?]/);
+  return !campoVazio(value) && pattern.test(value);
+}
+
 /**
  * só pode conter números e pontos [\d.]
  * não pode começar nem terminar em ponto (?!\.) (?!.*\.$)
@@ -59,6 +64,7 @@ const validations = {
   hasCapitalLetter: hasCapitalLetter,
   hasEspecialCharacter: hasEspecialCharacter,
   versao: versaoInvalida,
+  cname: cnameInvalido,
   equal: (value, field) => {
     return value !== field;
   }
@@ -74,7 +80,8 @@ const messages = {
   hasCapitalLetter: "erro.letra-maiuscula",
   hasEspecialCharacter: "erro.caracter-especial",
   equal: "erro.valor-diferente",
-  versao: "erro.versao"
+  versao: "erro.versao",
+  cname: "erro.url"
 }
 
 const validate = (form, name, field) => {

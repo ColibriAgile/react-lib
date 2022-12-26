@@ -37,6 +37,8 @@ const PageTemplate = ({
   filterValue = undefined,
   showFilterRow = true,
   children,
+  addOnClick = undefined,
+  addButtonText = undefined
 }) => {
   const { promiseInProgress } = usePromiseTracker();
   const { height } = useDimensions();
@@ -53,6 +55,18 @@ const PageTemplate = ({
     return () => reference?.instance?.endCustomLoading();
   }, [promiseInProgress, ref]);
 
+  const onToolbarPreparing = (e) => {
+    const addButton = e.toolbarOptions.items.filter( i => i.name == "addRowButton")[0];
+    if (addButton) {
+      if (addOnClick) {
+        addButton.options.onClick = addOnClick
+      }
+      if (addButtonText) {
+        addButton.options.text = addButtonText
+        addButton.options.hint = addButtonText
+      }
+    }
+  }
 
   return (
     <DivContainer>
@@ -67,6 +81,7 @@ const PageTemplate = ({
           dataSource={dataSource}
           allowColumnResizing={true}
           filterValue={filterValue}
+          onToolbarPreparing={onToolbarPreparing}
           height={altura}
         >
           <Toolbar>
