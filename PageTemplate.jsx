@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import {Paper, styled, useMediaQuery, useTheme} from "@mui/material";
-import { DataGrid, LoadIndicator } from "devextreme-react";
+import {Button, DataGrid, LoadIndicator} from "devextreme-react";
 import {
   ColumnChooser,
   Export,
@@ -36,9 +36,13 @@ const PageTemplate = ({
   dataSource,
   filterValue = undefined,
   showFilterRow = true,
+  exportEnabled = true,
+  columnChooserEnabled = true,
   children,
   addOnClick = undefined,
-  addButtonText = undefined
+  addButtonText = undefined,
+  removeOnClick = undefined,
+  removeButtonText  = undefined
 }) => {
   const { promiseInProgress } = usePromiseTracker();
   const { height } = useDimensions();
@@ -68,6 +72,7 @@ const PageTemplate = ({
     }
   }
 
+
   return (
     <DivContainer>
       <PaperGrid>
@@ -88,6 +93,11 @@ const PageTemplate = ({
             <Item location="before">
               <GridTitle titulo={title}/>
             </Item>
+            {removeOnClick &&
+                <Item  location="after">
+                  <Button icon="trash" name="delete" hint={removeButtonText} onClick={removeOnClick} hint={removeButtonText}/>
+                </Item>
+            }
             <Item name="applyFilterButton" />
             <Item name="addRowButton"/>
             <Item name="exportButton" />
@@ -98,9 +108,9 @@ const PageTemplate = ({
           <FilterRow visible={showFilterRow} />
           <SearchPanel visible={false} />
           <Scrolling mode="infinite" rowRenderingMode="virtual" />
-          <ColumnChooser enabled={true} />
+          <ColumnChooser enabled={columnChooserEnabled} />
           <LoadIndicator enabled={promiseInProgress} />
-          <Export enabled={true} fileName={title} />
+          <Export enabled={exportEnabled} fileName={title} />
           {children}
         </DataGrid>
       </PaperGrid>
