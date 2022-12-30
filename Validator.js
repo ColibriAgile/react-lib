@@ -40,7 +40,7 @@ const hasEspecialCharacter = (value) => {
 };
 
 const cnameInvalido = (value) => {
-  const pattern = new RegExp(/[!@#$%^&*()_+\=[\]{};':"\\|,.<>/?]/);
+  const pattern = new RegExp(/[!@#$%^&*()_+\=[\]{};':"\\|,.<>/?\s]/);
   return !campoVazio(value) && pattern.test(value);
 }
 
