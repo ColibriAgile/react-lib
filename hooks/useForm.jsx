@@ -54,12 +54,21 @@ export const useForm = (initialState = {}) => {
         setFormValues(auxValues);
     };
 
+    const getElement = (e, name) => {
+        if (e.name === name) {
+            return e;
+        } else {
+            const el = document.getElementsByName(name);
+            return el && el.length > 0 ? el[0] : e;
+        }
+    }
+
     const addField = (e, rules = {}) => {
         if (e) {
-            const name = e.name;
+            const name = rules.name ? rules.name : e.name;
             if (!fieldNames.current.has(name)) {
                 fieldNames.current.add(name);
-                fields.current[name] = { rules: rules, element: e };
+                fields.current[name] = { rules: rules, element: getElement(e, name) };
                 if (!formValues[name]) {
                     const aux = {};
                     aux[name] = "";
@@ -113,6 +122,14 @@ export const useForm = (initialState = {}) => {
         setErrors({});
     };
 
+    const removeFields = (fieldNames) => {
+        for (const field in formValues) {
+            if (fieldNames.includes(field)) {
+                removeField(field);
+            }
+        };
+    };
+
     const removeAllFields = () => {
         for (const field in formValues) {
             removeField(field);
@@ -131,9 +148,10 @@ export const useForm = (initialState = {}) => {
             handleChecked,
             handleValue,
             handleSubmit,
-            removeField,
-            removeAllFields,
         },
+        removeField,
+        removeFields,
+        removeAllFields,
         resetErrors,
     };
 };

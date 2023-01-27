@@ -24,6 +24,7 @@ const MascaraCep = forwardRef((props, ref) => {
             {...other}
             mask="00000-000"
             inputRef={ref}
+            name={props.name}
             onAccept={(value) => onChange({target: {name: props.name, value}})}
             overwrite
         />
@@ -36,6 +37,7 @@ const MascaraCnpj = forwardRef((props, ref) => {
         <IMaskInput
             {...other}
             mask="00.000.000/0000-00"
+            name={props.name}
             inputRef={ref}
             onAccept={(value) => onChange({target: {name: props.name, value}})}
             overwrite

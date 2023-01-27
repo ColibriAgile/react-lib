@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import {useTheme} from "@mui/material";
+
 
 const useClasses = stylesElement => {
     const theme = useTheme();
