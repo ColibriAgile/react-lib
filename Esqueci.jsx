@@ -29,7 +29,7 @@ const TextFieldEmail = styled(TextField)(({ theme }) => ({
     marginTop: "20px",
     padding: "10px",
     [theme.breakpoints.down('sm')]: {
-        "margin-top": "10px"
+        marginTop: "10px"
     }
 }));
 

@@ -7,7 +7,7 @@ const PaperMsg = styled(Paper)(({ theme }) => ({
     padding: "20px 40px 20px 40px",
     "align-items": "center",
     "& svg": {
-        "margin-right": theme.spacing(1),
+        marginRight: theme.spacing(1),
     }
 }));
 
