@@ -5,7 +5,7 @@ import React from "react";
 const PaperMsg = styled(Paper)(({ theme }) => ({
     display: "flex",
     padding: "20px 40px 20px 40px",
-    "align-items": "center",
+    alignItems: "center",
     "& svg": {
         marginRight: theme.spacing(1),
     }
