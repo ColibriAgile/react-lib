@@ -42,7 +42,11 @@ const ModalConfirmacao = ({
       <Dialog
         fullScreen={fullScreen || full}
         open={show}
-        onEscapeKeyDown={dismiss}
+        onClose={(event, reason) => {
+          if (reason === "escapeKeyDown") {
+            dismiss();
+          }
+        }}
         fullWidth={full}
         scroll="body"
       >
