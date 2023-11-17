@@ -71,7 +71,7 @@ var defaultPalette = {
     main: getColor(_materialColors.default, "primary", 500),
   },
   secondary: {
-    main: getColor(_materialColors.default, "secondary", 700),
+    main: getColor(_materialColors.default, "secondary", 500),
   },
   error: {
     main: _materialColors.default.error,
