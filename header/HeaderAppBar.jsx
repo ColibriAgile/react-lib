@@ -20,8 +20,7 @@ export default function HeaderAppBar({children}) {
     const navigate = useNavigate();
     const theme = useTheme();
     const mobile = useMediaQuery(theme.breakpoints.down("sm"));
-    console.log(theme.palette);
-    console.log(theme.palette);
+
 
     return (
         <Box sx={{flexGrow: 1, marginBottom: theme.spacing(10)}}>
