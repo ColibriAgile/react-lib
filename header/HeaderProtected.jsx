@@ -5,22 +5,26 @@ import HeaderMenu from "./HeaderMenu";
 import HeaderUserMenu from "./HeaderUserMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Box } from "@mui/material";
 
-export default function HeaderProtected({ title, version, menu, menus, logout }) {
+export default function HeaderProtected({ title, version, menu, menus, logout, extraContent }) {
     return (
       <HeaderAppBar>
           {/* Se só tem um menu, usa o MenuIcon (Hamburger menu) antes do título */}
           {menu && <HeaderMenu title={<MenuIcon/>} pages={menu} />}
           <HeaderTitle title={title}  version={version} />
-          {/* Se tem mais de um menu, usa o KeyboardArrowDownIcon depois do titulo de cada menu, após o título do app */}
-          {menus && menus.map((menu, index) => (
-              <HeaderMenu
-                  key={index} title={menu.pages ? <>{menu.title} <KeyboardArrowDownIcon /></> : menu.title}
-                  onClick={menu.onClick}
-                  route={menu.route}
-                  pages={menu.pages} />
-          ))}
-          <HeaderUserMenu logout={logout} />
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+              {extraContent}
+              {menus && menus.map((menu, index) => (
+                  <HeaderMenu
+                      {/* Se tem mais de um menu, usa o KeyboardArrowDownIcon depois do titulo de cada menu, após o título do app */}
+                      key={index} title={menu.pages ? <>{menu.title} <KeyboardArrowDownIcon /></> : menu.title}
+                      onClick={menu.onClick}
+                      route={menu.route}
+                      pages={menu.pages} />
+              ))}
+              <HeaderUserMenu logout={logout} />
+          </Box>
       </HeaderAppBar>
   );
 }
