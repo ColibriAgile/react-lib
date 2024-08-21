@@ -9,7 +9,7 @@ const ButtonLogin = styled(Button)(({ theme }) => ({
     marginRight: theme.spacing(2)
 }));
 
-export default function HeaderPublic({title, version, showLogin}) {
+export default function HeaderPublic({title, version, showLogin, extraContent}) {
     const {t} = useTranslation();
     const theme = useTheme();
     const mobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -17,6 +17,7 @@ export default function HeaderPublic({title, version, showLogin}) {
     return (
         <HeaderAppBar>
             <HeaderTitle title={title} version={version}/>
+            {extraContent}
             {showLogin && <ButtonLogin color="inherit"  onClick={showLogin}>
                 <Typography variant={mobile ? "body2" : "body1"}>
                     {t('login.login')}
