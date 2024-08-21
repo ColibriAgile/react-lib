@@ -15,9 +15,9 @@ export default function HeaderProtected({ title, version, menu, menus, logout, e
           <HeaderTitle title={title}  version={version} />
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
               {extraContent}
+              {/* Se tem mais de um menu, usa o KeyboardArrowDownIcon depois do titulo de cada menu, após o título do app */}
               {menus && menus.map((menu, index) => (
                   <HeaderMenu
-                      {/* Se tem mais de um menu, usa o KeyboardArrowDownIcon depois do titulo de cada menu, após o título do app */}
                       key={index} title={menu.pages ? <>{menu.title} <KeyboardArrowDownIcon /></> : menu.title}
                       onClick={menu.onClick}
                       route={menu.route}
