@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderTitle from "./HeaderTitle";
 import HeaderAppBar from "./HeaderAppBar";
-import {Button, styled, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Button, styled, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
 const ButtonLogin = styled(Button)(({ theme }) => ({
