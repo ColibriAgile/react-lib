@@ -16,7 +16,7 @@ export default function HeaderPublic({title, version, showLogin, extraContent}) 
     return (
         <HeaderAppBar>
             <HeaderTitle title={title} version={version}/>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'flex-end'}}>
                 {extraContent}
                 {showLogin && <ButtonLogin color="inherit" onClick={showLogin}>
                     <Typography variant={mobile ? "body2" : "body1"}>

@@ -3,8 +3,7 @@ import {Button, Menu, MenuItem, styled} from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { AuthContext } from "../context/AuthContext";
 
-const DivLogout = styled('div')(({ theme }) => ({
-  marginLeft: "auto",
+const DivLogout = styled('div')(({ theme }) => ({  
   marginRight: theme.spacing(2)
 }));
 

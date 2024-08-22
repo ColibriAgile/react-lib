@@ -13,8 +13,7 @@ export default function HeaderProtected({ title, version, menu, menus, logout, e
           {/* Se só tem um menu, usa o MenuIcon (Hamburger menu) antes do título */}
           {menu && <HeaderMenu title={<MenuIcon/>} pages={menu} />}
           <HeaderTitle title={title}  version={version} />
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-              {extraContent}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {/* Se tem mais de um menu, usa o KeyboardArrowDownIcon depois do titulo de cada menu, após o título do app */}
               {menus && menus.map((menu, index) => (
                   <HeaderMenu
@@ -23,6 +22,9 @@ export default function HeaderProtected({ title, version, menu, menus, logout, e
                       route={menu.route}
                       pages={menu.pages} />
               ))}
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', flexGrow: 1 }}>
+              {extraContent}
               <HeaderUserMenu logout={logout} />
           </Box>
       </HeaderAppBar>
