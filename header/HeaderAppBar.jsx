@@ -1,6 +1,6 @@
 import React from "react";
 import {AppBar, Box, styled, Toolbar, useMediaQuery, useTheme} from "@mui/material";
-import logoVoyix from "../img/ncr-voyix-logo.svg";
+import logoColibri from "../img/colibri-logo.svg";
 import {useNavigate} from "react-router-dom";
 
 const AppBarNcr = styled(AppBar)(({ theme }) => ({
@@ -27,7 +27,7 @@ export default function HeaderAppBar({children}) {
             <AppBarNcr>
                 <Toolbar disableGutters>
                     {!mobile &&
-                        <ImgLogo src={logoVoyix}  alt="NCR" width="120" onClick={() => navigate("/")}/>
+                        <ImgLogo src={logoColibri}  alt="Colibri" width="120" onClick={() => navigate("/")}/>
                     }
                     {children}
                 </Toolbar>
