@@ -12,7 +12,7 @@ const ButtonMenu = styled(Button)(({ theme }) => ({
   height: "58px"
 }));
 
-const MenuItemNCR = styled(MenuItem)(({ theme }) => ({
+const MenuItemColibri = styled(MenuItem)(({ theme }) => ({
   textDecoration: "none",
   color: theme.palette.common.black
 }));
@@ -47,9 +47,9 @@ const HeaderUserMenu = ({ logout }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItemNCR onClick={handleLogout}>
+        <MenuItemColibri onClick={handleLogout}>
           {t("login.logout")}
-        </MenuItemNCR>
+        </MenuItemColibri>
       </Menu>
     </DivLogout>
   );

@@ -4,12 +4,12 @@ import {useTranslation} from "react-i18next";
 import {Link, useLocation} from "react-router-dom";
 import LightTooltip from "../LigthTooltip";
 
-const ListItemNcr = styled(ListItem) ({
+const ListItemColibri = styled(ListItem) ({
   width: "100% !important",
   margin: "0px !important"
 });
 
-const ListItemIconNCR = styled(ListItemIcon) ({
+const ListItemIconColibri = styled(ListItemIcon) ({
   marginLeft: "8px"
 });
 
@@ -30,7 +30,7 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pag
                 disableHoverListener={disableTooltip}
                 disableTouchListener={disableTooltip}
             >
-              <ListItemNcr
+              <ListItemColibri
                   button
                   key={page.route}
                   component={Link}
@@ -38,9 +38,9 @@ const HeaderMenuList = forwardRef(({onClose, disableTooltip, showIcons=true, pag
                   selected={activeRoute(page.route)}
                   onClick={onClose}
               >
-                {showIcons && <ListItemIconNCR>{page.icon}</ListItemIconNCR>}
+                {showIcons && <ListItemIconColibri>{page.icon}</ListItemIconColibri>}
                 <ListItemText primary={t("header." + (page.title || page.route))}/>
-              </ListItemNcr>
+              </ListItemColibri>
             </LightTooltip>
         ))}
       </List>
