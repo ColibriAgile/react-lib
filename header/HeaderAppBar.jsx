@@ -3,7 +3,7 @@ import {AppBar, Box, styled, Toolbar, useMediaQuery, useTheme} from "@mui/materi
 import logoColibri from "../img/colibri-logo.svg";
 import {useNavigate} from "react-router-dom";
 
-const AppBarNcr = styled(AppBar)(({ theme }) => ({
+const AppBarColibri = styled(AppBar)(({ theme }) => ({
     flexGrow: 1,
     border: "none",
     backgroundColor: theme.palette.primary.main,
@@ -24,14 +24,14 @@ export default function HeaderAppBar({children}) {
 
     return (
         <Box sx={{flexGrow: 1, marginBottom: theme.spacing(10)}}>
-            <AppBarNcr>
+            <AppBarColibri>
                 <Toolbar disableGutters>
                     {!mobile &&
-                        <ImgLogo src={logoColibri}  alt="Colibri" width="120" onClick={() => navigate("/")}/>
+                        <ImgLogo src={logoColibri}  alt="Colibri" width="80" onClick={() => navigate("/")}/>
                     }
                     {children}
                 </Toolbar>
-            </AppBarNcr>
+            </AppBarColibri>
         </Box>
     );
 }
