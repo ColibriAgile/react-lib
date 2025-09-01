@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview do Cabeçalho Colibri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .header-preview {
+            position: relative;
+            background-color: #2e4051;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .header-preview::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #5dd252, #a6ce39 46%, #00a77e);
+        }
+        
+        .toolbar {
+            min-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .logo {
+            width: 64px;
+            height: 64px;
+            margin-right: 16px;
+            cursor: pointer;
+            filter: brightness(1.1) contrast(1.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: auto;
+        }
+        
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .content {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .description {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .color-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .color-sample {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-preview">
+        <div class="toolbar">
+            <img src="../img/colibri-logo.svg" alt="Colibri" class="logo" title="Logo Colibri">
+            <div class="nav-items">
+                <a href="#" class="nav-item">Configurações</a>
+                <a href="#" class="nav-item">Terminais</a>
+                <a href="#" class="nav-item">Extensões</a>
+                <a href="#" class="nav-item">Market Place</a>
+                <a href="#" class="nav-item">Status</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="description">
+            <h2>Preview do Cabeçalho Colibri</h2>
+            <p>Este é o preview do novo cabeçalho usando os recursos reais da aplicação:</p>
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li><strong>Logo real:</strong> Arquivo SVG original da pasta img/</li>
+                <li><strong>Faixa gradiente no topo:</strong> 4px de altura com gradiente verde</li>
+                <li><strong>Fundo principal:</strong> Cor sólida #2e4051 (cinza escuro azulado)</li>
+                <li><strong>Altura:</strong> 72px mínimo</li>
+                <li><strong>Efeitos:</strong> Hover, transições e filtros aplicados</li>
+            </ul>
+        </div>
+        
+        <h3>Cores utilizadas:</h3>
+        <div class="color-info">
+            <div class="color-sample">
+                <div class="color-box" style="background-color: #2e4051;"></div>
+                <span><strong>Fundo:</strong> #2e4051</span>
+            </div>
+            <div class="color-sample">
+                <div class="color-box" style="background: linear-gradient(-90deg, #54b948, #a6ce39 46%, #00a77e);"></div>
+                <span><strong>Gradiente:</strong> #54b948 → #a6ce39 → #00a77e</span>
+            </div>
+        </div>
+        
+        <p style="margin-top: 20px; color: #666;">
+            <em>✅ Agora usando o logo SVG real da aplicação! 
+            O preview reflete exatamente como ficará no React.</em>
+        </p>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f0f8f0; border-radius: 5px; border-left: 4px solid #4caf50;">
+            <h4 style="color: #2e7d32; margin-bottom: 10px;">Implementação React:</h4>
+            <p style="color: #2e7d32; margin: 0;">
+                O arquivo HeaderAppBar.jsx já foi atualizado com essas especificações. 
+                Basta executar a aplicação React para ver o resultado final!
+            </p>
+        </div>
+    </div>
+</body>
+</html>
