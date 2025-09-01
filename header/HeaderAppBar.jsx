@@ -39,7 +39,7 @@ export default function HeaderAppBar({children}) {
     const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
-        <Box sx={{flexGrow: 1, marginBottom: theme.spacing(10)}}>
+        <Box sx={{flexGrow: 1, marginBottom: theme.spacing(3)}}>
             <AppBarColibri>
                 <Toolbar 
                     disableGutters 
