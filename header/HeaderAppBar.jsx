@@ -27,7 +27,7 @@ export default function HeaderAppBar({children}) {
             <AppBarColibri>
                 <Toolbar disableGutters>
                     {!mobile &&
-                        <ImgLogo src={logoColibri}  alt="Colibri" width="80" onClick={() => navigate("/")}/>
+                        <ImgLogo src={logoColibri}  alt="Colibri" width="64" onClick={() => navigate("/")}/>
                     }
                     {children}
                 </Toolbar>
