@@ -3,6 +3,8 @@ import {AppBar, Box, styled, Toolbar, useMediaQuery, useTheme} from "@mui/materi
 import logoColibri from "../img/colibri-logo.svg";
 import {useNavigate} from "react-router-dom";
 
+// Atualizado com novo layout - versão 2.0
+
 const AppBarColibri = styled(AppBar)(({ theme }) => ({
     flexGrow: 1,
     border: "none",
