@@ -1,82 +1,16 @@
 {
-  "_from": "@nui/mui-theme",
-  "_id": "@nui/mui-theme@1.0.0",
-  "_inBundle": false,
-  "_integrity": "sha512-E+91t5wUtP7aqMVNd2lzi4Kb4ejpdQsHyHYJMj5kXsxmJV94xYm49Oh7h3tI+EicYIqLsVMXei/dbQ6wonTAaA==",
-  "_location": "/@nui/mui-theme",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "@nui/mui-theme",
-    "name": "@nui/mui-theme",
-    "escapedName": "@nui%2fmui-theme",
-    "scope": "@nui",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "http://nexuspro.ncr.com/nexus/content/repositories/cxd-npm/@nui/mui-theme/-/mui-theme-1.0.0.tgz",
-  "_shasum": "717e1bfd59b9eb134bbb36792be393160804f87a",
-  "_spec": "@nui/mui-theme",
-  "_where": "D:\\projetos\\cloud\\colibri-cloud-server\\web\\src\\main\\webapp\\resources",
-  "author": "",
-  "browserslist": [
-    "> 0.25%",
-    "not dead"
-  ],
-  "bundleDependencies": false,
+  "name": "@nui/mui-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vendored copy of @nui/mui-theme (Material UI theme). Build metadata removed.",
+  "license": "ISC",
+  "main": "dist/index.js",
   "dependencies": {
     "@nui/material-colors": "^1.0.0",
     "polished": "^3.4.1"
   },
-  "deprecated": false,
-  "description": "This theme is intended to work with [Material UI](https://material-ui.com).",
-  "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
-    "@material-ui/core": "4.5.1",
-    "@material-ui/icons": "^4.5.1",
-    "@storybook/addon-actions": "^5.2.4",
-    "@storybook/addon-links": "^5.2.4",
-    "@storybook/addons": "^5.2.4",
-    "@storybook/react": "^5.2.4",
-    "babel-loader": "^8.0.6",
-    "clsx": "^1.1.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-scripts": "^3.3.1"
-  },
-  "files": [
-    "dist/"
-  ],
-  "keywords": [],
-  "license": "ISC",
-  "main": "dist/index.js",
-  "name": "@nui/mui-theme",
   "peerDependencies": {
     "@material-ui/core": "^4.5.1"
-  },
-  "publishConfig": {
-    "registry": "http://nexuspro.ncr.com/nexus/content/repositories/cxd-npm"
-  },
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@almgit.ncr.com:7999/nui/nui-mui-theme.git"
-  },
-  "scripts": {
-    "build": "babel index.js -o dist/index.js && babel getTheme.js -o dist/getTheme.js",
-    "prepublishOnly": "npm run build",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook -c .storybook -s www -o ./storybook/nui-mui-theme"
-  },
-  "version": "1.0.0"
+  }
 }
+s

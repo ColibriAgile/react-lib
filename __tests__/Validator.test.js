@@ -36,9 +36,9 @@ test("validação de email", () => {
 
 test("validação de url", () => {
   const urls_validas = {
-    valida1: "http://www.ncr.com",
-    valida2: "https://www.ncr.com/teste",
-    valida3: "ftp://ncr.com",
+    valida1: "http://www.colibri.com.br",
+    valida2: "https://www.colibri.com.br/teste",
+    valida3: "ftp://colibri.com.br",
   }
 
   for (let key in urls_validas) {
