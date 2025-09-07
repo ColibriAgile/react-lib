@@ -116,12 +116,13 @@ const defaultDarkTheme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          background: 'linear-gradient(145deg, #1e293b, #0f172a)',
-          border: '1px solid #334155',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(148, 163, 184, 0.1)',
+          background: 'linear-gradient(145deg, #2d3748, #1a202c)', // Mais contrastante
+          border: '1px solid #4a5568', // Borda mais visível
+          boxShadow: '0 6px 16px rgba(0,0,0,0.5), 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(226, 232, 240, 0.1)',
           '&:hover': {
-            boxShadow: '0 12px 32px rgba(0,0,0,0.5), 0 6px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(148, 163, 184, 0.2), 0 0 0 1px rgba(34, 197, 94, 0.3)',
+            boxShadow: '0 16px 40px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(226, 232, 240, 0.2), 0 0 0 1px rgba(34, 197, 94, 0.4)',
             borderColor: '#22c55e',
+            background: 'linear-gradient(145deg, #374151, #1f2937)', // Mais claro no hover
           },
         },
       },
