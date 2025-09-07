@@ -1,11 +1,21 @@
 import React from "react";
-import {Alert, AlertTitle, useTheme} from "@mui/material";
+import {Alert, AlertTitle} from "@mui/material";
+import { useLibTheme } from './context/ThemeContext';
 
 
 export default function AlertaErro({titulo, msg=''}) {
-    const theme = useTheme();
+    const theme = useLibTheme(); // ✅ Usa tema da _react-lib (retrocompatível)
+    
     return (
-        <Alert severity="error" sx={{bgcolor: "#ffffff"}} variant="outlined">
+        <Alert 
+            severity="error" 
+            sx={{
+                bgcolor: theme.palette.mode === 'dark' 
+                    ? 'rgba(211, 47, 47, 0.1)' 
+                    : "#ffffff"
+            }} 
+            variant="outlined"
+        >
             <AlertTitle sx={{color: theme.palette.error.main}}>{titulo}</AlertTitle>
             {msg}
         </Alert>
