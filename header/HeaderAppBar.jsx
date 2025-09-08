@@ -10,11 +10,11 @@ const AppBarColibri = styled(AppBar)(({ theme, darkmode }) => ({
     flexGrow: 1,
     border: "none",
     backgroundColor: darkmode === 'true'
-        ? "#1e40af" // Azul mais escuro e contrastante para dark mode
+        ? "#496695"  // Azul mais claro e contrastante para dark mode
         : "#2e4051", // MANTÉM a cor original para light mode
     color: theme.palette.common.white,
     boxShadow: darkmode === 'true'
-        ? "0 4px 12px rgba(30, 64, 175, 0.3)"
+        ? "0 4px 12px rgba(73, 102, 149, 0.3)" // Sombra ajustada para a nova cor #496695
         : "0 2px 4px rgba(0,0,0,0.1)", // MANTÉM a sombra original para light mode
     position: "relative",
     transition: "background-color 0.3s ease, box-shadow 0.3s ease",
