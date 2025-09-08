@@ -6,16 +6,10 @@ import { useLibTheme } from "../context/ThemeContext";
 
 // Atualizado com novo layout - versão 2.0 + Sistema de Temas
 
-const AppBarColibri = styled(AppBar)(({ theme, darkmode }) => ({
+const AppBarColibri = styled(AppBar)(({ theme }) => ({
     flexGrow: 1,
     border: "none",
-    backgroundColor: darkmode === 'true'
-        ? "#496695"  // Azul mais claro e contrastante para dark mode
-        : "#2e4051", // MANTÉM a cor original para light mode
     color: theme.palette.common.white,
-    boxShadow: darkmode === 'true'
-        ? "0 4px 12px rgba(73, 102, 149, 0.3)" // Sombra ajustada para a nova cor #496695
-        : "0 2px 4px rgba(0,0,0,0.1)", // MANTÉM a sombra original para light mode
     position: "relative",
     transition: "background-color 0.3s ease, box-shadow 0.3s ease",
     "&::before": {
@@ -25,9 +19,7 @@ const AppBarColibri = styled(AppBar)(({ theme, darkmode }) => ({
         left: 0,
         right: 0,
         height: "4px",
-        background: darkmode === 'true'
-            ? "linear-gradient(90deg, #5dd252, #a6ce39 46%, #00a77e)" 
-            : "linear-gradient(90deg, #5dd252, #a6ce39 46%, #00a77e)", // MANTÉM gradiente original para light mode
+        background: "linear-gradient(90deg, #5dd252, #a6ce39 46%, #00a77e)",
     }
 }));
 
@@ -47,9 +39,19 @@ export default function HeaderAppBar({children}) {
     const libTheme = useLibTheme();
     const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+    // Definindo estilos dinâmicos baseados no tema
+    const appBarStyles = {
+        backgroundColor: libTheme.palette.mode === 'dark' 
+            ? "#496695"  // Azul para dark mode
+            : "#2e4051", // Cor original para light mode
+        boxShadow: libTheme.palette.mode === 'dark' 
+            ? "0 4px 12px rgba(73, 102, 149, 0.3)"
+            : "0 2px 4px rgba(0,0,0,0.1)",
+    };
+
     return (
         <Box sx={{flexGrow: 1, marginBottom: theme.spacing(3)}}>
-            <AppBarColibri darkmode={libTheme.palette.mode === 'dark' ? 'true' : 'false'}>
+            <AppBarColibri sx={appBarStyles}>
                 <Toolbar 
                     disableGutters 
                     sx={{ 
