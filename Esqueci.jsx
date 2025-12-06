@@ -55,12 +55,14 @@ const LoadingButtonEnviar = styled(LoadingButton)({
 export default function Esqueci({client, url = 'usuario/redefinir/'}) {
     const [erroEsqueci, setErroEsqueci] = React.useState(false);
     const [sucessoEsqueci, setSucessoEsqueci] = React.useState(false);
+    const [msgErro, setMsgErro] = React.useState(null);
     const {addField, formValues, errors, hasErro, on} = useForm();
     const {t} = useTranslation();
 
     const onSubmit = () => {
         setErroEsqueci(false);
         setSucessoEsqueci(false);
+        setMsgErro(null);
         post(
             client,
             url,
@@ -71,6 +73,9 @@ export default function Esqueci({client, url = 'usuario/redefinir/'}) {
             }
             else {
                 setErroEsqueci(true);
+                if (response.data && response.data.message) {
+                    setMsgErro(response.data.message);
+                }
             }
         });
     };
@@ -102,7 +107,8 @@ export default function Esqueci({client, url = 'usuario/redefinir/'}) {
             return (<PainelMsg msg={t("login.esqueci-sucesso")}/>)
         }
         if (erroEsqueci) {
-            return (<PainelMsg erro msg={t("login.esqueci-erro")}/>)
+            const msg = msgErro ? t(msgErro) : t("login.esqueci-erro");
+            return (<PainelMsg erro msg={msg}/>)
         }
         return ('');
     };
