@@ -92,10 +92,14 @@ export default function RedefinirSenha({client}) {
     };
 
     const msgSucesso = () => {
-        let msg = t("usuario.senha-alterada") + (
-            <Link href="#" color="secondary" onClick={() => navigate("/")}> login</Link>);
-        return (<PainelMsg msg={msg}/>);
-    }
+    const msg = (
+        <>
+            {t("usuario.senha-alterada")}
+            <Link href="#" color="secondary" onClick={() => navigate("/")}> login</Link>
+        </>
+    );
+    return (<PainelMsg msg={msg}/>);
+}
 
     return (
         <ContainerPage maxWidth="sm">
