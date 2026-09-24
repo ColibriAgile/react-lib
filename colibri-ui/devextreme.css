@@ -1,0 +1,427 @@
+/*
+ * Colibri UI — sobreposição para o DataGrid do DevExtreme (esquema base generic.light.compact).
+ * Dá ao grid o visual de .cm-table: barra de ferramentas fora da superfície, superfície única,
+ * cabeçalho compacto, linhas de 42 px sem zebra, hover e seleção em azul-claro.
+ * Carregar depois do esquema DevExtreme e de colibri-ui.css.
+ */
+
+.dx-widget,
+.dx-widget input,
+.dx-widget textarea {
+    font-family: var(--cm-font);
+}
+
+/* ---------- Grid ---------- */
+.cm-grid.dx-datagrid,
+.cm-grid .dx-datagrid {
+    color: var(--cm-ink);
+    background: transparent;
+    font-size: 13px;
+    line-height: 1.3;
+}
+
+/* Barra de ferramentas: fora da superfície da tabela, como .cm-toolbar */
+.cm-grid .dx-datagrid-header-panel {
+    padding: 0 0 20px;
+    background: transparent;
+    border-bottom: 0;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-items-container {
+    height: 32px;
+    overflow: visible;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item,
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-after .dx-toolbar-item {
+    padding: 0 0 0 8px;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:first-child {
+    padding-left: 0;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item + .dx-toolbar-item {
+    padding-left: 12px;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-after .dx-toolbar-item + .dx-toolbar-item {
+    padding-left: 4px;
+}
+.cm-grid .dx-datagrid-header-panel .dx-toolbar-after .dx-toolbar-item:has(.MuiButton-root) {
+    padding-left: 12px;
+}
+
+/* Busca: .cm-search */
+.cm-grid .dx-datagrid-search-panel {
+    margin: 0;
+    padding: 0;
+}
+.cm-grid .dx-datagrid-search-panel.dx-texteditor,
+.dx-datagrid-search-panel.dx-texteditor.dx-editor-outlined {
+    height: var(--cm-control-h);
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-line-strong);
+    border-radius: var(--cm-radius-sm);
+    box-shadow: none;
+    transition: border-color 150ms var(--cm-ease), box-shadow 150ms var(--cm-ease);
+}
+.cm-grid .dx-datagrid-search-panel.dx-state-hover {
+    border-color: var(--cm-line-strong);
+}
+.cm-grid .dx-datagrid-search-panel.dx-state-focused {
+    border-color: var(--cm-focus);
+    box-shadow: var(--cm-focus-ring);
+}
+.cm-grid .dx-datagrid-search-panel .dx-texteditor-input {
+    height: 30px;
+    min-height: 0;
+    padding: 0 10px 0 31px;
+    color: var(--cm-ink);
+    font-size: 13px;
+}
+.cm-grid .dx-datagrid-search-panel .dx-placeholder::before {
+    padding: 0 10px 0 31px;
+    color: var(--cm-ink-3);
+    font-size: 13px;
+    line-height: 30px;
+}
+.cm-grid .dx-searchbox .dx-icon-search {
+    top: 0;
+    left: 0;
+    width: 31px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    color: var(--cm-ink-3);
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
+}
+.cm-grid .dx-searchbox .dx-icon-search::before {
+    position: static;
+    margin: 0;
+    font-size: 14px;
+}
+.cm-grid .dx-datagrid-header-panel .cm-section__count {
+    display: inline-block;
+    line-height: 32px;
+    white-space: nowrap;
+}
+
+/* Botões de ícone da barra: .cm-icon-btn */
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-button-mode-contained,
+.cm-grid .dx-datagrid-header-panel .dx-button {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    color: var(--cm-ink-2);
+    background: transparent;
+    border: 0;
+    border-radius: var(--cm-radius-sm);
+    box-shadow: none;
+    transition: color 120ms var(--cm-ease), background-color 120ms var(--cm-ease);
+}
+.cm-grid .dx-datagrid-header-panel .dx-button .dx-button-content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.cm-grid .dx-datagrid-header-panel .dx-button .dx-icon {
+    width: auto;
+    height: auto;
+    margin: 0;
+    color: inherit;
+    font-size: 16px;
+    line-height: 1;
+}
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-hover {
+    color: var(--cm-accent);
+    background: var(--cm-accent-soft);
+}
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-focused {
+    background: transparent;
+}
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-focused:focus-visible,
+.cm-grid .dx-datagrid-header-panel .dx-button:focus-visible {
+    outline: 2px solid var(--cm-focus);
+    outline-offset: 1px;
+}
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-active {
+    color: var(--cm-accent);
+    background: var(--cm-accent-soft);
+}
+
+/* Superfície única: .cm-table */
+.cm-grid .dx-datagrid-borders > .dx-datagrid-headers {
+    border: 1px solid var(--cm-line);
+    border-bottom: 0;
+    border-radius: var(--cm-radius) var(--cm-radius) 0 0;
+    overflow: hidden;
+}
+.cm-grid .dx-datagrid-borders > .dx-datagrid-rowsview,
+.cm-grid .dx-datagrid-borders > .dx-datagrid-total-footer {
+    border-color: var(--cm-line);
+    background: var(--cm-surface);
+}
+.cm-grid .dx-datagrid-borders > .dx-datagrid-rowsview:last-child,
+.cm-grid .dx-datagrid-borders > .dx-datagrid-total-footer:last-child {
+    border-bottom: 1px solid var(--cm-line);
+    border-radius: 0 0 var(--cm-radius) var(--cm-radius);
+}
+.cm-grid .dx-datagrid-headers {
+    color: var(--cm-ink-2);
+    background: var(--cm-surface-2);
+    border-bottom: 1px solid var(--cm-line);
+}
+.cm-grid .dx-datagrid-headers .dx-header-row > td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    color: var(--cm-ink-2);
+    border-bottom: 1px solid var(--cm-line);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+.cm-grid .dx-datagrid-headers .dx-header-row > td:first-child,
+.cm-grid .dx-data-row > td:first-child,
+.cm-grid .dx-datagrid-filter-row > td:first-child {
+    padding-left: 16px;
+}
+.cm-grid .dx-datagrid-headers .dx-header-row > td:last-child,
+.cm-grid .dx-data-row > td:last-child {
+    padding-right: 12px;
+}
+/* Ordenação: uma seta só na coluna ativa. Filtro de cabeçalho discreto; forte só quando aplicado. */
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-sort,
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-sort::before {
+    color: var(--cm-ink);
+    font-size: 12px;
+}
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter,
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter.dx-header-filter-empty {
+    color: var(--cm-ink-3);
+    opacity: .45;
+    font-size: 12px;
+    transition: opacity 120ms var(--cm-ease), color 120ms var(--cm-ease);
+}
+.cm-grid .dx-datagrid-headers .dx-header-row > td:hover .dx-header-filter,
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter:hover {
+    opacity: 1;
+}
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter:not(.dx-header-filter-empty) {
+    color: var(--cm-accent);
+    opacity: 1;
+}
+.cm-grid .dx-header-row > td.dx-datagrid-drag-action,
+.cm-grid .dx-header-row > td[role="columnheader"]:hover {
+    color: var(--cm-ink);
+}
+
+/* Linha de filtro */
+.cm-grid .dx-datagrid-filter-row {
+    background: var(--cm-surface);
+}
+.cm-grid .dx-datagrid-filter-row > td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--cm-line);
+}
+.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor {
+    height: 28px;
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-btn-line);
+    border-radius: var(--cm-btn-radius);
+}
+.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor.dx-state-focused {
+    border-color: var(--cm-focus);
+    box-shadow: var(--cm-focus-ring);
+}
+.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor-input {
+    min-height: 0;
+    height: 26px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 12px;
+}
+.cm-grid .dx-datagrid-filter-row .dx-menu .dx-menu-item .dx-menu-item-content .dx-icon {
+    color: var(--cm-ink-3);
+}
+
+/* Linhas */
+.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row > td {
+    height: 42px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: var(--cm-ink);
+    font-size: 13px;
+    vertical-align: middle;
+}
+.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row {
+    border-top: 1px solid var(--cm-line);
+    border-bottom: 1px solid var(--cm-line);
+}
+.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
+    color: var(--cm-ink);
+    background: var(--cm-hover);
+}
+.cm-grid .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
+.cm-grid .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td {
+    color: var(--cm-ink);
+    background: var(--cm-accent-soft);
+    border-color: var(--cm-accent-line);
+}
+.cm-grid .dx-datagrid-rowsview .dx-row-focused.dx-data-row > td,
+.cm-grid .dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr > td {
+    color: var(--cm-ink);
+    background: var(--cm-accent-soft);
+}
+.cm-grid .dx-datagrid-rowsview .dx-data-row > td.dx-focused,
+.cm-grid .dx-datagrid .dx-datagrid-rowsview .dx-data-row > td.dx-focused {
+    border-color: var(--cm-focus) !important;
+}
+.cm-grid .dx-datagrid-rowsview a {
+    color: var(--cm-accent);
+    font-weight: 600;
+    text-decoration: none;
+}
+.cm-grid .dx-datagrid-rowsview a:hover {
+    text-decoration: underline;
+}
+.cm-grid .dx-datagrid-rowsview .dx-datagrid-nodata {
+    color: var(--cm-ink-2);
+    font-size: 13px;
+}
+
+/* Rodapé de totais */
+.cm-grid .dx-datagrid-total-footer {
+    background: var(--cm-surface-2);
+    border-top: 1px solid var(--cm-line);
+}
+.cm-grid .dx-datagrid-summary-item {
+    color: var(--cm-ink-2);
+    font: 600 12px var(--cm-mono);
+}
+
+/* Caixas de seleção do grid */
+.cm-grid .dx-checkbox-icon {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--cm-line-strong);
+    border-radius: 3px;
+}
+.cm-grid .dx-checkbox-checked .dx-checkbox-icon,
+.cm-grid .dx-checkbox-indeterminate .dx-checkbox-icon {
+    color: #fff;
+    background: var(--cm-accent);
+    border-color: var(--cm-accent);
+}
+.cm-grid .dx-checkbox-checked .dx-checkbox-icon::before {
+    margin-top: -6px;
+    margin-left: -6px;
+    font-size: 12px;
+}
+
+/* Carregamento */
+.dx-loadpanel-wrapper .dx-overlay-content.dx-loadpanel-content {
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-line);
+    border-radius: var(--cm-radius);
+    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+}
+.dx-loadpanel-message {
+    color: var(--cm-ink-2);
+    font-size: 13px;
+}
+
+/* ---------- Camadas do DevExtreme (seletor de colunas, filtro de cabeçalho, menus) ---------- */
+.dx-overlay-wrapper {
+    font-family: var(--cm-font);
+}
+.dx-popup-wrapper > .dx-overlay-content,
+.dx-datagrid-column-chooser .dx-overlay-content,
+.dx-header-filter-menu .dx-overlay-content {
+    color: var(--cm-ink);
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-line);
+    border-radius: var(--cm-radius);
+    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+}
+.dx-popup-title.dx-toolbar {
+    padding: 0 12px 0 16px;
+    background: var(--cm-surface);
+    border-bottom: 1px solid var(--cm-line);
+}
+.dx-popup-title .dx-toolbar-label {
+    color: var(--cm-ink);
+    font-size: 14px;
+    font-weight: 650;
+}
+.dx-popup-bottom.dx-toolbar {
+    padding: 12px 16px;
+    background: var(--cm-surface-2);
+    border-top: 1px solid var(--cm-line);
+}
+.dx-list-item,
+.dx-treeview-item {
+    color: var(--cm-ink);
+    font-size: 13px;
+}
+.dx-list-item.dx-state-hover,
+.dx-treeview-item.dx-state-hover {
+    color: var(--cm-ink);
+    background: var(--cm-accent-soft);
+}
+.dx-context-menu .dx-menu-item.dx-state-hover,
+.dx-menu-base .dx-menu-item.dx-state-hover {
+    color: var(--cm-ink);
+    background: var(--cm-accent-soft);
+}
+.dx-menu-base .dx-menu-item-selected {
+    color: var(--cm-accent);
+    background: transparent;
+}
+
+/* Botões comuns do DevExtreme (popups): .cm-btn */
+.dx-popup-wrapper .dx-button {
+    min-width: 0;
+    height: var(--cm-control-h);
+    color: var(--cm-btn-ink);
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-btn-line);
+    border-radius: var(--cm-btn-radius);
+    box-shadow: none;
+}
+.dx-popup-wrapper .dx-button.dx-state-hover {
+    color: var(--cm-ink);
+    background: var(--cm-btn-hover);
+}
+.dx-popup-wrapper .dx-button .dx-button-text {
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: none;
+}
+.dx-popup-wrapper .dx-button.dx-button-default {
+    color: #fff;
+    background: var(--cm-accent);
+    border-color: var(--cm-accent-border);
+}
+.dx-popup-wrapper .dx-button.dx-button-default.dx-state-hover {
+    background: var(--cm-accent-hover);
+}
+
+/* Colunas de dados em fonte mono: o cabeçalho e a linha de filtro continuam na fonte de texto */
+.cm-grid td.cm-mono { font-family: var(--cm-mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+.cm-grid .dx-header-row > td.cm-mono,
+.cm-grid .dx-datagrid-filter-row > td.cm-mono { font-family: var(--cm-font); }
+
+/* Termo encontrado pela busca: realce suave, sem inverter a cor */
+.cm-grid .dx-datagrid-search-text {
+    color: inherit;
+    background: var(--cm-warning-soft);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--cm-warning-line);
+}

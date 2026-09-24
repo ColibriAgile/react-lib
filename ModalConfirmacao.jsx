@@ -20,6 +20,13 @@ const DialogActionsContainer = styled(DialogActions)(({ theme }) => ({
   }
 }));
 
+// createConfirmation monta o diálogo fora da árvore da aplicação, sem o ThemeProvider dela.
+// A aplicação pode registrar o próprio tema aqui (ex.: tema Colibri UI).
+let confirmacaoTheme = null;
+export function setConfirmacaoTheme(theme) {
+  confirmacaoTheme = theme;
+}
+
 const ModalConfirmacao = ({
   title,
   message,
@@ -32,9 +39,13 @@ const ModalConfirmacao = ({
   onConfirm = null,
   autoFocus = true,
   fullScreen = false,
+  options = {},
 }) => {
+  // options.destructive: ação irreversível — botão vermelho e o foco (Enter) fica em Cancelar.
+  const destructive = !!options.destructive;
   const { t } = useTranslation();
-  const theme = useTheme();
+  const defaultTheme = useTheme();
+  const theme = confirmacaoTheme ?? defaultTheme;
   const full = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
@@ -59,6 +70,9 @@ const ModalConfirmacao = ({
           />
         </DialogContent>
         <DialogActionsContainer>
+          <Button variant="outlined" onClick={cancel} color="primary" autoFocus={destructive}>
+            {cancelLabel ?? t("acao.cancelar")}
+          </Button>
           <LoadingButton
             variant="contained"
             onClick={async () => {
@@ -67,14 +81,11 @@ const ModalConfirmacao = ({
               }
               proceed();
             }}
-            color="primary"
-            autoFocus={autoFocus}
+            color={destructive ? "error" : "primary"}
+            autoFocus={autoFocus && !destructive}
           >
             {okLabel ?? t("acao.ok")}
           </LoadingButton>
-          <Button variant="outlined" onClick={cancel} color="primary">
-            {cancelLabel ?? t("acao.cancelar")}
-          </Button>
         </DialogActionsContainer>
       </Dialog>
     </ThemeProvider>

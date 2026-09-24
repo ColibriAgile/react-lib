@@ -1,27 +1,24 @@
-import {Typography, IconButton, styled} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import {DialogTitle} from "@mui/material";
 import React from "react";
+import {useTranslation} from "react-i18next";
 
-const DivTitulo = styled('div') ({
-    display: "flex",
-    padding: "16px 24px"
-});
-
-
-const TypographyTitulo =  styled(Typography) ({
-    flexGrow: 1
-});
-
-
-export default function ModalTitulo({ onClose, titulo }) {
+// Cabeçalho de diálogo da linha Colibri UI: título de 16 px e fechar à direita (.cm-dialog__head).
+export default function ModalTitulo({onClose, titulo}) {
+    const {t} = useTranslation();
     return (
-        <DivTitulo>
-            <TypographyTitulo variant="h5" component="h5">
-                {titulo}
-            </TypographyTitulo>
-            <IconButton size="small" edge="start" color="inherit" onClick={onClose} aria-label="close">
-                <CloseIcon />
-            </IconButton>
-        </DivTitulo>
+        <DialogTitle component="div">
+            <h2 className="cm-dialog__title">{titulo}</h2>
+            {onClose && (
+                <button
+                    type="button"
+                    className="cm-dialog__close"
+                    onClick={onClose}
+                    title={t("acao.fechar", "Fechar")}
+                    aria-label={t("acao.fechar", "Fechar")}
+                >
+                    <i className="bi bi-x-lg" aria-hidden="true" style={{fontSize: 14}}/>
+                </button>
+            )}
+        </DialogTitle>
     );
 }

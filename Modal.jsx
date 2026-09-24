@@ -85,6 +85,13 @@ const Modal = forwardRef(
                 {!hideActions &&
                     (
                         <DialogActionsContainer>
+                            <Button
+                                variant="outlined"
+                                onClick={() => handleClose()}
+                                color="primary"
+                            >
+                                {t("acao.cancelar")}
+                            </Button>
                             <LoadingButton
                                 variant="contained"
                                 onClick={onConfirm}
@@ -93,13 +100,6 @@ const Modal = forwardRef(
                             >
                                 {actionName ?? t("acao.ok")}
                             </LoadingButton>
-                            <Button
-                                variant="outlined"
-                                onClick={() => handleClose()}
-                                color="primary"
-                            >
-                                {t("acao.cancelar")}
-                            </Button>
                         </DialogActionsContainer>
                     )
                 }
