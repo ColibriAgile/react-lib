@@ -19,7 +19,7 @@ export default function LoadingOverlay() {
     return (
         <Backdrop
             open={!!isLoading}
-            sx={{zIndex: (theme) => theme.zIndex.modal + 10, "&&": {background: "rgba(242, 245, 249, .55)"}}}
+            sx={{zIndex: (theme) => theme.zIndex.modal + 10, "&&": {background: "var(--cm-loading-veil)"}}}
         >
             <LoadingIndicator/>
         </Backdrop>

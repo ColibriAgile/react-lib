@@ -31,6 +31,7 @@ const Modal = forwardRef(
             titulo,
             onConfirm,
             actionName,
+            actionColor = "primary",
             children,
             autoFocus = false,
             fullScreen = false,
@@ -95,7 +96,7 @@ const Modal = forwardRef(
                             <LoadingButton
                                 variant="contained"
                                 onClick={onConfirm}
-                                color="primary"
+                                color={actionColor}
                                 autoFocus={autoFocus}
                             >
                                 {actionName ?? t("acao.ok")}

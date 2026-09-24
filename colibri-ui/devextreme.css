@@ -315,7 +315,7 @@
 }
 .cm-grid .dx-checkbox-checked .dx-checkbox-icon,
 .cm-grid .dx-checkbox-indeterminate .dx-checkbox-icon {
-    color: #fff;
+    color: var(--cm-on-accent);
     background: var(--cm-accent);
     border-color: var(--cm-accent);
 }
@@ -330,7 +330,7 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+    box-shadow: var(--cm-shadow-float);
 }
 .dx-loadpanel-message {
     color: var(--cm-ink-2);
@@ -348,7 +348,7 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+    box-shadow: var(--cm-shadow-float);
 }
 .dx-popup-title.dx-toolbar {
     padding: 0 12px 0 16px;
@@ -405,7 +405,7 @@
     text-transform: none;
 }
 .dx-popup-wrapper .dx-button.dx-button-default {
-    color: #fff;
+    color: var(--cm-on-accent);
     background: var(--cm-accent);
     border-color: var(--cm-accent-border);
 }
@@ -425,3 +425,55 @@
     border-radius: 2px;
     box-shadow: 0 0 0 1px var(--cm-warning-line);
 }
+
+/* Ações de linha (coluna type="buttons"): .cm-icon-btn */
+.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link,
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    color: var(--cm-ink-2);
+    border-radius: var(--cm-radius-sm);
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 120ms var(--cm-ease), background-color 120ms var(--cm-ease);
+}
+.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link:hover,
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action:hover {
+    color: var(--cm-accent);
+    background: var(--cm-accent-soft);
+}
+.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link:focus-visible {
+    outline: 2px solid var(--cm-focus);
+    outline-offset: 1px;
+}
+.cm-grid .dx-datagrid-rowsview .dx-command-edit {
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: right;
+}
+.cm-grid .dx-data-row .cm-tag { vertical-align: middle; }
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action--danger:hover {
+    color: var(--cm-danger);
+    background: var(--cm-danger-soft);
+}
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action + .dx-link.cm-grid-action { margin-left: 2px; }
+/* Linha em edição */
+.cm-grid .dx-datagrid-rowsview .dx-edit-row > td {
+    background: var(--cm-surface-2);
+}
+.cm-grid .dx-edit-row .dx-texteditor {
+    height: 30px;
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-btn-line);
+    border-radius: var(--cm-btn-radius);
+}
+.cm-grid .dx-edit-row .dx-texteditor.dx-state-focused {
+    border-color: var(--cm-focus);
+    box-shadow: var(--cm-focus-ring);
+}
+.cm-grid .dx-edit-row .dx-texteditor-input { min-height: 0; height: 28px; padding-top: 0; padding-bottom: 0; font-size: 13px; }
+.cm-grid .dx-edit-row .dx-texteditor.dx-invalid { border-color: var(--cm-danger); }

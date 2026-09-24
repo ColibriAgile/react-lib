@@ -1,5 +1,5 @@
 import React, {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState} from "react";
-import {Button} from "@mui/material";
+import {Button, ButtonGroup} from "@mui/material";
 import {DataGrid} from "devextreme-react";
 import {
     ColumnChooser,
@@ -16,7 +16,8 @@ import {useTranslation} from "react-i18next";
 
 // Página de listagem da linha Colibri UI sobre o DataGrid do DevExtreme (DESIGN.md, seção 9):
 // barra de ferramentas acima da tabela (busca e contagem à esquerda, ações à direita) e
-// uma única superfície de tabela. Mesma API de PageTemplate, que continua para quem não migrou.
+// uma única superfície de tabela. Mesma API de PageTemplate (que continua para quem não migrou), mais
+// `actions` (grupo de botões; o principal por último), `countLabel` e repasse de props ao DataGrid.
 
 const ROW_HEIGHT = 42;
 
@@ -31,8 +32,11 @@ const GridPage = forwardRef(({
                                  customOnClick = undefined,
                                  customButtonText = undefined,
                                  customButtonColor = "primary",
+                                 customButtonVariant = "outlined",
                                  reloadButtonOnClick = undefined,
                                  countLabel = undefined,
+                                 actions = undefined,
+                                 ...gridProps
                              }, ref) => {
     const {t} = useTranslation();
     const {promiseInProgress} = usePromiseTracker();
@@ -55,14 +59,22 @@ const GridPage = forwardRef(({
 
     // Com rolagem infinita, totalCount() conhece só as linhas já carregadas; a contagem vem
     // do store com o filtro combinado (linha de filtro, filtro de cabeçalho e busca).
-    const onContentReady = (e) => {
-        const store = e.component.getDataSource()?.store();
+    const recount = useCallback((component) => {
+        const store = component?.getDataSource()?.store();
         if (!store) return;
-        const filter = e.component.getCombinedFilter();
-        store.totalCount({filter})
+        store.totalCount({filter: component.getCombinedFilter()})
             .then((total) => setCount(total >= 0 ? total : null))
             .catch(() => setCount(null));
-    };
+    }, []);
+
+    const onContentReady = (e) => recount(e.component);
+
+    // Com array como dataSource, a troca do array nem sempre dispara contentReady de novo.
+    useEffect(() => {
+        if (!Array.isArray(dataSource)) return undefined;
+        const timer = setTimeout(() => recount(grid.current?.instance), 0);
+        return () => clearTimeout(timer);
+    }, [dataSource, recount]);
 
     // Poucas linhas: altura automática, a superfície termina na última linha. Muitas: o grid ocupa a
     // área útil e rola por dentro. (max-height não serve: o grid calcula errado ao encolher.)
@@ -102,6 +114,8 @@ const GridPage = forwardRef(({
                 allowColumnResizing={true}
                 columnHidingEnabled={true}
                 onContentReady={onContentReady}
+                noDataText={t("grid.vazio", "Nada para mostrar.")}
+                {...gridProps}
             >
                 <Toolbar>
                     <Item name="searchPanel" location="before"/>
@@ -140,9 +154,26 @@ const GridPage = forwardRef(({
                             elementAttr: {"aria-label": t("grid.colunas", "Escolher colunas")},
                         }}
                     />
+                    {actions?.length > 0 && (
+                        <Item location="after" render={() => (
+                            <ButtonGroup>
+                                {actions.map((action) => (
+                                    <Button
+                                        key={action.text}
+                                        variant={action.variant ?? "outlined"}
+                                        color={action.color ?? "primary"}
+                                        disabled={action.disabled}
+                                        onClick={action.onClick}
+                                    >
+                                        {action.text}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                        )}/>
+                    )}
                     {customOnClick && (
                         <Item location="after" render={() => (
-                            <Button variant="outlined" color={customButtonColor} onClick={customOnClick}>
+                            <Button variant={customButtonVariant} color={customButtonColor} onClick={customOnClick}>
                                 {customButtonText}
                             </Button>
                         )}/>

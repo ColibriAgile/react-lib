@@ -3,6 +3,21 @@
  * Tudo aqui deriva dos tokens --cm-*; candidatos a voltar para o kit como modelos React.
  */
 
+/* Tokens que o kit ainda não define (valores do tema claro, tirados de colibri-ui.css).
+   Um tema escuro redefine estes e os --cm-* do kit; nada abaixo usa cor fixa. Candidatos ao kit. */
+:root {
+    --cm-on-accent: #fff;
+    --cm-danger-border: #8f1e2c;
+    --cm-danger-hover: #951f2e;
+    --cm-icon-disabled: #b4bdc7;
+    --cm-check-hover: #9aa8b7;
+    --cm-shadow-float: 0 6px 16px rgba(18, 38, 63, .12);
+    --cm-shadow-dialog: 0 12px 32px rgba(18, 38, 63, .18);
+    --cm-backdrop: rgba(12, 30, 50, .4);
+    --cm-loading-veil: rgba(242, 245, 249, .55);
+    --cm-work-bg: linear-gradient(165deg, #e8f0fb 0%, #f2f5f9 32%, #f2f5f9 100%);
+}
+
 #root { height: 100%; }
 
 /* ---------- Página de listagem: o grid ocupa a altura útil ---------- */
@@ -31,7 +46,7 @@
 }
 .cm-mui-check--radio { border-radius: 50%; }
 .MuiCheckbox-root:hover .cm-mui-check,
-.MuiRadio-root:hover .cm-mui-check { border-color: #9aa8b7; }
+.MuiRadio-root:hover .cm-mui-check { border-color: var(--cm-check-hover); }
 .cm-mui-check.is-checked {
     background-color: var(--cm-accent);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.4l3 3 6-6.6'/%3E%3C/svg%3E");
@@ -60,7 +75,7 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+    box-shadow: var(--cm-shadow-float);
     font-size: 13px;
     line-height: 1.4;
 }
@@ -105,7 +120,7 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: 0 6px 16px rgba(18, 38, 63, .12);
+    box-shadow: var(--cm-shadow-float);
     font-size: 13px;
 }
 .cm-loading > .bi { color: var(--cm-accent); font-size: 16px; line-height: 1; }
@@ -119,7 +134,7 @@
     height: 100%;
     padding: 24px 16px;
     overflow: auto;
-    background: linear-gradient(165deg, #e8f0fb 0%, #f2f5f9 32%, #f2f5f9 100%);
+    background: var(--cm-work-bg);
 }
 .cm-auth__panel {
     display: flex;
@@ -172,4 +187,54 @@
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-btn-radius);
     font: 500 12px/1.6 var(--cm-mono);
+}
+
+/* ---------- Formulários em diálogo ---------- */
+.cm-dialog-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.cm-dialog-form .cm-fieldset > :not(legend) + :not(legend) { margin-top: 12px; }
+.cm-dialog-form .cm-fieldset > legend { margin-bottom: 12px; }
+.cm-form-row--nested { margin-left: 24px; }
+
+/* Campo com prefixo/sufixo unidos (.cm-input-group) sobre o TextField do MUI */
+.cm-mui-input-group.MuiOutlinedInput-root { padding-left: 0; padding-right: 0; }
+.cm-mui-input-group .MuiInputAdornment-root {
+    align-self: stretch;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0 10px;
+    color: var(--cm-ink-3);
+    background: var(--cm-surface-2);
+    font: 400 12px var(--cm-mono);
+    white-space: nowrap;
+}
+.cm-mui-input-group .MuiInputAdornment-root .MuiTypography-root { color: inherit; font: inherit; }
+.cm-mui-input-group .MuiInputAdornment-positionStart {
+    border-right: 1px solid var(--cm-btn-line);
+    border-radius: var(--cm-btn-radius) 0 0 var(--cm-btn-radius);
+}
+.cm-mui-input-group .MuiInputAdornment-positionEnd {
+    border-left: 1px solid var(--cm-btn-line);
+    border-radius: 0 var(--cm-btn-radius) var(--cm-btn-radius) 0;
+}
+.cm-mui-input-group .MuiOutlinedInput-input.cm-mono { font-family: var(--cm-mono); font-size: 13px; }
+.MuiOutlinedInput-input.cm-mono { font-family: var(--cm-mono); }
+
+/* Alvo da exclusão, em destaque abaixo do alerta */
+.cm-exclusao-alvo {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Texto de log */
+.cm-task-log {
+    font-family: var(--cm-mono);
+    font-size: 12px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }

@@ -1,5 +1,6 @@
-// Espelho em JS dos tokens --cm-* de colibri-ui.css (kit de design Colibri).
-// Usado pelo tema MUI; mantenha os valores iguais aos do CSS.
+// Espelho em JS dos tokens --cm-* de colibri-ui.css (kit de design Colibri), tema claro.
+// Usado por createColibriTheme; mantenha os valores iguais aos do CSS. Um tema escuro é outro
+// objeto com as mesmas chaves (ver DESIGN.md, seção 9, "Troca de tema").
 export const cm = {
     font: "'Google Sans Flex', 'Segoe UI', Arial, sans-serif",
     mono: "'Google Sans Mono', Consolas, monospace",
@@ -32,6 +33,14 @@ export const cm = {
     dangerSoft: "#fbe9eb",
     dangerLine: "#f1c4ca",
     mutedSoft: "#eef1f5",
+    // Também em colibri-ui-react.css (:root), por ainda não existirem no kit.
+    onAccent: "#fff",
+    dangerBorder: "#8f1e2c",
+    dangerHover: "#951f2e",
+    iconDisabled: "#b4bdc7",
+    shadowFloat: "0 6px 16px rgba(18, 38, 63, .12)",
+    shadowDialog: "0 12px 32px rgba(18, 38, 63, .18)",
+    backdrop: "rgba(12, 30, 50, .4)",
     radius: 6,
     radiusSm: 4,
     btnRadius: 3,
