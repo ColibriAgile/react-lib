@@ -1,7 +1,7 @@
 /*
  * Colibri UI — base visual das aplicações Colibri (linha "Colibri Master").
  * CSS puro, sem dependência de framework. Prefixo `cm-`.
- * Requisitos: pasta fonts/ ao lado deste arquivo e Bootstrap Icons (classe .bi) para os ícones.
+ * Requisitos: pastas fonts/ e logos/ ao lado deste arquivo e Bootstrap Icons (classe .bi) para os ícones.
  * Regras de uso: ver DESIGN.md do kit.
  */
 :root {
@@ -863,7 +863,20 @@ pre.log,
 .cm-modal-table { --cm-cols: minmax(0, 1fr) minmax(0, 1.4fr); }
 .cm-modal-table .cm-table__row { padding-right: 16px; }
 
-/* ---------- Cartões ---------- */
+/* ---------- Página inicial e cartões ---------- */
+.cm-page--home { position: relative; isolation: isolate; }
+.cm-page--home::before {
+    content: "";
+    position: fixed;
+    right: clamp(12px, 3vw, 48px);
+    bottom: clamp(16px, 5vh, 64px);
+    width: min(42vw, 540px);
+    aspect-ratio: 1;
+    background: url('logos/colibri-colorido.svg') no-repeat center / contain;
+    opacity: .12;
+    pointer-events: none;
+    z-index: -1;
+}
 .cm-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
