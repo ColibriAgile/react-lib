@@ -238,3 +238,15 @@
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
+
+/* ---------- Colunas iguais (página inicial): cartões e seções lado a lado, alinhados entre si ---------- */
+.cm-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: 20px 12px;
+    align-items: start;
+}
+.cm-cards.cm-columns {
+    row-gap: 12px;
+    align-items: stretch;
+}
