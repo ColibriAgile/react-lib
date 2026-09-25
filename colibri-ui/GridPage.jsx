@@ -17,7 +17,10 @@ import {useTranslation} from "react-i18next";
 // Página de listagem da linha Colibri UI sobre o DataGrid do DevExtreme (DESIGN.md, seção 9):
 // barra de ferramentas acima da tabela (busca e contagem à esquerda, ações à direita) e
 // uma única superfície de tabela. Mesma API de PageTemplate (que continua para quem não migrou), mais
-// `actions` (grupo de botões; o principal por último), `countLabel` e repasse de props ao DataGrid.
+// `actions` (grupo de botões; o principal por último), `countLabel`, `tools` (conteúdo após a contagem,
+// ex.: etiquetas-filtro .cm-tag-filter) e repasse de props ao DataGrid.
+// Itens da barra não podem surgir depois da primeira renderização (no DevExtreme 22 o template do item
+// novo não é registrado): passe `tools` desde o início, mesmo vazio ([]), se ele puder aparecer.
 
 const ROW_HEIGHT = 42;
 
@@ -36,6 +39,7 @@ const GridPage = forwardRef(({
                                  reloadButtonOnClick = undefined,
                                  countLabel = undefined,
                                  actions = undefined,
+                                 tools = undefined,
                                  ...gridProps
                              }, ref) => {
     const {t} = useTranslation();
@@ -120,6 +124,7 @@ const GridPage = forwardRef(({
                 <Toolbar>
                     <Item name="searchPanel" location="before"/>
                     <Item location="before" render={() => <span className="cm-section__count">{countText}</span>}/>
+                    {tools && <Item location="before" render={() => <div className="cm-section__tools">{tools}</div>}/>}
                     <Item name="applyFilterButton"/>
                     <Item name="addRowButton"/>
                     <Item name="revertButton"/>
