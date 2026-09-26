@@ -477,3 +477,55 @@
 }
 .cm-grid .dx-edit-row .dx-texteditor-input { min-height: 0; height: 28px; padding-top: 0; padding-bottom: 0; font-size: 13px; }
 .cm-grid .dx-edit-row .dx-texteditor.dx-invalid { border-color: var(--cm-danger); }
+
+/* Ação de linha indisponível: fica visível e desabilitada, mantendo o alinhamento da coluna */
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action.dx-state-disabled,
+.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action.dx-state-disabled:hover {
+    color: var(--cm-icon-disabled);
+    background: transparent;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+/* Etiquetas-filtro na barra do GridPage (prop tools) */
+.cm-grid .dx-datagrid-header-panel .cm-section__tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    margin: 0;
+}
+
+/* Mestre-detalhe: chevron legível e detalhe alinhado ao texto, em surface-2 */
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened {
+    color: var(--cm-ink-2);
+    cursor: pointer;
+}
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed::before,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened::before {
+    font-size: 18px;
+}
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-closed,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-opened {
+    color: var(--cm-accent);
+}
+.cm-grid .dx-master-detail-row > .dx-master-detail-cell {
+    padding: 12px 16px 14px 44px;
+    background: var(--cm-surface-2);
+}
+
+/* Colunas ocultas por largura (hidingPriority): linha adaptativa em surface-2 com rótulos */
+.cm-grid .dx-adaptive-detail-row > td {
+    padding: 8px 16px 10px;
+    background: var(--cm-surface-2);
+}
+.cm-grid .dx-adaptive-detail-row .dx-field-item-label-text {
+    color: var(--cm-ink-3);
+    font-size: 12px;
+    font-weight: 400;
+}
+.cm-grid .dx-command-adaptive .dx-datagrid-adaptive-more {
+    color: var(--cm-ink-2);
+    cursor: pointer;
+}

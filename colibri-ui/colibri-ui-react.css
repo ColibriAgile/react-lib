@@ -20,6 +20,19 @@
 
 #root { height: 100%; }
 
+/* ---------- Foco dos botões: contorno interno, também em grupo ----------
+   O contorno fica dentro da borda, assim o botão vizinho do grupo (ou o principal, que fica por cima)
+   não o encobre, e o botão focado sobe acima dos demais. No principal o contorno é claro.
+   Precisa ser CSS: com injectFirst a regra global do kit (outline-offset: 1px) vence o tema MUI. */
+.cm-btn:focus-visible,
+.MuiButton-root.Mui-focusVisible { outline-offset: -3px; z-index: 3; }
+.cm-btn-group .cm-btn:focus-visible,
+.cm-dialog__foot > .cm-btn:focus-visible,
+.MuiButtonGroup-root .MuiButton-root.Mui-focusVisible,
+.MuiDialogActions-root > .MuiButton-root.Mui-focusVisible { z-index: 3; }
+.cm-btn--primary:focus-visible,
+.MuiButton-contained.Mui-focusVisible { outline-color: rgba(255, 255, 255, .7) !important; }
+
 /* ---------- Página de listagem: o grid ocupa a altura útil ---------- */
 .cm-content:has(> .cm-grid-page) {
     display: flex;
