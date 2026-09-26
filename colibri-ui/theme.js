@@ -124,9 +124,9 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                     root: {borderRadius: cm.btnRadius},
                     grouped: {
                         minWidth: 120,
-                        "&:hover, &.Mui-focusVisible": {zIndex: 1},
+                        "&:hover": {zIndex: 1},
                         "&.MuiButton-contained": {zIndex: 2},
-                        "&.Mui-focusVisible": {outlineOffset: -3},
+                        "&.Mui-focusVisible": {outlineOffset: -3, zIndex: 3},
                         "&:not(:first-of-type)": {marginLeft: -1},
                     },
                     groupedHorizontal: {
@@ -393,8 +393,9 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                             borderTopRightRadius: cm.btnRadius,
                             borderBottomRightRadius: cm.btnRadius,
                         },
-                        "& > .MuiButton-root:hover, & > .MuiButton-root.Mui-focusVisible": {zIndex: 1},
+                        "& > .MuiButton-root:hover": {zIndex: 1},
                         "& > .MuiButton-contained": {zIndex: 2},
+                        "& > .MuiButton-root.Mui-focusVisible": {outlineOffset: -3, zIndex: 3},
                         "& > :not(:first-of-type)": {marginLeft: -1},
                     },
                 },
