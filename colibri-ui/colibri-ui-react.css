@@ -3,19 +3,18 @@
  * Tudo aqui deriva dos tokens --cm-*; candidatos a voltar para o kit como modelos React.
  */
 
-/* Tokens que o kit ainda não define (valores do tema claro, tirados de colibri-ui.css).
-   Um tema escuro redefine estes e os --cm-* do kit; nada abaixo usa cor fixa. Candidatos ao kit. */
+/* Tokens que o kit ainda não define; nada abaixo usa cor fixa. Candidatos ao kit.
+   O botão destrutivo preenchido (MUI contained + color="error") não existe no kit: como o principal,
+   mantém o preenchimento e o texto branco nos dois temas; --cm-danger fica para texto e ícone. */
 :root {
     --cm-on-accent: #fff;
+    --cm-danger-fill: #b02637;
     --cm-danger-border: #8f1e2c;
     --cm-danger-hover: #951f2e;
-    --cm-icon-disabled: #b4bdc7;
-    --cm-check-hover: #9aa8b7;
-    --cm-shadow-float: 0 6px 16px rgba(18, 38, 63, .12);
-    --cm-shadow-dialog: 0 12px 32px rgba(18, 38, 63, .18);
-    --cm-backdrop: rgba(12, 30, 50, .4);
     --cm-loading-veil: rgba(242, 245, 249, .55);
-    --cm-work-bg: linear-gradient(165deg, #e8f0fb 0%, #f2f5f9 32%, #f2f5f9 100%);
+}
+:root[data-theme="dark"] {
+    --cm-loading-veil: rgba(11, 24, 34, .55);
 }
 
 #root { height: 100%; }
@@ -85,7 +84,7 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: var(--cm-shadow-float);
+    box-shadow: var(--cm-shadow-menu);
     font-size: 13px;
     line-height: 1.4;
 }
@@ -98,7 +97,7 @@
 .cm-toast--success > .bi { color: var(--cm-success); }
 .cm-toast--warning > .bi { color: var(--cm-warning); }
 .cm-toast--error > .bi { color: var(--cm-danger); }
-.cm-toast--info > .bi { color: var(--cm-accent); }
+.cm-toast--info > .bi { color: var(--cm-accent-ink); }
 .cm-toast__body {
     display: flex;
     flex: 1 1 auto;
@@ -130,10 +129,10 @@
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
     border-radius: var(--cm-radius);
-    box-shadow: var(--cm-shadow-float);
+    box-shadow: var(--cm-shadow-menu);
     font-size: 13px;
 }
-.cm-loading > .bi { color: var(--cm-accent); font-size: 16px; line-height: 1; }
+.cm-loading > .bi { color: var(--cm-accent-ink); font-size: 16px; line-height: 1; }
 
 /* ---------- Telas públicas (login, redefinição de senha) ---------- */
 .cm-auth {
@@ -144,7 +143,7 @@
     height: 100%;
     padding: 24px 16px;
     overflow: auto;
-    background: var(--cm-work-bg);
+    background: var(--cm-scroll-bg);
 }
 .cm-auth__panel {
     display: flex;

@@ -63,11 +63,10 @@ function NavSection({section}) {
                 <span>{section.label}</span>
                 <i className="bi bi-chevron-down" aria-hidden="true"/>
             </button>
-            {open && (
-                <div className="cm-nav__list" id={listId}>
-                    {section.items.map((item) => <NavItem key={item.route} item={item}/>)}
-                </div>
-            )}
+            {/* hidden, e não remoção: a lista recolhida continua contando na largura da lateral. */}
+            <div className="cm-nav__list" id={listId} hidden={!open}>
+                {section.items.map((item) => <NavItem key={item.route} item={item}/>)}
+            </div>
         </div>
     );
 }
@@ -77,7 +76,7 @@ function NavSection({section}) {
  * @param version      versão exibida no rodapé da lateral
  * @param nav          itens {route, label, icon} e seções {id, label, items}
  * @param title        título da página na barra superior
- * @param aside        conteúdo à direita da barra superior (idioma, usuário)
+ * @param aside        conteúdo à direita da barra superior (tema, idioma, usuário)
  * @param banner       aviso global exibido abaixo da barra superior
  */
 export default function AppShell({productName, version, nav, title, aside, banner, children}) {

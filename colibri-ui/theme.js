@@ -1,6 +1,6 @@
 import {createElement} from "react";
 import {createTheme} from "@mui/material/styles";
-import {cm as tokensClaro} from "./tokens";
+import {readTokens} from "./tokens";
 
 // Tema MUI da linha Colibri UI: faz os componentes MUI terem o visual dos componentes `cm-`
 // de colibri-ui.css (ver DESIGN.md, seção 7). Não crie variações locais: derive dos tokens.
@@ -11,15 +11,16 @@ const checkIcon = (checked, radio) =>
         "aria-hidden": true,
     });
 
-// Gera o tema a partir de um conjunto de tokens (tokens.js). Um tema escuro será
-// createColibriTheme(tokensEscuro, "dark"), com as mesmas chaves.
-export function createColibriTheme(cm = tokensClaro, mode = "light") {
+// Gera o tema a partir dos tokens do tema aplicado ao <html> (tokens.js). No tema escuro, chame depois
+// de trocar data-theme: createColibriTheme(readTokens(), "dark"). O preenchimento azul (principal,
+// caixa marcada, indicador) usa accent; texto, link e ícone em azul usam accentInk (DESIGN.md, seção 2).
+export function createColibriTheme(cm = readTokens(), mode = "light") {
     const focusOutline = {
         outline: `2px solid ${cm.focus}`,
         outlineOffset: 1,
     };
 
-    const floatingShadow = cm.shadowFloat;
+    const floatingShadow = cm.shadowMenu;
 
     return createTheme({
         palette: {
@@ -86,7 +87,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                         transition: `background-color 150ms ${cm.ease}, border-color 150ms ${cm.ease}, color 150ms ${cm.ease}`,
                         "&.Mui-disabled": {opacity: .5},
                         ...(ownerState.variant === "text" && {
-                            color: ownerState.color === "error" ? cm.danger : cm.accent,
+                            color: ownerState.color === "error" ? cm.danger : cm.accentInk,
                             fontWeight: 600,
                             "&:hover": {background: cm.accentSoft},
                         }),
@@ -105,7 +106,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                     }),
                     contained: ({ownerState}) => {
                         const danger = ownerState.color === "error";
-                        const bg = danger ? cm.danger : cm.accent;
+                        const bg = danger ? cm.dangerFill : cm.accent;
                         return {
                             color: cm.onAccent,
                             background: bg,
@@ -147,8 +148,8 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                         transition: `color 120ms ${cm.ease}, background-color 120ms ${cm.ease}`,
                         "&:hover": ownerState.color === "error"
                             ? {color: cm.danger, background: cm.dangerSoft}
-                            : {color: cm.accent, background: cm.accentSoft},
-                        "&.Mui-disabled": {color: cm.iconDisabled},
+                            : {color: cm.accentInk, background: cm.accentSoft},
+                        "&.Mui-disabled": {color: cm.disabledInk},
                         "& .MuiSvgIcon-root": {fontSize: 18},
                     }),
                     sizeSmall: {width: 26, height: 26, fontSize: 14},
@@ -243,7 +244,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                             borderRadius: cm.radiusSm,
                             fontSize: 13,
                             "&.Mui-focused": {background: cm.accentSoft},
-                            "&[aria-selected=\"true\"]": {color: cm.accent, fontWeight: 600, background: "transparent"},
+                            "&[aria-selected=\"true\"]": {color: cm.accentInk, fontWeight: 600, background: "transparent"},
                             "&[aria-selected=\"true\"].Mui-focused": {background: cm.accentSoft},
                         },
                     },
@@ -323,7 +324,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                         fontSize: 13,
                         lineHeight: 1.3,
                         "&:hover, &.Mui-focusVisible": {background: cm.accentSoft},
-                        "&.Mui-selected": {color: cm.accent, fontWeight: 600, background: "transparent"},
+                        "&.Mui-selected": {color: cm.accentInk, fontWeight: 600, background: "transparent"},
                         "&.Mui-selected:hover, &.Mui-selected.Mui-focusVisible": {background: cm.accentSoft},
                         "&.Mui-focusVisible": {outline: "none"},
                     },
@@ -402,7 +403,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
             },
             MuiTooltip: {
                 styleOverrides: {
-                    tooltip: {background: cm.ink, fontSize: 12, fontWeight: 500, borderRadius: cm.radiusSm, padding: "4px 8px"},
+                    tooltip: {color: cm.surface, background: cm.ink, fontSize: 12, fontWeight: 500, borderRadius: cm.radiusSm, padding: "4px 8px"},
                     arrow: {color: cm.ink},
                 },
             },
@@ -423,7 +424,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
                     standardError: {color: cm.danger, background: cm.dangerSoft, borderColor: cm.dangerLine},
                     standardWarning: {color: cm.warning, background: cm.warningSoft, borderColor: cm.warningLine},
                     standardSuccess: {color: cm.success, background: cm.successSoft, borderColor: cm.successLine},
-                    standardInfo: {color: cm.accent, background: cm.accentSoft, borderColor: cm.accentLine},
+                    standardInfo: {color: cm.accentInk, background: cm.accentSoft, borderColor: cm.accentLine},
                 },
             },
             MuiSnackbar: {
@@ -433,12 +434,12 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
             },
             MuiLink: {
                 defaultProps: {underline: "hover"},
-                styleOverrides: {root: {color: cm.accent}},
+                styleOverrides: {root: {color: cm.accentInk}},
             },
             MuiCircularProgress: {defaultProps: {size: 24, thickness: 4.5}},
             MuiTab: {
                 styleOverrides: {
-                    root: {minHeight: 40, padding: "0 12px", fontSize: 13, color: cm.ink2, "&.Mui-selected": {color: cm.accent, fontWeight: 600}},
+                    root: {minHeight: 40, padding: "0 12px", fontSize: 13, color: cm.ink2, "&.Mui-selected": {color: cm.accentInk, fontWeight: 600}},
                 },
             },
             MuiTabs: {styleOverrides: {root: {minHeight: 40}, indicator: {background: cm.accent}}},
@@ -446,6 +447,7 @@ export function createColibriTheme(cm = tokensClaro, mode = "light") {
     });
 }
 
+// Tema claro, para quem ainda não usa ColibriThemeProvider (ThemeMode.jsx).
 const theme = createColibriTheme();
 
 export default theme;
