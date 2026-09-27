@@ -413,6 +413,40 @@
     background: var(--cm-accent-hover);
 }
 
+/* Rodapé dos popups (ex.: edição do DataGrid com rodapeEdicao de edicao.js): botões unidos em grupo,
+   120 px de largura mínima, cantos só nas extremidades e o principal por cima dos vizinhos
+   (DESIGN.md, regra dos botões adjacentes). Foco interno, como em .cm-btn. */
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item {
+    padding: 0;
+}
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item .dx-button {
+    position: relative;
+    min-width: 120px;
+    border-radius: 0;
+}
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item + .dx-toolbar-item .dx-button {
+    margin-left: -1px;
+}
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:first-child .dx-button {
+    border-radius: var(--cm-btn-radius) 0 0 var(--cm-btn-radius);
+}
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:last-child .dx-button {
+    border-radius: 0 var(--cm-btn-radius) var(--cm-btn-radius) 0;
+}
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:only-child .dx-button {
+    border-radius: var(--cm-btn-radius);
+}
+.dx-popup-bottom .dx-button.dx-state-hover { z-index: 1; }
+.dx-popup-bottom .dx-button.dx-button-default { z-index: 2; }
+.dx-popup-bottom .dx-button:focus-visible {
+    z-index: 3;
+    outline: 2px solid var(--cm-focus);
+    outline-offset: -3px;
+}
+.dx-popup-bottom .dx-button.dx-button-default:focus-visible {
+    outline-color: rgba(255, 255, 255, .7) !important;
+}
+
 /* Colunas de dados em fonte mono: o cabeçalho e a linha de filtro continuam na fonte de texto */
 .cm-grid td.cm-mono { font-family: var(--cm-mono); font-size: 12px; font-variant-numeric: tabular-nums; }
 .cm-grid .dx-header-row > td.cm-mono,
