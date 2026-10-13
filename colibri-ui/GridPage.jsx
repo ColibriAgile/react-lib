@@ -14,7 +14,7 @@ import {
 import {usePromiseTracker} from "react-promise-tracker";
 import {useTranslation} from "react-i18next";
 
-// Página de listagem da linha Colibri UI sobre o DataGrid do DevExtreme (DESIGN.md, seção 9):
+// Página de listagem da linha Colibri UI sobre o DataGrid do DevExtreme (DESIGN.md, "Anatomia de página"):
 // barra de ferramentas acima da tabela (busca e contagem à esquerda, ações à direita) e
 // uma única superfície de tabela. Mesma API de PageTemplate (que continua para quem não migrou), mais
 // `actions` (grupo de botões; o principal por último), `countLabel`, `tools` (conteúdo após a contagem,
@@ -22,7 +22,8 @@ import {useTranslation} from "react-i18next";
 // Itens da barra não podem surgir depois da primeira renderização (no DevExtreme 22 o template do item
 // novo não é registrado): passe `tools` desde o início, mesmo vazio ([]), se ele puder aparecer.
 
-const ROW_HEIGHT = 42;
+// Linha de 36 px mais o divisor (DESIGN.md, regra da grade como tabela).
+const ROW_HEIGHT = 37;
 
 const GridPage = forwardRef(({
                                  title,

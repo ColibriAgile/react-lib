@@ -1,22 +1,18 @@
 /*
- * Colibri UI — sobreposição para o DataGrid do DevExtreme (esquema base generic.light.compact).
- * Dá ao grid o visual de .cm-table: barra de ferramentas fora da superfície, superfície única,
- * cabeçalho compacto, linhas de 42 px sem zebra, hover e seleção em azul-claro.
- * Carregar depois do esquema DevExtreme e de colibri-ui.css.
+ * Colibri UI — complementos do DevExtreme para o React (GridPage, edicao.js). Carregar depois do esquema DevExtreme,
+ * de colibri-ui.css e de colibri-ui.devexpress.css (adaptador do kit: fonte, grade como tabela, caixa de seleção,
+ * popups da grade e listas). Aqui fica só o que o adaptador não cobre; ajuste que valha para todas as aplicações
+ * volta ao kit.
+ *
+ * GridPage (.cm-grid): a barra (busca, contagem, ferramentas e ações) fica fora da superfície da tabela, como a
+ * .cm-toolbar da anatomia de página; por isso a moldura de 1 px e os cantos de 6 px são da própria grade
+ * (cabeçalho + linhas), no lugar do .cm-panel que o adaptador espera.
  */
 
-.dx-widget,
-.dx-widget input,
-.dx-widget textarea {
-    font-family: var(--cm-font);
-}
-
-/* ---------- Grid ---------- */
+/* ---------- Grade do GridPage ---------- */
 .cm-grid.dx-datagrid,
 .cm-grid .dx-datagrid {
-    color: var(--cm-ink);
     background: transparent;
-    font-size: 13px;
     line-height: 1.3;
 }
 
@@ -78,12 +74,10 @@
     height: 30px;
     min-height: 0;
     padding: 0 10px 0 31px;
-    color: var(--cm-ink);
     font-size: 13px;
 }
 .cm-grid .dx-datagrid-search-panel .dx-placeholder::before {
     padding: 0 10px 0 31px;
-    color: var(--cm-ink-3);
     font-size: 13px;
     line-height: 30px;
 }
@@ -110,17 +104,13 @@
     white-space: nowrap;
 }
 
-/* Botões de ícone da barra: .cm-icon-btn */
+/* Botões de ícone da barra com a medida e o hover de .cm-icon-btn (o adaptador cobre cor e fundo) */
 .cm-grid .dx-datagrid-header-panel .dx-button.dx-button-mode-contained,
 .cm-grid .dx-datagrid-header-panel .dx-button {
     width: 32px;
     min-width: 32px;
     height: 32px;
-    color: var(--cm-ink-2);
-    background: transparent;
     border: 0;
-    border-radius: var(--cm-radius-sm);
-    box-shadow: none;
     transition: color 120ms var(--cm-ease), background-color 120ms var(--cm-ease);
 }
 .cm-grid .dx-datagrid-header-panel .dx-button .dx-button-content {
@@ -134,37 +124,32 @@
     width: auto;
     height: auto;
     margin: 0;
-    color: inherit;
     font-size: 16px;
     line-height: 1;
 }
-.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-hover {
-    color: var(--cm-accent-ink);
-    background: var(--cm-accent-soft);
-}
-.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-focused {
-    background: transparent;
-}
-.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-focused:focus-visible,
-.cm-grid .dx-datagrid-header-panel .dx-button:focus-visible {
-    outline: 2px solid var(--cm-focus);
-    outline-offset: 1px;
-}
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-hover,
 .cm-grid .dx-datagrid-header-panel .dx-button.dx-state-active {
     color: var(--cm-accent-ink);
     background: var(--cm-accent-soft);
 }
+.cm-grid .dx-datagrid-header-panel .dx-button.dx-state-focused:not(.dx-state-hover) {
+    color: var(--cm-ink-2);
+    background: transparent;
+}
+.cm-grid .dx-datagrid-header-panel .dx-button:focus-visible {
+    outline: 2px solid var(--cm-focus);
+    outline-offset: -3px;
+}
 
-/* Superfície única: .cm-table */
+/* Moldura da superfície (no lugar do .cm-panel): cabeçalho e linhas com borda de 1 px e cantos de 6 px */
 .cm-grid .dx-datagrid-borders > .dx-datagrid-headers {
     border: 1px solid var(--cm-line);
-    border-bottom: 0;
+    border-bottom: 1px solid var(--cm-line);
     border-radius: var(--cm-radius) var(--cm-radius) 0 0;
     overflow: hidden;
 }
 .cm-grid .dx-datagrid-borders > .dx-datagrid-rowsview,
 .cm-grid .dx-datagrid-borders > .dx-datagrid-total-footer {
-    border-color: var(--cm-line);
     background: var(--cm-surface);
 }
 .cm-grid .dx-datagrid-borders > .dx-datagrid-rowsview:last-child,
@@ -172,112 +157,28 @@
     border-bottom: 1px solid var(--cm-line);
     border-radius: 0 0 var(--cm-radius) var(--cm-radius);
 }
-.cm-grid .dx-datagrid-headers {
-    color: var(--cm-ink-2);
-    background: var(--cm-surface-2);
-    border-bottom: 1px solid var(--cm-line);
-}
-.cm-grid .dx-datagrid-headers .dx-header-row > td {
-    padding-top: 9px;
-    padding-bottom: 9px;
-    color: var(--cm-ink-2);
-    border-bottom: 1px solid var(--cm-line);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.3;
-}
-.cm-grid .dx-datagrid-headers .dx-header-row > td:first-child,
-.cm-grid .dx-data-row > td:first-child,
 .cm-grid .dx-datagrid-filter-row > td:first-child {
     padding-left: 16px;
 }
-.cm-grid .dx-datagrid-headers .dx-header-row > td:last-child,
-.cm-grid .dx-data-row > td:last-child {
-    padding-right: 12px;
-}
-/* Ordenação: uma seta só na coluna ativa. Filtro de cabeçalho discreto; forte só quando aplicado. */
-.cm-grid .dx-datagrid-headers .dx-header-row .dx-sort,
-.cm-grid .dx-datagrid-headers .dx-header-row .dx-sort::before {
-    color: var(--cm-ink);
-    font-size: 12px;
-}
-.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter,
-.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter.dx-header-filter-empty {
-    color: var(--cm-ink-3);
+
+/* Filtro de cabeçalho discreto; forte só quando aplicado (as cores vêm do adaptador) */
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter {
     opacity: .45;
     font-size: 12px;
     transition: opacity 120ms var(--cm-ease), color 120ms var(--cm-ease);
 }
 .cm-grid .dx-datagrid-headers .dx-header-row > td:hover .dx-header-filter,
-.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter:hover {
-    opacity: 1;
-}
+.cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter:hover,
 .cm-grid .dx-datagrid-headers .dx-header-row .dx-header-filter:not(.dx-header-filter-empty) {
-    color: var(--cm-accent-ink);
     opacity: 1;
 }
-.cm-grid .dx-header-row > td.dx-datagrid-drag-action,
-.cm-grid .dx-header-row > td[role="columnheader"]:hover {
-    color: var(--cm-ink);
-}
 
-/* Linha de filtro */
-.cm-grid .dx-datagrid-filter-row {
-    background: var(--cm-surface);
-}
-.cm-grid .dx-datagrid-filter-row > td {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--cm-line);
-}
-.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor {
-    height: 28px;
-    background: var(--cm-surface);
-    border: 1px solid var(--cm-btn-line);
-    border-radius: var(--cm-btn-radius);
-}
-.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor.dx-state-focused {
-    border-color: var(--cm-focus);
-    box-shadow: var(--cm-focus-ring);
-}
-.cm-grid .dx-datagrid-filter-row .dx-editor-cell .dx-texteditor-input {
-    min-height: 0;
-    height: 26px;
-    padding-top: 0;
-    padding-bottom: 0;
-    font-size: 12px;
-}
-.cm-grid .dx-datagrid-filter-row .dx-menu .dx-menu-item .dx-menu-item-content .dx-icon {
-    color: var(--cm-ink-3);
-}
-
-/* Linhas */
-.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row > td {
-    height: 42px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: var(--cm-ink);
-    font-size: 13px;
-    vertical-align: middle;
-}
-.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row {
-    border-top: 1px solid var(--cm-line);
-    border-bottom: 1px solid var(--cm-line);
-}
-.cm-grid .dx-datagrid-rowsview .dx-row.dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row) > td:not(.dx-focused) {
-    color: var(--cm-ink);
-    background: var(--cm-hover);
-}
-.cm-grid .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td,
-.cm-grid .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover > td {
-    color: var(--cm-ink);
-    background: var(--cm-accent-soft);
-    border-color: var(--cm-accent-line);
-}
+/* Linha focada (focusedRowEnabled) e célula focada */
 .cm-grid .dx-datagrid-rowsview .dx-row-focused.dx-data-row > td,
 .cm-grid .dx-datagrid-rowsview .dx-row-focused.dx-data-row > tr > td {
     color: var(--cm-ink);
     background: var(--cm-accent-soft);
+    border-bottom-color: var(--cm-line);
 }
 .cm-grid .dx-datagrid-rowsview .dx-data-row > td.dx-focused,
 .cm-grid .dx-datagrid .dx-datagrid-rowsview .dx-data-row > td.dx-focused {
@@ -291,14 +192,9 @@
 .cm-grid .dx-datagrid-rowsview a:hover {
     text-decoration: underline;
 }
-.cm-grid .dx-datagrid-rowsview .dx-datagrid-nodata {
-    color: var(--cm-ink-2);
-    font-size: 13px;
-}
 
-/* Rodapé de totais */
+/* Rodapé de totais em mono */
 .cm-grid .dx-datagrid-total-footer {
-    background: var(--cm-surface-2);
     border-top: 1px solid var(--cm-line);
 }
 .cm-grid .dx-datagrid-summary-item {
@@ -306,26 +202,87 @@
     font: 600 12px var(--cm-mono);
 }
 
-/* Caixas de seleção do grid */
-.cm-grid .dx-checkbox-icon {
-    width: 16px;
-    height: 16px;
-    border: 1px solid var(--cm-line-strong);
-    border-radius: 3px;
-}
-.cm-grid .dx-checkbox-checked .dx-checkbox-icon,
-.cm-grid .dx-checkbox-indeterminate .dx-checkbox-icon {
-    color: var(--cm-on-accent);
-    background: var(--cm-accent);
-    border-color: var(--cm-accent);
-}
-.cm-grid .dx-checkbox-checked .dx-checkbox-icon::before {
-    margin-top: -6px;
-    margin-left: -6px;
-    font-size: 12px;
+/* Termo encontrado pela busca: realce suave, sem inverter a cor */
+.cm-grid .dx-datagrid-search-text {
+    color: inherit;
+    background: var(--cm-warning-soft);
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--cm-warning-line);
 }
 
-/* Carregamento */
+/* Ações de linha (coluna type="buttons", .cm-icon-btn pelo adaptador): à direita, sem aumentar a linha */
+.cm-grid .dx-datagrid-rowsview .dx-command-edit {
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: right;
+}
+.cm-grid .dx-data-row .cm-tag { vertical-align: middle; }
+/* Nome antigo da ação destrutiva (cssClass="cm-grid-action--danger"); use cm-icon-btn--danger, como no adaptador. */
+.dx-datagrid .dx-command-edit-with-icons .dx-link.cm-grid-action--danger:hover {
+    color: var(--cm-danger);
+    background: var(--cm-danger-soft);
+}
+
+/* Linha em edição: campo editável de 30 px, que cabe na linha de 36 px sem aumentá-la */
+.cm-grid .dx-datagrid-rowsview .dx-edit-row > td {
+    background: var(--cm-surface-2);
+}
+.cm-grid .dx-edit-row .dx-texteditor {
+    height: 30px;
+    background: var(--cm-surface);
+    border: 1px solid var(--cm-btn-line);
+    border-radius: var(--cm-btn-radius);
+}
+.cm-grid .dx-edit-row .dx-texteditor.dx-state-focused {
+    border-color: var(--cm-focus);
+    box-shadow: var(--cm-focus-ring);
+}
+.cm-grid .dx-edit-row .dx-texteditor-input { min-height: 0; height: 28px; padding-top: 0; padding-bottom: 0; font-size: 13px; }
+.cm-grid .dx-edit-row .dx-texteditor.dx-invalid { border-color: var(--cm-danger); }
+
+/* Etiquetas-filtro na barra do GridPage (prop tools) */
+.cm-grid .dx-datagrid-header-panel .cm-section__tools {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    margin: 0;
+}
+
+/* Mestre-detalhe: chevron legível (coluna de 30 px pelo adaptador) e detalhe alinhado ao texto */
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened {
+    color: var(--cm-ink-2);
+    cursor: pointer;
+}
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed::before,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened::before {
+    font-size: 18px;
+}
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-closed,
+.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-opened {
+    color: var(--cm-accent-ink);
+}
+.cm-grid .dx-master-detail-row > .dx-master-detail-cell {
+    padding: 12px 16px 14px 44px;
+}
+
+/* Colunas ocultas por largura (hidingPriority): linha adaptativa em surface-2 com rótulos */
+.cm-grid .dx-adaptive-detail-row > td {
+    padding: 8px 16px 10px;
+    background: var(--cm-surface-2);
+}
+.cm-grid .dx-adaptive-detail-row .dx-field-item-label-text {
+    color: var(--cm-ink-3);
+    font-size: 12px;
+    font-weight: 400;
+}
+.cm-grid .dx-command-adaptive .dx-datagrid-adaptive-more {
+    color: var(--cm-ink-2);
+    cursor: pointer;
+}
+
+/* ---------- Carregamento ---------- */
 .dx-loadpanel-wrapper .dx-overlay-content.dx-loadpanel-content {
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
@@ -337,13 +294,9 @@
     font-size: 13px;
 }
 
-/* ---------- Camadas do DevExtreme (seletor de colunas, filtro de cabeçalho, menus) ---------- */
-.dx-overlay-wrapper {
-    font-family: var(--cm-font);
-}
+/* ---------- Popups do DevExtreme (edição, escolha de colunas) como camadas do kit ---------- */
 .dx-popup-wrapper > .dx-overlay-content,
-.dx-datagrid-column-chooser .dx-overlay-content,
-.dx-header-filter-menu .dx-overlay-content {
+.dx-datagrid-column-chooser .dx-overlay-content {
     color: var(--cm-ink);
     background: var(--cm-surface);
     border: 1px solid var(--cm-line);
@@ -367,26 +320,23 @@
 }
 .dx-list-item,
 .dx-treeview-item {
-    color: var(--cm-ink);
     font-size: 13px;
 }
-.dx-list-item.dx-state-hover,
-.dx-treeview-item.dx-state-hover {
-    color: var(--cm-ink);
-    background: var(--cm-accent-soft);
-}
+.dx-treeview-item { color: var(--cm-ink); }
+.dx-treeview-item.dx-state-hover,
 .dx-context-menu .dx-menu-item.dx-state-hover,
 .dx-menu-base .dx-menu-item.dx-state-hover {
     color: var(--cm-ink);
-    background: var(--cm-accent-soft);
+    background: var(--cm-hover);
 }
 .dx-menu-base .dx-menu-item-selected {
     color: var(--cm-accent-ink);
     background: transparent;
 }
 
-/* Botões comuns do DevExtreme (popups): .cm-btn */
-.dx-popup-wrapper .dx-button {
+/* Botões dos popups (ex.: Cancelar e Salvar do rodapeEdicao): .cm-btn. Os botões de texto (OK e Cancelar do filtro
+   de cabeçalho) ficam com o adaptador. */
+.dx-popup-wrapper .dx-button:not(.dx-button-mode-text) {
     min-width: 0;
     height: var(--cm-control-h);
     color: var(--cm-btn-ink);
@@ -395,21 +345,21 @@
     border-radius: var(--cm-btn-radius);
     box-shadow: none;
 }
-.dx-popup-wrapper .dx-button.dx-state-hover {
+.dx-popup-wrapper .dx-button:not(.dx-button-mode-text).dx-state-hover {
     color: var(--cm-ink);
     background: var(--cm-btn-hover);
 }
-.dx-popup-wrapper .dx-button .dx-button-text {
+.dx-popup-wrapper .dx-button:not(.dx-button-mode-text) .dx-button-text {
     font-size: 13px;
     font-weight: 400;
     text-transform: none;
 }
-.dx-popup-wrapper .dx-button.dx-button-default {
+.dx-popup-wrapper .dx-button.dx-button-default:not(.dx-button-mode-text) {
     color: var(--cm-on-accent);
     background: var(--cm-accent);
     border-color: var(--cm-accent-border);
 }
-.dx-popup-wrapper .dx-button.dx-button-default.dx-state-hover {
+.dx-popup-wrapper .dx-button.dx-button-default:not(.dx-button-mode-text).dx-state-hover {
     background: var(--cm-accent-hover);
 }
 
@@ -419,21 +369,21 @@
 .dx-popup-bottom .dx-toolbar-after .dx-toolbar-item {
     padding: 0;
 }
-.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item .dx-button {
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item .dx-button:not(.dx-button-mode-text) {
     position: relative;
     min-width: 120px;
     border-radius: 0;
 }
-.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item + .dx-toolbar-item .dx-button {
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item + .dx-toolbar-item .dx-button:not(.dx-button-mode-text) {
     margin-left: -1px;
 }
-.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:first-child .dx-button {
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:first-child .dx-button:not(.dx-button-mode-text) {
     border-radius: var(--cm-btn-radius) 0 0 var(--cm-btn-radius);
 }
-.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:last-child .dx-button {
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:last-child .dx-button:not(.dx-button-mode-text) {
     border-radius: 0 var(--cm-btn-radius) var(--cm-btn-radius) 0;
 }
-.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:only-child .dx-button {
+.dx-popup-bottom .dx-toolbar-after .dx-toolbar-item:only-child .dx-button:not(.dx-button-mode-text) {
     border-radius: var(--cm-btn-radius);
 }
 .dx-popup-bottom .dx-button.dx-state-hover { z-index: 1; }
@@ -443,123 +393,6 @@
     outline: 2px solid var(--cm-focus);
     outline-offset: -3px;
 }
-.dx-popup-bottom .dx-button.dx-button-default:focus-visible {
+.dx-popup-bottom .dx-button.dx-button-default:not(.dx-button-mode-text):focus-visible {
     outline-color: rgba(255, 255, 255, .7) !important;
-}
-
-/* Colunas de dados em fonte mono: o cabeçalho e a linha de filtro continuam na fonte de texto */
-.cm-grid td.cm-mono { font-family: var(--cm-mono); font-size: 12px; font-variant-numeric: tabular-nums; }
-.cm-grid .dx-header-row > td.cm-mono,
-.cm-grid .dx-datagrid-filter-row > td.cm-mono { font-family: var(--cm-font); }
-
-/* Termo encontrado pela busca: realce suave, sem inverter a cor */
-.cm-grid .dx-datagrid-search-text {
-    color: inherit;
-    background: var(--cm-warning-soft);
-    border-radius: 2px;
-    box-shadow: 0 0 0 1px var(--cm-warning-line);
-}
-
-/* Ações de linha (coluna type="buttons"): .cm-icon-btn */
-.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link,
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    margin: 0;
-    color: var(--cm-ink-2);
-    border-radius: var(--cm-radius-sm);
-    font-size: 16px;
-    text-decoration: none;
-    transition: color 120ms var(--cm-ease), background-color 120ms var(--cm-ease);
-}
-.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link:hover,
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action:hover {
-    color: var(--cm-accent-ink);
-    background: var(--cm-accent-soft);
-}
-.cm-grid .dx-command-edit.dx-command-edit-with-icons .dx-link:focus-visible {
-    outline: 2px solid var(--cm-focus);
-    outline-offset: 1px;
-}
-.cm-grid .dx-datagrid-rowsview .dx-command-edit {
-    padding-top: 0;
-    padding-bottom: 0;
-    text-align: right;
-}
-.cm-grid .dx-data-row .cm-tag { vertical-align: middle; }
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action--danger:hover {
-    color: var(--cm-danger);
-    background: var(--cm-danger-soft);
-}
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action + .dx-link.cm-grid-action { margin-left: 2px; }
-/* Linha em edição */
-.cm-grid .dx-datagrid-rowsview .dx-edit-row > td {
-    background: var(--cm-surface-2);
-}
-.cm-grid .dx-edit-row .dx-texteditor {
-    height: 30px;
-    background: var(--cm-surface);
-    border: 1px solid var(--cm-btn-line);
-    border-radius: var(--cm-btn-radius);
-}
-.cm-grid .dx-edit-row .dx-texteditor.dx-state-focused {
-    border-color: var(--cm-focus);
-    box-shadow: var(--cm-focus-ring);
-}
-.cm-grid .dx-edit-row .dx-texteditor-input { min-height: 0; height: 28px; padding-top: 0; padding-bottom: 0; font-size: 13px; }
-.cm-grid .dx-edit-row .dx-texteditor.dx-invalid { border-color: var(--cm-danger); }
-
-/* Ação de linha indisponível: fica visível e desabilitada, mantendo o alinhamento da coluna */
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action.dx-state-disabled,
-.cm-grid .dx-datagrid-rowsview .dx-link.cm-grid-action.dx-state-disabled:hover {
-    color: var(--cm-disabled-ink);
-    background: transparent;
-    cursor: not-allowed;
-    opacity: 1;
-}
-
-/* Etiquetas-filtro na barra do GridPage (prop tools) */
-.cm-grid .dx-datagrid-header-panel .cm-section__tools {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 32px;
-    margin: 0;
-}
-
-/* Mestre-detalhe: chevron legível e detalhe alinhado ao texto, em surface-2 */
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed,
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened {
-    color: var(--cm-ink-2);
-    cursor: pointer;
-}
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-closed::before,
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand .dx-datagrid-group-opened::before {
-    font-size: 18px;
-}
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-closed,
-.cm-grid .dx-datagrid-rowsview .dx-row > td.dx-command-expand:hover .dx-datagrid-group-opened {
-    color: var(--cm-accent-ink);
-}
-.cm-grid .dx-master-detail-row > .dx-master-detail-cell {
-    padding: 12px 16px 14px 44px;
-    background: var(--cm-surface-2);
-}
-
-/* Colunas ocultas por largura (hidingPriority): linha adaptativa em surface-2 com rótulos */
-.cm-grid .dx-adaptive-detail-row > td {
-    padding: 8px 16px 10px;
-    background: var(--cm-surface-2);
-}
-.cm-grid .dx-adaptive-detail-row .dx-field-item-label-text {
-    color: var(--cm-ink-3);
-    font-size: 12px;
-    font-weight: 400;
-}
-.cm-grid .dx-command-adaptive .dx-datagrid-adaptive-more {
-    color: var(--cm-ink-2);
-    cursor: pointer;
 }

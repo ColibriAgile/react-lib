@@ -25,7 +25,12 @@ export default function ForgotPasswordPage({productName, version, client, url = 
     };
 
     return (
-        <AuthLayout productName={productName} version={version} hint={t("login.esqueci-dica", "Informe seu e-mail para receber o link de redefinição de senha.")}>
+        <AuthLayout
+            productName={productName}
+            version={version}
+            title={t("login.esqueci")}
+            hint={t("login.esqueci-dica", "Informe seu e-mail para receber o link de redefinição de senha.")}
+        >
             {resultado === "sucesso" && (
                 <div className="cm-notice cm-notice--success cm-notice--block" role="status">
                     <i className="bi bi-check-circle-fill" aria-hidden="true"/>
@@ -33,9 +38,9 @@ export default function ForgotPasswordPage({productName, version, client, url = 
                 </div>
             )}
             {resultado === "erro" && (
-                <div className="cm-alert" role="alert">
+                <div className="cm-notice cm-notice--danger" role="alert">
                     <i className="bi bi-exclamation-octagon" aria-hidden="true"/>
-                    <p>{t("login.esqueci-erro")}</p>
+                    <span>{t("login.esqueci-erro")}</span>
                 </div>
             )}
             <form className="cm-auth__form" onSubmit={on.handleSubmit(onSubmit)} noValidate>
@@ -52,7 +57,7 @@ export default function ForgotPasswordPage({productName, version, client, url = 
                     fullWidth
                     autoFocus
                 />
-                <Button type="submit" variant="contained" disabled={enviando}>
+                <Button type="submit" variant="contained" className="cm-login__submit" disabled={enviando}>
                     {enviando && <i className="bi bi-arrow-repeat cm-spin" aria-hidden="true"/>}
                     {t("login.enviar")}
                 </Button>

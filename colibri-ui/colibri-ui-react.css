@@ -134,48 +134,18 @@
 }
 .cm-loading > .bi { color: var(--cm-accent-ink); font-size: 16px; line-height: 1; }
 
-/* ---------- Telas públicas (login, redefinição de senha) ---------- */
-.cm-auth {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-    height: 100%;
-    padding: 24px 16px;
-    overflow: auto;
-    background: var(--cm-scroll-bg);
-}
-.cm-auth__panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 360px;
-    padding: 24px;
-}
-.cm-auth__brand {
-    margin: 0;
-    color: var(--cm-ink);
-    font-size: 16px;
-    font-weight: 650;
-    line-height: 1.3;
-}
-.cm-auth__hint {
-    margin: -8px 0 0;
-    color: var(--cm-ink-3);
-    font-size: 12px;
-    line-height: 1.45;
-}
+/* ---------- Tela de entrada (login, redefinição de senha): complementos do .cm-login do kit ---------- */
+/* O cartão do kit recebe os campos do MUI num <form> próprio, com o mesmo espaçamento do .cm-form. */
 .cm-auth__form {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
 }
-.cm-auth__form .MuiButton-root { width: 100%; }
 .cm-auth__links {
     display: flex;
     justify-content: center;
 }
+/* Versão abaixo do cartão, em mono como os demais identificadores. */
 .cm-auth__foot {
     color: var(--cm-ink-3);
     font: 500 11px var(--cm-mono);

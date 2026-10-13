@@ -35,11 +35,16 @@ export default function LoginPage({productName, version, client, loginEndPoint =
     };
 
     return (
-        <AuthLayout productName={productName} version={version}>
+        <AuthLayout
+            productName={productName}
+            version={version}
+            title={t("login.entrar")}
+            hint={t("login.dica", "Entre com o seu usuário e a sua senha.")}
+        >
             {erroLogin && (
-                <div className="cm-alert" role="alert">
+                <div className="cm-notice cm-notice--danger" role="alert">
                     <i className="bi bi-exclamation-octagon" aria-hidden="true"/>
-                    <p>{t("login.erro")}</p>
+                    <span>{t("login.erro")}</span>
                 </div>
             )}
             <form className="cm-auth__form" onSubmit={on.handleSubmit(onSubmit)} noValidate>
@@ -50,7 +55,7 @@ export default function LoginPage({productName, version, client, loginEndPoint =
                     type={useUsername ? "text" : "email"}
                     autoComplete={useUsername ? "username" : "email"}
                     value={formValues[campo]}
-                    error={hasErro(campo)}
+                    error={hasErro(campo) || erroLogin}
                     helperText={errors[campo]}
                     onChange={on.handleChange}
                     fullWidth
@@ -62,12 +67,12 @@ export default function LoginPage({productName, version, client, loginEndPoint =
                     label={t("login.senha")}
                     autoComplete="current-password"
                     value={formValues.senha}
-                    error={hasErro("senha")}
+                    error={hasErro("senha") || erroLogin}
                     helperText={errors.senha}
                     onChange={on.handleChange}
                     fullWidth
                 />
-                <Button type="submit" variant="contained" disabled={enviando}>
+                <Button type="submit" variant="contained" className="cm-login__submit" disabled={enviando}>
                     {enviando && <i className="bi bi-arrow-repeat cm-spin" aria-hidden="true"/>}
                     {t("login.entrar")}
                 </Button>
