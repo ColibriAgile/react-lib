@@ -35,7 +35,17 @@ const Modal = forwardRef(
             children,
             autoFocus = false,
             fullScreen = false,
-            hideActions = false
+            hideActions = false,
+            // Opcionais (padrão = comportamento anterior):
+            // scroll="paper" rola só o corpo, com cabeçalho e rodapé fixos;
+            // onRequestClose é consultado antes de fechar por Esc, X ou Cancelar e devolve false para manter aberto;
+            // aside vai à esquerda do rodapé, fora do grupo Cancelar | Confirmar (.cm-dialog__aside);
+            // paperClassName e contentClassName dão classe ao papel e ao corpo sem mirar classes internas do MUI.
+            scroll = "body",
+            onRequestClose,
+            aside,
+            paperClassName,
+            contentClassName
         },
         ref
     ) => {
@@ -49,6 +59,12 @@ const Modal = forwardRef(
             if (onClose) {
                 onClose(item);
             }
+        };
+
+        // Fechamento pedido pela pessoa (Esc, X, Cancelar): pode ser vetado; closeModal() fecha sempre.
+        const requestClose = () => {
+            if (onRequestClose && onRequestClose() === false) return;
+            handleClose();
         };
 
         const handleOpen = () => {
@@ -70,25 +86,27 @@ const Modal = forwardRef(
                 open={open}
                 fullWidth={fullWidth || full}
                 maxWidth={maxWidth}
-                scroll="body"
+                scroll={scroll}
+                PaperProps={paperClassName ? {className: paperClassName} : undefined}
                 TransitionProps={{
                     onEntered: onEntered,
                     onExited: onExited,
                 }}
                 onClose={(event, reason) => {
                     if (reason === "escapeKeyDown") {
-                        handleClose();
+                        requestClose();
                     }
                 }}
             >
-                <ModalTitulo titulo={titulo} onClose={() => handleClose()}/>
-                <DialogContent dividers>{children}</DialogContent>
+                <ModalTitulo titulo={titulo} onClose={requestClose}/>
+                <DialogContent dividers className={contentClassName}>{children}</DialogContent>
                 {!hideActions &&
                     (
                         <DialogActionsContainer>
+                            {aside && <div className="cm-dialog__aside">{aside}</div>}
                             <Button
                                 variant="outlined"
-                                onClick={() => handleClose()}
+                                onClick={requestClose}
                                 color="primary"
                             >
                                 {t("acao.cancelar")}

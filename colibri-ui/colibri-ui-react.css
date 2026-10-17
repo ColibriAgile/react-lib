@@ -178,6 +178,21 @@
 .cm-dialog-form .cm-fieldset > legend { margin-bottom: 12px; }
 .cm-form-row--nested { margin-left: 24px; }
 
+/* Rodapé do diálogo MUI com nota ou ação à parte (prop aside do Modal): à esquerda, fora do grupo
+   Cancelar | Confirmar, como .cm-dialog__foot > .cm-dialog__aside do kit. Na tela estreita vai para
+   a linha de cima, com os botões dividindo a largura abaixo. */
+.MuiDialogActions-root > .cm-dialog__aside {
+    margin-right: auto;
+    padding-right: 16px;
+    color: var(--cm-ink-3);
+    font-size: 12px;
+    line-height: 1.35;
+}
+@media (max-width: 599.95px) {
+    .MuiDialogActions-root:has(> .cm-dialog__aside) { flex-wrap: wrap; row-gap: 8px; }
+    .MuiDialogActions-root > .cm-dialog__aside { flex: 1 0 100%; padding-right: 0; }
+}
+
 /* Campo com prefixo/sufixo unidos (.cm-input-group) sobre o TextField do MUI */
 .cm-mui-input-group.MuiOutlinedInput-root { padding-left: 0; padding-right: 0; }
 .cm-mui-input-group .MuiInputAdornment-root {
