@@ -396,3 +396,10 @@
 .dx-popup-bottom .dx-button.dx-button-default:not(.dx-button-mode-text):focus-visible {
     outline-color: rgba(255, 255, 255, .7) !important;
 }
+
+/* Filtro de cabeçalho: o DevExtreme põe OK antes de Cancelar; o kit pede o principal na extremidade direita
+ * (DESIGN.md, seção 7, regra dos botões adjacentes). Só a ordem visual muda; Enter continua acionando o OK. */
+.dx-header-filter-menu .dx-popup-bottom .dx-toolbar-after {
+    display: flex;
+    flex-direction: row-reverse;
+}

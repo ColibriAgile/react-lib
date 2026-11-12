@@ -14,7 +14,13 @@ const checkIcon = (checked, radio) =>
 // Gera o tema a partir dos tokens do tema aplicado ao <html> (tokens.js). No tema escuro, chame depois
 // de trocar data-theme: createColibriTheme(readTokens(), "dark"). O preenchimento azul (principal,
 // caixa marcada, indicador) usa accent; texto, link e ícone em azul usam accentInk (DESIGN.md, seção 2).
+// Movimento reduzido (DESIGN.md, seção 4): nada desliza nem cresce; menus, popovers e diálogos aparecem no
+// estado final. O tema é recriado a cada troca de tema, então basta ler a preferência na criação.
+const prefersReducedMotion = () =>
+    typeof window !== "undefined" && !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
 export function createColibriTheme(cm = readTokens(), mode = "light") {
+    const reducedMotion = prefersReducedMotion();
     const focusOutline = {
         outline: `2px solid ${cm.focus}`,
         outlineOffset: 1,
@@ -62,10 +68,18 @@ export function createColibriTheme(cm = readTokens(), mode = "light") {
             snackbar: cm.layer.toast,
             tooltip: cm.layer.toast + 100,
         },
-        transitions: {
-            easing: {easeOut: cm.ease, easeInOut: cm.ease},
-            duration: {shortest: 120, shorter: 150, short: 180, standard: 200, complex: 260},
-        },
+        transitions: reducedMotion
+            ? {
+                easing: {easeOut: cm.ease, easeInOut: cm.ease},
+                duration: {
+                    shortest: 0, shorter: 0, short: 0, standard: 0, complex: 0, enteringScreen: 0, leavingScreen: 0,
+                },
+                create: () => "none",
+            }
+            : {
+                easing: {easeOut: cm.ease, easeInOut: cm.ease},
+                duration: {shortest: 120, shorter: 150, short: 180, standard: 200, complex: 260},
+            },
         components: {
             MuiButtonBase: {
                 defaultProps: {disableRipple: true},
