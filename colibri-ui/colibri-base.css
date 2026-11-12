@@ -45,8 +45,9 @@
     --cm-control-h: 32px;
     --cm-sidebar-bg: linear-gradient(180deg, #043355 0%, #2aa3e7 100%);
     --cm-sidebar-head-bg: linear-gradient(180deg, #043354 0%, #0b2a41 100%);
-    --cm-nav-ink: #d7d7d7;
-    --cm-nav-ink-muted: rgba(215, 215, 215, .72);
+    /* Texto da lateral em branco gelo, sem contorno: legível em toda a altura do degradê. */
+    --cm-nav-ink: #f1f5f9;
+    --cm-nav-ink-muted: rgba(241, 245, 249, .72);
     --cm-topbar-bg: #fafbfc;
     --cm-scroll-bg: linear-gradient(165deg, #e8f0fb 0%, #f2f5f9 32%, #f2f5f9 100%);
     --cm-disabled-ink: #b4bdc7;
@@ -69,6 +70,32 @@
     --cm-chart-7: #4a3aa7;
     --cm-chart-8: #e34948;
     --cm-ease: cubic-bezier(.22, 1, .36, 1);
+    /* Paleta curada (DESIGN.md, seção 9): cores fixas com no mínimo 5,2:1 sobre texto branco, nos dois
+     * temas, para tipos de pedido, estações e selos categóricos. Fica na base porque o admin (perfil
+     * Admin) mostra e oferece as mesmas cores que as telas de produção desenham; o perfil Operação as
+     * expõe como --ct-palette-*. O lojista escolhe dentro dela, gravando o nome (verde), nunca o hex. */
+    --cm-palette-verde: #1e7a46;
+    --cm-palette-laranja: #b0500c;
+    --cm-palette-azul: #1d62ad;
+    --cm-palette-roxo: #6d3fa3;
+    --cm-palette-vinho: #a32c52;
+    --cm-palette-petroleo: #0e6d77;
+    --cm-palette-marrom: #7d5130;
+    --cm-palette-grafite: #4d5a68;
+    /* Etiqueta do tipo do pedido (perfil Admin, .cm-tag--entrega etc.): fundo suave, linha e texto na cor do
+     * tipo, com 4,5:1 ou mais nos dois temas; a Retirada é cheia, no laranja da paleta (5,2:1 com branco). */
+    --cm-tipo-entrega-soft: #e2edef;
+    --cm-tipo-entrega-line: #b2d0d3;
+    --cm-tipo-entrega-ink: #0e6d77;
+    --cm-tipo-mesa-soft: #e4ecf5;
+    --cm-tipo-mesa-line: #b7cde5;
+    --cm-tipo-mesa-ink: #1d62ad;
+    --cm-tipo-balcao-soft: #e4efe9;
+    --cm-tipo-balcao-line: #b7d4c4;
+    --cm-tipo-balcao-ink: #1e7a46;
+    --cm-tipo-ficha-soft: #ede8f4;
+    --cm-tipo-ficha-line: #d0c2e2;
+    --cm-tipo-ficha-ink: #6d3fa3;
 }
 
 /* ---------- Tema escuro ----------
@@ -122,6 +149,18 @@
     --cm-chart-5: #d55181;
     --cm-chart-7: #9085e9;
     --cm-chart-8: #e66767;
+    --cm-tipo-entrega-soft: #124451;
+    --cm-tipo-entrega-line: #105864;
+    --cm-tipo-entrega-ink: #a3c8cb;
+    --cm-tipo-mesa-soft: #183f67;
+    --cm-tipo-mesa-line: #1b518a;
+    --cm-tipo-mesa-ink: #a9c3e0;
+    --cm-tipo-balcao-soft: #19493e;
+    --cm-tipo-balcao-line: #1b6142;
+    --cm-tipo-balcao-ink: #aaccb9;
+    --cm-tipo-ficha-soft: #383163;
+    --cm-tipo-ficha-line: #533883;
+    --cm-tipo-ficha-ink: #c8b6dc;
 }
 
 /* ---------- Fontes locais (sem dependência de internet) ---------- */

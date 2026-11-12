@@ -88,6 +88,7 @@ export default function AppShell({productName, version, nav, title, aside, banne
     const menuButton = useRef(null);
     const collapseButton = useRef(null);
     const scrollArea = useRef(null);
+    const content = useRef(null);
 
     const closeOverlay = useCallback((restoreFocus = true) => {
         setOverlayOpen(false);
@@ -147,7 +148,16 @@ export default function AppShell({productName, version, nav, title, aside, banne
     const showMenuButton = narrow || collapsed;
     const toggleLabel = narrow && !overlayOpen ? t("shell.abrir", "Abrir navegação") : t("shell.recolher", "Recolher navegação");
 
+    // Pular para o conteúdo (DESIGN.md, seção 5): primeiro elemento da página. Com roteamento por hash, o
+    // href="#conteudo" trocaria a rota; o clique leva o foco ao conteúdo e o href fica para quem abre em nova aba.
+    const skipToContent = (e) => {
+        e.preventDefault();
+        content.current?.focus();
+    };
+
     return (
+        <>
+        <a className="cm-skip" href="#conteudo" onClick={skipToContent}>{t("shell.pular", "Pular para o conteúdo")}</a>
         <div className={shellClass}>
             <div className="cm-shell__backdrop" onClick={() => closeOverlay()} aria-hidden="true"/>
 
@@ -201,9 +211,10 @@ export default function AppShell({productName, version, nav, title, aside, banne
 
                 <div className="cm-scroll" ref={scrollArea}>
                     {banner}
-                    <main className="cm-content">{children}</main>
+                    <main className="cm-content" id="conteudo" tabIndex={-1} ref={content}>{children}</main>
                 </div>
             </div>
         </div>
+        </>
     );
 }

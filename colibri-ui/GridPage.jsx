@@ -41,6 +41,7 @@ const GridPage = forwardRef(({
                                  countLabel = undefined,
                                  actions = undefined,
                                  tools = undefined,
+                                 onCellPrepared = undefined,
                                  ...gridProps
                              }, ref) => {
     const {t} = useTranslation();
@@ -73,6 +74,17 @@ const GridPage = forwardRef(({
     }, []);
 
     const onContentReady = (e) => recount(e.component);
+
+    // Ações de linha (<Column type="buttons">): o DevExtreme 22 põe o `hint` só no title do link; o kit pede
+    // também o aria-label (DESIGN.md, seção 7, "Ações de linha").
+    const prepareCell = (e) => {
+        if (e.rowType === "data" && e.column?.type === "buttons") {
+            e.cellElement.querySelectorAll("a[title]:not([aria-label])").forEach((a) => {
+                a.setAttribute("aria-label", a.getAttribute("title"));
+            });
+        }
+        onCellPrepared?.(e);
+    };
 
     // Com array como dataSource, a troca do array nem sempre dispara contentReady de novo.
     useEffect(() => {
@@ -119,6 +131,7 @@ const GridPage = forwardRef(({
                 allowColumnResizing={true}
                 columnHidingEnabled={true}
                 onContentReady={onContentReady}
+                onCellPrepared={prepareCell}
                 noDataText={t("grid.vazio", "Nada para mostrar.")}
                 {...gridProps}
             >
